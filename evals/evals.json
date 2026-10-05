@@ -19,7 +19,7 @@
       "id": 3,
       "name": "instruction-agents-md",
       "prompt": "我要给团队的 AGENTS.md 加几条规则，内容是：提交代码前要跑测试；不能直接推到 main 分支；最好给新函数写单元测试；紧急修复可以先上线，但要在一天内补文档。帮我写成规则，按受控中文写。",
-      "expected_output": "按 for instruction writing 写：强度词只用应、宜、可、能及其否定；一条只写一个要求；紧急修复的例外写在同一条里；时间写成阿拉伯数字。",
+      "expected_output": "按 for instruction writing 写：强度词只用必须、不得、宜、不宜、可、不必、能、不能；一条只写一个要求；紧急修复的例外写在同一条里；时间写成阿拉伯数字。",
       "files": []
     }
   ]

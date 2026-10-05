@@ -42,7 +42,7 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | for chat | agent 在对话里回复人 | 可以用“我”“你”；第一句回答问题 |
 | for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写“我们”“你们” |
 | for web dev | 网页和应用界面上给用户看的文字 | 不用复数人称和第三人称代词；按钮以动词开头 |
-| for instruction writing | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用“应、宜、可、能”及其否定 |
+| for instruction writing | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用“必须、不得、宜、不宜、可、不必、能、不能” |
 
 ## 怎么用
 

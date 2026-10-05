@@ -43,6 +43,9 @@ function compileEntry(entry) {
       patterns.push(new RegExp(`${escape(head)}[^。！？\\n]{0,30}?${escape(tail)}`, 'g'));
     } else if (alt === '进行') {
       patterns.push(/进行(?!中)/g);
+    } else if (alt === '应') {
+      // Modal 应 only: skip 应用、对应、响应、应对 and the like, and 不应 (its own entry).
+      patterns.push(/(?<![不对相响适回供答呼反])应(?![用对答急聘该当变])/g);
     } else {
       patterns.push(new RegExp(escape(alt), 'g'));
     }
@@ -107,7 +110,7 @@ export function lintSegments(segments, profile, dictionary) {
 
     if (profile === 'for-web-dev') {
       scan(segment, /他们|她们|它们|咱们|(?<!其)[他她它](?!们)/g, (m) =>
-        add(segment, m.index, 'W1', 'error', '界面文字不应使用复数人称代词和第三人称代词，应写名称', m[0]),
+        add(segment, m.index, 'W1', 'error', '界面文字不得使用复数人称代词和第三人称代词，要写名称', m[0]),
       );
       if (/您/.test(segment.text)) usesNin = true;
       if (/你(?!们)/.test(segment.text)) usesNi = true;
@@ -118,12 +121,12 @@ export function lintSegments(segments, profile, dictionary) {
       );
     }
     if (profile === 'for-instruction-writing') {
-      scan(segment, /应(?:尽量|尽可能|考虑|避免)/g, (m) =>
-        add(segment, m.index, 'I2', 'error', '“应”不应与“尽量、尽可能、考虑、避免”连用；表达推荐应写“宜”', m[0]),
+      scan(segment, /必须(?:尽量|尽可能|考虑|避免)/g, (m) =>
+        add(segment, m.index, 'I2', 'error', '“必须”不得与“尽量、尽可能、考虑、避免”连用；表达推荐写“宜”', m[0]),
       );
     }
     if (profile === 'for-chat') {
-      scan(segment, /[！!]/g, (m) => add(segment, m.index, 'C3', 'error', '对话里不应使用感叹号', m[0]));
+      scan(segment, /[！!]/g, (m) => add(segment, m.index, 'C3', 'error', '对话里不得使用感叹号', m[0]));
     }
 
     scan(original, /[「」『』]/g, (m) =>

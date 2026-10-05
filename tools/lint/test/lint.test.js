@@ -31,11 +31,14 @@ test('JSX 文字里的代词报错', () => {
   assert.ok(rules('<p>大家分的是同一块蛋糕</p>', { path: 'Card.jsx' }).includes('W1'));
 });
 
-test('规则文件里的非标准强度词和“应尽量”报错', () => {
-  const found = rules('提交前必须运行测试。应尽量写单元测试。改完应该更新文档。', { path: 'AGENTS.md' });
-  assert.ok(found.includes('I1'));
+test('规则文件里的非标准强度词和“必须尽量”报错', () => {
+  const found = rules('提交前应运行测试。必须尽量写单元测试。改完应该更新文档。不要直接推送。', { path: 'AGENTS.md' });
   assert.ok(found.includes('I2'));
-  assert.ok(found.filter((r) => r === 'I1').length >= 3);
+  assert.ok(found.filter((r) => r === 'I1').length >= 4);
+});
+
+test('“必须、不得、宜”和“应用、对应”不报强度词', () => {
+  assert.deepEqual(rules('提交前必须运行测试。不得直接推送。宜写单元测试。在应用里打开对应的页面。', { path: 'AGENTS.md' }), []);
 });
 
 test('直角引号报错', () => {

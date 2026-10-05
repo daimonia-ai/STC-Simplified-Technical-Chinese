@@ -33,7 +33,7 @@ echo "本周我们进行了大量优化。" | node tools/lint/bin/stc-lint.js --
 | W1 | 界面文字里的复数人称代词和第三人称代词 | 错误 |
 | W2 | “你”和“您”混用 | 警告 |
 | I1 | 规则文件里的非标准强度词 | 错误 |
-| I2 | “应”与“尽量、避免”这类词连用 | 错误 |
+| I2 | “必须”与“尽量、避免”这类词连用 | 错误 |
 
 以下内容不检查：
 
@@ -53,4 +53,4 @@ npm run build:data   # 从 dictionary/*.yaml 生成 data/*.json
 npm test
 ```
 
-改了 `dictionary/` 里的词表后，应重新运行 `npm run build:data`。
+改了 `dictionary/` 里的词表后，必须重新运行 `npm run build:data`。
