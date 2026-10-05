@@ -97,9 +97,9 @@ STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for
 
 ## 许可
 
-- 规则与词表：[CC BY 4.0](LICENSE)，可以复制、修改、商用，须注明出处
+- 规则与词表：[CC BY 4.0](LICENSE)，可以复制、修改、商用，必须注明出处
 - 代码（检查脚本、skill、配置示例）：[MIT](LICENSE-CODE)
 
 ## 维护
 
-由 [Daimonia（代梦智能）](https://daimonia.ai) 编写和维护。Daimonia 的产品界面、内部文档和 agent 按 STC 写作。
+由 [Daimonia（代梦智能）](https://daimonia.ai) 编写和维护。Daimonia 正在把自己的产品界面文字、内部文档和 agent 规则改为按 STC 写作。
