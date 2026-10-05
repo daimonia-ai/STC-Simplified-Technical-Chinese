@@ -1,4 +1,4 @@
-// Converts dictionary/*.yaml into data/*.json so the linter has no runtime dependencies.
+// Converts dictionary/*.yaml into data/*.json so the check command has no runtime dependencies.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -8,11 +8,32 @@ STC 是一套受控中文：写作规则、词表，以及让 AI agent 直接使
 
 **English summary.** STC (Simplified Technical Chinese) is a controlled natural language for written Chinese. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100.
 
+## 快速开始
+
+把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent。agent 会装好 STC，再演示一次检查和改写：
+
+```text
+请在当前项目里安装 STC 受控中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese），然后演示一次：
+1. 运行 npx -y @daimonia/stc init。
+2. 挑项目里一份中文文档，运行 npx -y @daimonia/stc check <文件名>，把结果整理成表格。
+3. 按 STC 的 for document 档位改写下面这段话。列出改前和改后，写明每处改动对应哪条规则：
+本周我们进行了大量优化，整体链路已基本打通，后续将持续赋能业务增长。
+```
+
+不用 agent 时，在终端里运行下面两条命令，需要 Node.js 18 以上版本：
+
+```bash
+npx @daimonia/stc init
+npx @daimonia/stc check docs/
+```
+
+`init` 把 skill 文件放进 `.claude/skills/stc/`，把核心规则写进项目的 AGENTS.md 或 CLAUDE.md。`check` 检查文件或目录里的中文文字，发现错误时返回退出码 1，可以放进 CI。命令的完整说明见 [`tools/README.md`](tools/README.md)。
+
 ## 为什么做
 
 大模型写中文，常见的问题是写得多、写法散。同一个东西换着叫法，程度词代替数字。“进行优化”“赋能”“闭环”这类词把句子撑长，代词也指代不清。读的人要花时间猜，agent 之间传话也会走样。
 
-英文有 ASD-STE100：53 条写作规则，加一本约 900 个许可词的词典，每个词只有一个意思、一个词性。ASD-STE100 在 1986 年首次发布，用于航空维修手册，2025 年成为国际标准。中文没有对应的国家标准或行业标准。
+英文有 ASD-STE100：53 条写作规则，加一本约 900 个许可词的词典，每个词只有一个意思、一个词性。ASD-STE100 在 1986 年首次发布，用于航空维修手册，现行版本是 2025 年发布的第 9 版。中文没有对应的国家标准或行业标准。
 
 STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设计。
 
@@ -31,7 +52,7 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | 词表 | 推荐词（一个词一个意思）、不推荐写法（附推荐写法）、项目术语表模板 | [`dictionary/`](dictionary/) |
 | 核心规则片段 | 贴进 AGENTS.md 或 CLAUDE.md 的十来行规则 | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | skill | agent 写、改、审中文时加载的技能包 | [`SKILL.md`](SKILL.md) |
-| 检查脚本 | 读词表和规则，找出机器能判断的问题 | [`tools/lint/`](tools/lint/) |
+| 命令行工具 | `stc init` 把 STC 装进项目，`stc check` 找出机器能判断的问题 | [`tools/`](tools/) |
 
 ### 四个档位
 
@@ -48,9 +69,10 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 
 | 方式 | 做法 | 作用 |
 |---|---|---|
+| 安装命令 | `npx @daimonia/stc init` | 一步装好 skill 和核心规则 |
 | 核心规则 | 把 [`snippets/agents-md.md`](snippets/agents-md.md) 的内容贴进 AGENTS.md 或 CLAUDE.md | 每次会话都带着，agent 不用记得去调用 |
 | skill | 把本仓库放进 agent 的技能目录，比如 `~/.claude/skills/stc/` | agent 写中文时按需加载全套规则和词表 |
-| 检查脚本 | `node tools/lint/bin/stc-lint.js <文件>`，可放进 CI，发现错误时返回退出码 1 | 机器能判断的规则自动检查 |
+| 检查命令 | `npx @daimonia/stc check <文件或目录>`，可放进 CI，发现错误时返回退出码 1 | 机器能判断的规则自动检查 |
 | 原文 | 直接读 `rules/` 和 `dictionary/` | 审稿、培训、自己写工具 |
 
 ## 仓库结构
@@ -60,7 +82,7 @@ SKILL.md        skill 入口：判断档位，读规则和词表，写、改写�
 rules/          规则：通用规则与四个档位
 dictionary/     词表：推荐词、不推荐写法、项目术语表模板
 snippets/       贴进 AGENTS.md / CLAUDE.md 的核心规则
-tools/lint/     检查脚本
+tools/          命令行工具 stc：init 安装，check 检查
 evals/          skill 的测试任务
 ```
 
@@ -69,7 +91,7 @@ evals/          skill 的测试任务
 - 规则：通用规则与四个档位，约 50 条
 - 推荐词：约 200 条
 - 不推荐写法：约 300 条
-- 核心规则片段、skill、检查脚本
+- 核心规则片段、skill、命令行工具
 
 词条按真实的 AI 中文输出中的出现次数排定先后。例句使用通用名称，不含可识别的个人或企业信息。
 
@@ -98,7 +120,7 @@ STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for
 ## 许可
 
 - 规则与词表：[CC BY 4.0](LICENSE)，可以复制、修改、商用，必须注明出处
-- 代码（检查脚本、skill、配置示例）：[MIT](LICENSE-CODE)
+- 代码（命令行工具、skill、配置示例）：[MIT](LICENSE-CODE)
 
 ## 维护
 

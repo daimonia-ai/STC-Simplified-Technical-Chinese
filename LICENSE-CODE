@@ -2,8 +2,8 @@ MIT License
 
 Copyright (c) 2026 Daimonia (杭州代梦智能科技有限公司)
 
-This license applies to the code in this repository: linters, skills, and
-configuration examples. The writing rules and the dictionary are licensed
+This license applies to the code in this repository: the stc command-line
+tool, the skill, and configuration examples. The writing rules and the dictionary are licensed
 under CC BY 4.0, see LICENSE.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

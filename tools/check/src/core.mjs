@@ -1,6 +1,6 @@
 // Checks text segments against STC rules and the avoid list.
 import { readFileSync } from 'node:fs';
-import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.js';
+import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.mjs';
 
 export const PROFILES = ['for-chat', 'for-document', 'for-web-dev', 'for-instruction-writing'];
 

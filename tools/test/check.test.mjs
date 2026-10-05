@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { lintText } from '../src/core.js';
+import { lintText } from '../check/src/core.mjs';
 
 const rules = (text, opts) => lintText(text, opts).issues.filter((x) => x.level === 'error').map((x) => x.rule);
 

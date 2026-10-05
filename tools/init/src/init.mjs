@@ -1,0 +1,162 @@
+// The init command: installs STC into the current project.
+// Skill files go to .claude/skills/stc/. The core rules go into the project's AGENTS.md or CLAUDE.md,
+// which agents read in every session.
+import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, statSync, writeFileSync } from 'node:fs';
+import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { CMD, PACKAGE } from '../../meta.mjs';
+
+const ROOT = resolve(fileURLToPath(new URL('../../../', import.meta.url)));
+export const DEFAULT_DIR = '.claude/skills/stc';
+const START = '<!-- stc:start -->';
+const END = '<!-- stc:end -->';
+
+// What goes into the skill directory: the skill entry, rules, dictionary, core-rules snippet, CLI and licenses.
+// The CLI is included so that the skill can run its self-check offline.
+const COPY = [
+  'SKILL.md', 'README.md', 'LICENSE', 'LICENSE-CODE', 'rules', 'dictionary', 'snippets',
+  'tools/meta.mjs', 'tools/cli.mjs', 'tools/check/src', 'tools/check/data', 'tools/init/src',
+];
+
+export const initHelp = () => `用法：${CMD} init [选项]
+
+把 STC 装进当前目录下的项目：
+  1. skill 文件放进 ${DEFAULT_DIR}/
+  2. 核心规则写进项目里已有的 AGENTS.md 和 CLAUDE.md；两个都没有时，新建 AGENTS.md
+再次运行会更新这两处，不会重复写入。
+
+选项：
+  --dir <目录>   skill 文件放在哪个目录，默认 ${DEFAULT_DIR}
+  --dry-run      只列出要改的文件，不写入
+  --help         显示本说明`;
+
+const toPosix = (p) => p.split(sep).join('/');
+
+function listFiles(rel) {
+  const abs = join(ROOT, rel);
+  if (!existsSync(abs)) return [];
+  if (!statSync(abs).isDirectory()) return [rel];
+  return readdirSync(abs).sort().flatMap((name) => listFiles(join(rel, name)));
+}
+
+// Takes the core rules from snippets/agents-md.md and points them at the skill's path in the project.
+export function snippetBlock(skillPath) {
+  const text = readFileSync(join(ROOT, 'snippets', 'agents-md.md'), 'utf8');
+  const match = text.match(/```markdown\n([\s\S]*?)\n```/);
+  if (!match) throw new Error('snippets/agents-md.md 里没有找到核心规则代码块');
+  const body = match[1].replace('STC 规则所在位置', `\`${skillPath}/SKILL.md\``);
+  return `${START}\n${body}\n${END}`;
+}
+
+// Replaces the STC block if the file has one; otherwise appends it.
+export function upsertBlock(content, block) {
+  const start = content.indexOf(START);
+  const end = start === -1 ? -1 : content.indexOf(END, start);
+  if (start !== -1 && end !== -1) return content.slice(0, start) + block + content.slice(end + END.length);
+  const trimmed = content.replace(/\s+$/, '');
+  return trimmed ? `${trimmed}\n\n${block}\n` : `${block}\n`;
+}
+
+// Rule files to write: the existing AGENTS.md and CLAUDE.md, or a new AGENTS.md when neither exists.
+// If CLAUDE.md imports AGENTS.md with @AGENTS.md, only AGENTS.md is written, so agents do not read the block twice.
+function ruleTargets(cwd) {
+  const agents = join(cwd, 'AGENTS.md');
+  const claude = join(cwd, 'CLAUDE.md');
+  const hasAgents = existsSync(agents);
+  const hasClaude = existsSync(claude);
+  const claudeImportsAgents = hasClaude && /^@AGENTS\.md\s*$/m.test(readFileSync(claude, 'utf8'));
+  const targets = [];
+  if (hasAgents || !hasClaude || claudeImportsAgents) targets.push(agents);
+  if (hasClaude && !claudeImportsAgents) targets.push(claude);
+  // When CLAUDE.md is a link to AGENTS.md, both names are one file: write it once.
+  if (targets.length === 2 && hasAgents && realpathSync(agents) === realpathSync(claude)) targets.pop();
+  return targets;
+}
+
+export function planInit({ cwd = process.cwd(), dir = DEFAULT_DIR } = {}) {
+  const target = resolve(cwd, dir);
+  const rel = toPosix(relative(cwd, target));
+  const skillPath = !rel ? '.' : rel.startsWith('..') || isAbsolute(rel) ? toPosix(target) : rel;
+  const sameAsSource = existsSync(target) && realpathSync(target) === realpathSync(ROOT);
+
+  const files = sameAsSource ? [] : COPY.flatMap(listFiles).map((file) => {
+    const to = join(target, file);
+    const data = readFileSync(join(ROOT, file));
+    const status = !existsSync(to) ? 'create' : readFileSync(to).equals(data) ? 'unchanged' : 'update';
+    return { to, data, status };
+  });
+
+  const block = snippetBlock(skillPath);
+  const rules = ruleTargets(cwd).map((path) => {
+    const exists = existsSync(path);
+    const before = exists ? readFileSync(path, 'utf8') : '';
+    const after = upsertBlock(before, block);
+    const status = !exists ? 'create' : before === after ? 'unchanged' : 'update';
+    return { path, name: toPosix(relative(cwd, path)), after, status, hadBlock: before.includes(START) };
+  });
+
+  return { skillPath, sameAsSource, files, rules };
+}
+
+function describeFiles({ skillPath, sameAsSource, files }) {
+  if (sameAsSource) return `skill 文件就在 ${skillPath}/，不用复制。`;
+  const count = (s) => files.filter((f) => f.status === s).length;
+  const parts = [];
+  if (count('create')) parts.push(`新建 ${count('create')} 个文件`);
+  if (count('update')) parts.push(`更新 ${count('update')} 个文件`);
+  return `${skillPath}/：${parts.length ? parts.join('，') : '文件已是最新'}。`;
+}
+
+function describeRule({ name, status, hadBlock }) {
+  if (status === 'create') return `${name}：新建，写入了核心规则。`;
+  if (status === 'unchanged') return `${name}：核心规则已是最新。`;
+  return `${name}：${hadBlock ? '更新了' : '写入了'}核心规则。`;
+}
+
+// Returns the exit code: 0 done, 1 write failed, 2 bad arguments.
+export function runInit(argv, { cwd = process.cwd(), log = console.log, error = console.error } = {}) {
+  const opts = { dir: DEFAULT_DIR, dryRun: false };
+  for (let i = 0; i < argv.length; i += 1) {
+    const a = argv[i];
+    if (a === '--help' || a === '-h') {
+      log(initHelp());
+      return 0;
+    }
+    if (a === '--dry-run') opts.dryRun = true;
+    else if (a === '--dir') {
+      if (!argv[i + 1]) {
+        error('--dir 后面要写目录。');
+        return 2;
+      }
+      opts.dir = argv[++i];
+    } else {
+      error(`未知选项：${a}\n\n${initHelp()}`);
+      return 2;
+    }
+  }
+
+  try {
+    const plan = planInit({ cwd, dir: opts.dir });
+    if (opts.dryRun) {
+      log('预演，不写入文件：');
+      log(`  ${describeFiles(plan)}`);
+      for (const r of plan.rules) log(`  ${describeRule(r)}`);
+      return 0;
+    }
+    for (const f of plan.files) {
+      if (f.status === 'unchanged') continue;
+      mkdirSync(dirname(f.to), { recursive: true });
+      writeFileSync(f.to, f.data);
+    }
+    for (const r of plan.rules) {
+      if (r.status !== 'unchanged') writeFileSync(r.path, r.after);
+    }
+    log(`STC 已装好。\n${describeFiles(plan)}`);
+    for (const r of plan.rules) log(describeRule(r));
+    log(`下一步：运行 npx ${PACKAGE} check <文件或目录>，检查项目里的中文文字。`);
+    return 0;
+  } catch (e) {
+    error(`安装失败：${e.message}`);
+    return 1;
+  }
+}

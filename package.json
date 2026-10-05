@@ -1,0 +1,57 @@
+{
+  "name": "@daimonia/stc",
+  "version": "0.1.0",
+  "description": "STC (Simplified Technical Chinese): writing rules, a dictionary and a CLI that help people and AI agents write and check Chinese text.",
+  "type": "module",
+  "bin": {
+    "stc": "tools/cli.mjs"
+  },
+  "files": [
+    "SKILL.md",
+    "rules/",
+    "dictionary/",
+    "snippets/",
+    "tools/meta.mjs",
+    "tools/cli.mjs",
+    "tools/check/src/",
+    "tools/check/data/",
+    "tools/init/src/",
+    "LICENSE",
+    "LICENSE-CODE"
+  ],
+  "scripts": {
+    "build:data": "node tools/check/scripts/build-data.mjs",
+    "test": "node --test tools/test/*.test.mjs",
+    "prepublishOnly": "npm run build:data && npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese.git"
+  },
+  "homepage": "https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese",
+  "bugs": {
+    "url": "https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/issues"
+  },
+  "author": "Daimonia (https://daimonia.ai)",
+  "license": "(CC-BY-4.0 AND MIT)",
+  "keywords": [
+    "chinese",
+    "controlled-language",
+    "simplified-technical-chinese",
+    "writing",
+    "style-guide",
+    "agent",
+    "agents-md",
+    "claude-code",
+    "skill"
+  ],
+  "devDependencies": {
+    "yaml": "^2.5.0"
+  }
+}
