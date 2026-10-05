@@ -1,0 +1,258 @@
+# STC 推荐词 v0.1（首批）
+# 每个词只有一个意思。同组的近义词各自成条，写明区别。格式见 README.md。
+
+# 去掉对象
+
+- word: 删除
+  pos: 动词
+  meaning: 把对象永久去掉，之后不能恢复
+  not_same_as:
+    移除: 从一组对象里拿出来，对象本身还在
+    清空: 去掉一个容器里的全部内容，容器还在
+  example: 删除这份报告后，报告不能恢复。
+  profiles: [web-dev, document]
+
+- word: 移除
+  pos: 动词
+  meaning: 把对象从一组对象里拿出来，对象本身还在
+  not_same_as:
+    删除: 对象被永久去掉
+  example: 从项目里移除成员后，这名成员的账号仍然存在。
+  profiles: [web-dev, document]
+
+- word: 清空
+  pos: 动词
+  meaning: 去掉一个容器里的全部内容，容器本身保留
+  not_same_as:
+    删除: 连容器一起去掉
+  example: 清空回收站后，回收站里的文件不能恢复。
+  profiles: [web-dev, document]
+
+# 保存与交出
+
+- word: 保存
+  pos: 动词
+  meaning: 把当前内容存下来，之后可以继续修改
+  not_same_as:
+    提交: 把内容交给他人或系统处理
+    发布: 让内容对目标读者可见
+  example: 保存草稿后，可以随时回来继续编辑。
+  profiles: [web-dev]
+
+- word: 提交
+  pos: 动词
+  meaning: 把内容交给他人或系统处理，比如审核或执行
+  not_same_as:
+    保存: 内容只是存下来，还没有交出去
+    发布: 内容已经对目标读者可见
+  example: 提交后，审核人会在 1 个工作日内处理。
+  profiles: [web-dev]
+
+- word: 发布
+  pos: 动词
+  meaning: 让内容对目标读者可见
+  not_same_as:
+    提交: 内容交出去了，但还不一定可见
+  example: 发布后，所有访客都能看到这篇文章。
+  profiles: [web-dev]
+
+# 停止与恢复
+
+- word: 取消
+  pos: 动词
+  meaning: 停止一个还没有完成的操作，不保留中间结果
+  not_same_as:
+    撤销: 把已经完成的操作恢复到操作前
+    关闭: 让窗口或面板消失，不影响数据
+  example: 取消上传后，已传的部分不会保留。
+  profiles: [web-dev]
+
+- word: 撤销
+  pos: 动词
+  meaning: 把已经完成的操作恢复到操作前的状态
+  not_same_as:
+    取消: 操作还没有完成
+  example: 撤销后，刚才删除的文字会恢复。
+  profiles: [web-dev]
+
+- word: 关闭
+  pos: 动词
+  meaning: 让窗口、面板、弹窗或文件不再显示，数据不变
+  not_same_as:
+    停用: 让一项功能或账号暂停生效
+  example: 关闭弹窗不会丢失已填写的内容。
+  profiles: [web-dev]
+
+- word: 打开
+  pos: 动词
+  meaning: 让窗口、面板、页面或文件显示出来
+  not_same_as:
+    启用: 让一项功能或账号开始生效
+  example: 打开「设置」页面。
+  profiles: [web-dev]
+
+# 功能与账号的开关
+
+- word: 启用
+  pos: 动词
+  meaning: 让一项功能或一个账号开始生效
+  not_same_as:
+    打开: 让窗口、页面或文件显示出来
+  example: 启用两步验证后，登录时需要输入短信验证码。
+  profiles: [web-dev]
+
+- word: 停用
+  pos: 动词
+  meaning: 让一项功能或一个账号暂停生效，设置保留，可以重新启用
+  not_same_as:
+    删除: 永久去掉，不能恢复
+    关闭: 只让窗口或面板不再显示
+  example: 停用账号后，这个账号不能登录，数据仍然保留。
+  profiles: [web-dev]
+
+# 新增
+
+- word: 新建
+  pos: 动词
+  meaning: 生成一个原来没有的对象
+  not_same_as:
+    添加: 把已有的对象放进一组对象里
+  example: 新建项目后，为项目命名。
+  profiles: [web-dev]
+
+- word: 添加
+  pos: 动词
+  meaning: 把已有的对象放进一组对象里
+  not_same_as:
+    新建: 对象原来不存在
+  example: 把同事添加到项目里。
+  profiles: [web-dev]
+
+- word: 编辑
+  pos: 动词
+  meaning: 修改已有对象的内容
+  example: 编辑文章标题。
+  profiles: [web-dev]
+
+# 进出数据
+
+- word: 上传
+  pos: 动词
+  meaning: 把本地文件原样传到产品里
+  not_same_as:
+    导入: 读入外部数据，并转换成产品里的对象
+  example: 上传合同扫描件。
+  profiles: [web-dev]
+
+- word: 导入
+  pos: 动词
+  meaning: 读入外部数据，并转换成产品里的对象
+  not_same_as:
+    上传: 文件原样存放，不做转换
+  example: 导入表格后，表格里的每一行变成一个联系人。
+  profiles: [web-dev]
+
+- word: 下载
+  pos: 动词
+  meaning: 把产品里的文件原样存到本地
+  not_same_as:
+    导出: 先把产品里的数据转换成文件，再存到本地
+  example: 下载原始合同文件。
+  profiles: [web-dev]
+
+- word: 导出
+  pos: 动词
+  meaning: 把产品里的数据转换成文件，再存到本地
+  not_same_as:
+    下载: 文件原样存到本地，不做转换
+  example: 把本月的订单导出为表格。
+  profiles: [web-dev]
+
+# 核对与同意
+
+- word: 检查
+  pos: 动词
+  meaning: 判断内容是否符合要求，由系统或人执行
+  not_same_as:
+    审核: 有权限的人决定是否通过
+    确认: 用户同意即将执行的操作
+  example: 系统检查文件格式，检查不通过时给出原因。
+  profiles: [web-dev, document]
+
+- word: 审核
+  pos: 动词
+  meaning: 有权限的人决定一项内容是否通过
+  not_same_as:
+    检查: 只判断是否符合要求，不做决定
+  example: 文章提交后，由编辑审核。
+  profiles: [web-dev, document]
+
+- word: 确认
+  pos: 动词
+  meaning: 用户同意执行即将发生的操作
+  not_same_as:
+    检查: 判断内容是否符合要求
+  example: 确认删除这 3 个文件？
+  profiles: [web-dev]
+
+# 让数据变新
+
+- word: 同步
+  pos: 动词
+  meaning: 让两处的数据保持一致
+  not_same_as:
+    刷新: 重新加载当前页面上的数据
+    更新: 改成新的版本或新的值
+  example: 手机和电脑上的笔记每 5 分钟同步一次。
+  profiles: [web-dev, document]
+
+- word: 刷新
+  pos: 动词
+  meaning: 重新加载当前页面上的数据
+  not_same_as:
+    同步: 让两处的数据保持一致
+  example: 刷新页面后，列表显示最新的订单。
+  profiles: [web-dev]
+
+- word: 更新
+  pos: 动词
+  meaning: 把对象改成新的版本或新的值
+  not_same_as:
+    刷新: 只是重新加载显示，对象本身不变
+  example: 更新到 2.0 版后，可以批量导出。
+  profiles: [web-dev, document]
+
+# 结果
+
+- word: 失败
+  pos: 动词
+  meaning: 操作没有完成
+  example: 保存失败：网络连接中断。检查网络后重试。
+  profiles: [web-dev]
+
+# 风险提示的三个级别
+
+- word: 警告
+  pos: 名词
+  meaning: 继续操作可能造成数据丢失、安全问题或无法撤销的结果
+  not_same_as:
+    注意: 继续操作可能失败，或结果不符合预期
+    说明: 补充信息，没有风险
+  example: 警告：删除后，数据不能恢复。
+  profiles: [web-dev, document]
+
+- word: 注意
+  pos: 名词
+  meaning: 继续操作可能失败，或结果不符合预期
+  not_same_as:
+    警告: 后果是数据丢失、安全问题或无法撤销
+  example: 注意：文件超过 20 MB 时上传会失败。
+  profiles: [web-dev, document]
+
+- word: 说明
+  pos: 名词
+  meaning: 补充信息，没有风险
+  not_same_as:
+    注意: 有操作失败的风险
+  example: 说明：按住 Shift 可以多选。
+  profiles: [web-dev, document]
