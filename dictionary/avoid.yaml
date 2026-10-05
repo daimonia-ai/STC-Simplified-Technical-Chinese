@@ -8,7 +8,16 @@
   examples:
     - before: 提交前必须运行测试。
       after: 提交前应运行测试。
-  profiles: [instruction]
+  profiles: [for-instruction-writing]
+
+- avoid: 应该
+  type: 强度词
+  why: 日常用法里偏向建议，读者分不清是要求还是推荐
+  use: 要求写“应”，推荐写“宜”
+  examples:
+    - before: 提交前应该运行测试。
+      after: 提交前应运行测试。
+  profiles: [for-instruction-writing]
 
 - avoid: 我们
   type: 人称代词
@@ -17,7 +26,7 @@
   examples:
     - before: 我们会在三个工作日内回复。
       after: 客服团队会在 3 个工作日内回复。
-  profiles: [web-dev, document]
+  profiles: [for-web-dev, for-document]
 
 - avoid: 建议 / 最好 / 尽量
   type: 强度词
@@ -26,7 +35,7 @@
   examples:
     - before: 最好为每个函数写注释。
       after: 宜为每个公开函数写注释。
-  profiles: [instruction]
+  profiles: [for-instruction-writing]
 
 - avoid: 不要 / 禁止 / 不得 / 严禁 / 切勿
   type: 强度词
@@ -35,7 +44,7 @@
   examples:
     - before: 禁止直接修改生产数据库。
       after: 不应直接修改生产数据库。
-  profiles: [instruction]
+  profiles: [for-instruction-writing]
 
 - avoid: 部分（表示数量时）
   type: 模糊量词
@@ -132,7 +141,7 @@
   examples:
     - before: 大家分的是同一块蛋糕。
       after: 各品牌分的是同一块蛋糕。
-  profiles: [web-dev, document]
+  profiles: [for-web-dev, for-document]
 
 - avoid: 非常 / 极其 / 十分
   type: 程度词
@@ -161,11 +170,11 @@
 - avoid: 你们
   type: 人称代词
   why: 说不清指读者本人还是读者所在的公司
-  use: 写名称；界面上称呼用户用「你」
+  use: 写名称；界面上称呼用户用“你”
   examples:
     - before: 你们的账号已开通。
       after: 你的账号已开通。
-  profiles: [web-dev, document]
+  profiles: [for-web-dev, for-document]
 
 - avoid: 对于……而言
   type: 翻译腔
@@ -242,11 +251,11 @@
 - avoid: 出错 / 异常（界面报错里）
   type: 含糊动词
   why: 用户不知道是什么失败了、接下来怎么办
-  use: 写「失败」，加上原因和下一步
+  use: 写“失败”，加上原因和下一步
   examples:
     - before: 系统异常，请稍后再试。
       after: 保存失败：服务器暂时无法连接。1 分钟后重试。
-  profiles: [web-dev]
+  profiles: [for-web-dev]
 
 - avoid: 实现 + 名词（实现增长、实现提升）
   type: 虚动词
@@ -395,7 +404,7 @@
 - avoid: 基于……的情况下
   type: 翻译腔
   why: 外语长句直译留下的结构
-  use: 改成「如果……」或「在……时」
+  use: 改成“如果……”或“在……时”
   examples:
     - before: 基于网络正常的情况下，同步需要 5 分钟。
       after: 如果网络正常，同步需要 5 分钟。

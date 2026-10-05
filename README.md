@@ -10,7 +10,7 @@ STC 是一套受控中文：写作规则、词表，以及让 AI agent 直接使
 
 ## 为什么做
 
-大模型写中文，常见的问题是写得多、写法散：同一个东西换着叫法，程度词代替数字，「进行优化」「赋能」「闭环」这类词把句子撑长，代词指代不清。读的人要花时间猜，agent 之间传话也会走样。
+大模型写中文，常见的问题是写得多、写法散：同一个东西换着叫法，程度词代替数字，“进行优化”“赋能”“闭环”这类词把句子撑长，代词指代不清。读的人要花时间猜，agent 之间传话也会走样。
 
 英文有 ASD-STE100：53 条写作规则，加一本约 900 个许可词的词典，每个词只有一个意思、一个词性。ASD-STE100 在 1986 年首次发布，用于航空维修手册，2025 年成为国际标准。中文没有对应的国家标准或行业标准。
 
@@ -35,14 +35,14 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 
 ### 四个档位
 
-写之前先判断在写哪类文字，再用「通用规则 + 对应档位的规则」。
+写之前先判断在写哪类文字，再用“通用规则 + 对应档位的规则”。
 
 | 档位 | 写的是什么 | 和其他档位的主要区别 |
 |---|---|---|
-| chat | agent 在对话里回复人 | 可以用「我」「你」；第一句回答问题 |
-| document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写「我们」「你们」 |
-| web dev | 网页和应用界面上给用户看的文字 | 不用复数人称和第三人称代词；按钮以动词开头 |
-| instruction | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用「应、宜、可、能」及其否定 |
+| for chat | agent 在对话里回复人 | 可以用“我”“你”；第一句回答问题 |
+| for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写“我们”“你们” |
+| for web dev | 网页和应用界面上给用户看的文字 | 不用复数人称和第三人称代词；按钮以动词开头 |
+| for instruction writing | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用“应、宜、可、能”及其否定 |
 
 ## 怎么用
 
@@ -74,7 +74,7 @@ snippets/       贴进 AGENTS.md / CLAUDE.md 的核心规则
 
 STC 参考 ASD-STE100 的结构：写作规则、受控词典、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。
 
-ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Association of Europe）所有，「ASD-STE100 Simplified Technical English」是 ASD 的欧盟注册商标。STC 不是 ASD-STE100 的官方中文版本，本仓库不分发 ASD-STE100 的文本。需要原文请到官网免费申请：<https://www.asd-ste100.org/>
+ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Association of Europe）所有，“ASD-STE100 Simplified Technical English”是 ASD 的欧盟注册商标。STC 不是 ASD-STE100 的官方中文版本，本仓库不分发 ASD-STE100 的文本。需要原文请到官网免费申请：<https://www.asd-ste100.org/>
 
 英文写作可以直接使用 ASD-STE100。
 
@@ -89,7 +89,7 @@ ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Associa
 - [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh)：受控中文改写 skill 与检查脚本
 - [RinStel/cste-zh](https://github.com/RinStel/cste-zh)：受控简明技术中文 skill
 
-STC 和这两个项目的差别：STC 以词表为核心，并按 chat、document、web dev、instruction 四个档位分别给出规则。
+STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for document、for web dev、for instruction writing 四个档位分别给出规则。
 
 ## 许可
 
