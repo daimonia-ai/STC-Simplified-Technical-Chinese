@@ -1,0 +1,32 @@
+{
+  "name": "stc-lint",
+  "version": "0.1.0",
+  "description": "STC (Simplified Technical Chinese) linter: checks Chinese text against the STC rules and dictionary.",
+  "type": "module",
+  "bin": {
+    "stc-lint": "bin/stc-lint.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "data"
+  ],
+  "scripts": {
+    "build:data": "node scripts/build-data.mjs",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "yaml": "^2.5.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "chinese",
+    "controlled-language",
+    "lint",
+    "writing",
+    "agent"
+  ]
+}
