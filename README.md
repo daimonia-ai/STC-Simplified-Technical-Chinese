@@ -1,7 +1,5 @@
 # STC (Simplified Technical Chinese) · 受控中文
 
-> 状态：v0.1 草稿，编写中。
-
 STC 是一套受控中文：写作规则、词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
@@ -86,12 +84,7 @@ tools/          命令行工具 stc：init 安装，check 检查
 evals/          skill 的测试任务
 ```
 
-## v0.1 范围
-
-- 规则：通用规则与四个档位，约 50 条
-- 推荐词：约 200 条
-- 不推荐写法：约 300 条
-- 核心规则片段、skill、命令行工具
+## 词表怎么定
 
 词条按真实的 AI 中文输出中的出现次数排定先后。例句使用通用名称，不含可识别的个人或企业信息。
 
@@ -124,4 +117,4 @@ STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for
 
 ## 维护
 
-由 [Daimonia（代梦智能）](https://daimonia.ai) 编写和维护。Daimonia 正在把自己的产品界面文字、内部文档和 agent 规则改为按 STC 写作。
+由 [Daimonia（代梦智能）](https://daimonia.ai) 编写和维护。STC 开源出来，是希望用 AI 写中文的人都能用上。欢迎提交词条和 issue。

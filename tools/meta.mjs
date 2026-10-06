@@ -3,5 +3,5 @@
 // A test checks that this version matches package.json.
 export const CMD = 'stc';
 export const PACKAGE = '@daimonia/stc';
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 export const HOMEPAGE = 'https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese';
