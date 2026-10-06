@@ -76,3 +76,7 @@ test('不在括号里的排除说明和引号里的提法不报 G20', () => {
   assert.deepEqual(warnings('常见的多余说明有“（不放洋葱）”这种写法。', { profile: 'for-document' }), []);
   assert.deepEqual(warnings('导出完成（共 320 行）。', { profile: 'for-document' }), []);
 });
+
+test('“不仅是……更是”口号句式报错', () => {
+  assert.ok(rules('这不仅是一次更新，更是一次蜕变。', { profile: 'for-document' }).includes('G7'));
+});
