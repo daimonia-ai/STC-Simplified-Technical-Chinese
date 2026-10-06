@@ -101,7 +101,7 @@ evals/          skill 的测试任务
 
 ## 和 ASD-STE100 的关系
 
-STC 参考 ASD-STE100 的结构：写作规则、受控词典、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。STC 另外补了大模型写中文时常见的问题，比如 G20 不写读者不需要的排除说明；ASD-STE100 没有专门管这个问题的规则。
+STC 参考 ASD-STE100 的结构：写作规则、受控词典、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。STC 另外加了规则，解决大模型写中文时额外出现的问题，比如 G20 不写读者不需要的排除说明；ASD-STE100 没有专门管这个问题的规则。
 
 ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Association of Europe）所有，“ASD-STE100 Simplified Technical English”是 ASD 的欧盟注册商标。STC 不是 ASD-STE100 的官方中文版本，本仓库不分发 ASD-STE100 的文本。需要原文请到官网免费申请：<https://www.asd-ste100.org/>
 
