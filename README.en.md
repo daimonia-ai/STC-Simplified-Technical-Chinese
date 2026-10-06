@@ -52,6 +52,7 @@ Chinese text from language models often has the same problems:
 
 - Filler verbs and buzzwords, such as 进行 (conduct), 赋能 (empower), and 闭环 (closed loop). The sentence gets longer, but the information does not increase.
 - Unclear pronouns, such as 我们 (we) and 你们 (you, plural). When the text is forwarded, the reader does not know who they refer to.
+- Exclusions that the reader does not need, such as 西红柿炒鸡蛋（不放洋葱） ("tomato and egg, no onions"). The reader starts to think about something that is not there.
 - Mixed strength words in rules for agents, such as 应 (should), 尽量 (try to), and 务必 (be sure to). The agent cannot tell which rule is a requirement.
 
 English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved words, each with one meaning. It was first released in 1986 for aerospace maintenance documentation. Chinese has no equivalent national or industry standard. STC fills this gap, and it is designed for AI agents from the start.
@@ -83,7 +84,7 @@ Entries are ordered by how often they occur in real Chinese output from AI model
 
 ## Relation to ASD-STE100
 
-STC follows the structure of ASD-STE100: writing rules, a controlled dictionary, and project term lists. The STC rules and entries are written independently. They do not translate or copy the text, rules, or dictionary entries of ASD-STE100.
+STC follows the structure of ASD-STE100: writing rules, a controlled dictionary, and project term lists. The STC rules and entries are written independently. They do not translate or copy the text, rules, or dictionary entries of ASD-STE100. STC also adds rules for problems that are common in Chinese text from language models. For example, rule G20 tells writers not to add exclusions that the reader does not need. ASD-STE100 has no specific rule for this problem.
 
 ASD-STE100 is copyright of ASD (Aerospace, Security and Defence Industries Association of Europe), and "ASD-STE100 Simplified Technical English" is a registered EU trademark of ASD. STC is not an official Chinese version of ASD-STE100. To get the specification, request it from <https://www.asd-ste100.org/>.
 

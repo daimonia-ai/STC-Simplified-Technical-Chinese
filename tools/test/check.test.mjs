@@ -62,3 +62,17 @@ test('stc-disable-next-line 跳过下一行', () => {
 test('引号里的词视为引用，不查词表', () => {
   assert.deepEqual(rules('常见的程度词有“非常、显著、大幅”。', { profile: 'for-document' }), []);
 });
+
+const warnings = (text, opts) => lintText(text, opts).issues.filter((x) => x.rule === 'G20').map((x) => x.match);
+
+test('括号里的排除说明和结尾自证给 G20 警告', () => {
+  assert.deepEqual(warnings('午餐：西红柿炒鸡蛋（不放洋葱）。', { profile: 'for-document' }), ['（不放洋葱）']);
+  assert.deepEqual(warnings('本次改用 A 方案（没有用 B 方案）。', { profile: 'for-document' }), ['（没有用 B 方案）']);
+  assert.deepEqual(warnings('文件已清理，已确认不含客户信息。', { profile: 'for-document' }), ['已确认不含']);
+});
+
+test('不在括号里的排除说明和引号里的提法不报 G20', () => {
+  assert.deepEqual(warnings('报价 1200 元，不含税。', { profile: 'for-document' }), []);
+  assert.deepEqual(warnings('常见的多余说明有“（不放洋葱）”这种写法。', { profile: 'for-document' }), []);
+  assert.deepEqual(warnings('导出完成（共 320 行）。', { profile: 'for-document' }), []);
+});
