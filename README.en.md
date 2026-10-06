@@ -18,31 +18,32 @@ Install STC (Simplified Technical Chinese) in this project from https://github.c
 本周我们进行了大量优化，整体链路已基本打通，后续将持续赋能业务增长。
 ```
 
-Without an agent, run these two commands. You need Node.js 18 or later:
+Without an agent, install the CLI, then run it in your project. You need Node.js 18 or later:
 
 ```bash
-npx @daimonia/stc init
-npx @daimonia/stc check docs/
+npm install -g @daimonia/stc
+stc init
+stc check docs/
 ```
 
-`init` works before the agent writes. `check` works after the text is written. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
+To run the CLI without installing it, use `npx @daimonia/stc init`. `init` makes STC the default output rules of the agent. `check` checks existing text. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
 
 ## Two ways to use STC
 
-You can use one way or both. When you use both, the rules make the agent write in STC from the start, and the check finds the problems that remain.
+You can use one way or both. When you use both, the default output rules make the agent write in STC from the start, and a review finds the problems that remain.
 
-### Before writing: load STC into the agent
+### Way 1: Make STC the default output rules of the agent
 
-Run `npx @daimonia/stc init`. The command does two things:
+In your project, run `stc init`. The command does two things:
 
 1. It writes the core rules into the AGENTS.md or CLAUDE.md of the project. The agent reads these rules at the start of each session. The rules start with an instruction: identify the type of text before you write, then apply the rules of that profile.
 2. It puts the skill in `.claude/skills/stc/`. The agent loads the full rules and the dictionary when it writes, rewrites, or reviews Chinese.
 
 You can also do these steps manually. Paste the contents of [`snippets/agents-md.md`](snippets/agents-md.md) into AGENTS.md or CLAUDE.md. Then put this repository in the skills directory of the agent, for example `~/.claude/skills/stc/`.
 
-### After writing: check the text
+### Way 2: Let the agent review and improve existing text
 
-Run `npx @daimonia/stc check <file or directory>`. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
+Tell the agent "Review this document with STC". The agent uses the STC skill to run the check and to fix the text. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
 
 A machine cannot check all rules, for example whether a fact has a source. For these rules, the agent reviews the text with the skill, or a person reviews it.
 
@@ -52,7 +53,7 @@ Chinese text from language models often has the same problems:
 
 - Filler verbs and buzzwords, such as 进行 (conduct), 赋能 (empower), and 闭环 (closed loop). The sentence gets longer, but the information does not increase.
 - Unclear pronouns, such as 我们 (we) and 你们 (you, plural). When the text is forwarded, the reader does not know who they refer to.
-- Exclusions that the reader does not need, such as 西红柿炒鸡蛋（不放洋葱） ("tomato and egg, no onions"). The reader starts to think about something that is not there.
+- Exclusions that the reader does not need, such as 西红柿炒鸡蛋（没有东坡肉） ("stir-fried tomato and egg, with no braised pork"). The reader starts to think about something that is not there.
 - Mixed strength words in rules for agents, such as 应 (should), 尽量 (try to), and 务必 (be sure to). The agent cannot tell which rule is a requirement.
 
 English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved words, each with one meaning. It was first released in 1986 for aerospace maintenance documentation. Chinese has no equivalent national or industry standard. STC fills this gap, and it is designed for AI agents from the start.
