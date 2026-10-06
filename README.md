@@ -1,10 +1,12 @@
 # STC (Simplified Technical Chinese) · 受控中文
 
+中文 | [English](README.en.md)
+
 STC 是一套受控中文：写作规则、词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
-**English summary.** STC (Simplified Technical Chinese) is a controlled natural language for written Chinese. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100.
+**English summary.** STC (Simplified Technical Chinese) is a controlled natural language for written Chinese. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
 
 ## 快速开始
 
@@ -117,4 +119,4 @@ STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for
 
 ## 维护
 
-由 [Daimonia（代梦智能）](https://daimonia.ai) 编写和维护。STC 开源出来，是希望用 AI 写中文的人都能用上。欢迎提交词条和 issue。
+由 [代梦智能（Daimonia）](https://daimonia.ai/zh/?utm_source=github&utm_medium=readme&utm_campaign=stc) 发起并维护。STC 是开源项目，欢迎一起共建：提交词条、规则和 issue 都可以。
