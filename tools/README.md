@@ -46,14 +46,14 @@ echo "本周我们进行了大量优化。" | stc check --profile for-document
 
 | 选项 | 作用 |
 |---|---|
-| `--profile <档位>` | 指定档位：`for-chat`、`for-document`、`for-web-dev`、`for-instruction-writing` |
+| `--profile <场景>` | 指定场景：`for-chat`、`for-document`、`for-web-dev`、`for-instruction-writing` |
 | `--json` | 输出 JSON |
 | `--max-errors <n>` | 错误超过 n 个时返回退出码 1，默认 0 |
 | `--no-warnings` | 只显示错误 |
 
 给目录时，逐层检查其中的 Markdown、文本和代码文件，跳过以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录。
 
-不指定档位时，按文件判断：AGENTS.md、CLAUDE.md、SKILL.md 用 for instruction writing；代码文件（`.ts`、`.tsx`、`.js`、`.jsx`、`.vue`、`.html` 等）用 for web dev，只检查字符串和 JSX 里的文字；其余文件用 for document。
+不指定场景时，按文件判断：AGENTS.md、CLAUDE.md、SKILL.md 用 for instruction writing；代码文件（`.ts`、`.tsx`、`.js`、`.jsx`、`.vue`、`.html` 等）用 for web dev，只检查字符串和 JSX 里的文字；其余文件用 for document。
 
 ### 检查什么
 

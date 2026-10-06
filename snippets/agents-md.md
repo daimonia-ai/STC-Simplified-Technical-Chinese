@@ -7,7 +7,7 @@
 ```markdown
 ## 中文写作：STC（Simplified Technical Chinese）
 
-写中文时必须按 STC 写。动笔前先判断在写哪类文字，再用通用规则加对应档位的规则：
+写中文时必须按 STC 写。动笔前先判断在写哪类文字，再用通用规则加对应场景的规则：
 
 - 对话里回复人：for chat
 - 给人读的文档、代码注释、提交说明：for document

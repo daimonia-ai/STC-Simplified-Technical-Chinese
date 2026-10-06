@@ -3,27 +3,27 @@
 STC 的规则分两层：
 
 - **通用规则**（[`for-all.md`](for-all.md)）：所有文字都适用，编号 G。
-- **档位规则**：按在写哪类文字分四档，补充通用规则。两者不一致时，以档位规则为准。
+- **场景规则**：按在写哪类文字分四个场景，补充通用规则。两者不一致时，以场景规则为准。
 
-| 档位 | 文件 | 编号 |
+| 场景 | 文件 | 编号 |
 |---|---|---|
 | for chat | [`for-chat.md`](for-chat.md) | C |
 | for document | [`for-document.md`](for-document.md) | D |
 | for web dev | [`for-web-dev.md`](for-web-dev.md) | W |
 | for instruction writing | [`for-instruction-writing.md`](for-instruction-writing.md) | I |
 
-## 先判断档位
+## 先判断场景
 
 按读者和用途判断：
 
-| 读者 | 用途 | 档位 |
+| 读者 | 用途 | 场景 |
 |---|---|---|
 | 正在对话的人 | 得到回复 | for chat |
 | 人 | 理解内容或照着操作：报告、方案、手册、会议纪要、代码注释、提交说明、日志 | for document |
 | 产品的用户 | 在网页或应用界面上看到 | for web dev |
 | agent | 照着执行：系统提示词、AGENTS.md、CLAUDE.md、skill、给 agent 的工作流程 | for instruction writing |
 
-同一份文字只用一个档位。一份文档里引用界面文字时，被引用的界面文字按 for web dev 写，文档本身按 for document 写。
+同一份文字只按一个场景写。一份文档里引用界面文字时，被引用的界面文字按 for web dev 写，文档本身按 for document 写。
 
 ## 规则里的强度词
 

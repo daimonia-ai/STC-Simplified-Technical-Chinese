@@ -1,18 +1,18 @@
 ---
 name: stc
 description: >
-  STC（Simplified Technical Chinese，受控中文）：按受控中文规范写、改写、审查中文。先判断在写哪类文字，再按对应档位的规则和词表执行。档位分四类：对话回复、给人读的文档、网页和应用的界面文字、写给 agent 的规则。用户要写或修改中文的文档、报告、周报、界面文案、系统提示词、AGENTS.md 规则或 skill 时，必须使用本 skill。用户说“按受控中文改一下”“审一下这段文案”“去掉套话”时，同样必须使用本 skill。用户没有提到 STC 时也适用。
+  STC（Simplified Technical Chinese，受控中文）：按受控中文规范写、改写、审查中文。先判断在写哪类文字，再按对应场景的规则和词表执行。场景分四类：对话回复、给人读的文档、网页和应用的界面文字、写给 agent 的规则。用户要写或修改中文的文档、报告、周报、界面文案、系统提示词、AGENTS.md 规则或 skill 时，必须使用本 skill。用户说“按受控中文改一下”“审一下这段文案”“去掉套话”时，同样必须使用本 skill。用户没有提到 STC 时也适用。
 ---
 
 # STC 受控中文
 
 本 skill 让写出来的中文同一个意思只有一种写法：读不错，也查得出。规则在 `rules/`，词表在 `dictionary/`，路径都相对于本 skill 所在的目录。
 
-## 第一步：判断档位
+## 第一步：判断场景
 
 动笔前先判断这次写的是哪类文字。按读者和用途判断：
 
-| 读者和用途 | 档位 | 规则文件 |
+| 读者和用途 | 场景 | 规则文件 |
 |---|---|---|
 | 正在对话的人，读 agent 的回复 | for chat | `rules/for-chat.md` |
 | 人，读来理解内容或照着操作：报告、方案、手册、周报、会议纪要、代码注释、提交说明 | for document | `rules/for-document.md` |
@@ -21,13 +21,13 @@ description: >
 
 - 一次任务包含几类文字时，必须对每一类文字分别判断。例如一份需求文档按 for document 写，文档里给出的按钮文字按 for web dev 写。
 - 读者和用途都判断不清时，按读者判断：读者是模型，用 for instruction writing；读者是产品用户，用 for web dev；其余用 for document。
-- 回复开头宜用一句话注明档位，比如“按 for web dev 写”。原因：判断错了，用户能马上纠正。
+- 回复开头宜用一句话注明场景，比如“按 for web dev 写”。原因：判断错了，用户能马上纠正。
 
 ## 第二步：读规则和词表
 
-1. 读 `rules/for-all.md`。通用规则对所有档位都适用。
-2. 读第一步选定的档位文件。档位规则和通用规则不一致时，以档位规则为准。
-3. 读 `dictionary/avoid.yaml`。只用 `profiles` 字段为空或包含当前档位的条目。
+1. 读 `rules/for-all.md`。通用规则对所有场景都适用。
+2. 读第一步选定的场景文件。场景规则和通用规则不一致时，以场景规则为准。
+3. 读 `dictionary/avoid.yaml`。只用 `profiles` 字段为空或包含当前场景的条目。
 4. 写界面文字，或写警告、注意、说明这类提醒时，读 `dictionary/recommended.yaml`，动作词和提醒级别照表里的意思用。
 5. 项目里有术语表时（文件名通常含 `terms` 或“术语”），必须照术语表写名称。
 
@@ -63,7 +63,7 @@ description: >
 能运行 Node.js 18 以上版本时，先用检查命令检查写好的文字：
 
 ```bash
-node <本 skill 目录>/tools/cli.mjs check <文件> --profile <档位>
+node <本 skill 目录>/tools/cli.mjs check <文件> --profile <场景>
 ```
 
 用 `npx @daimonia/stc init` 安装时，本 skill 目录是 `.claude/skills/stc/`。文字不在文件里时，可以通过标准输入传给检查命令。检查命令报的错误必须全部改掉；警告宜逐条判断。检查命令查不了的项，交付前必须逐项检查：
@@ -74,7 +74,7 @@ node <本 skill 目录>/tools/cli.mjs check <文件> --profile <档位>
 - 没有营销词、行话、套话和口号句式（G6、G7）。
 - 一句只讲一件事，一句不超过 40 个字（G9、G12）。
 - 表示把握程度的词没有被删掉（G15）。
-- 人称符合档位：for document 和 for web dev 里没有“我们”“你们”；for web dev 里也没有“他”“她”“它”“大家”（D1、W1）。
+- 人称符合场景：for document 和 for web dev 里没有“我们”“你们”；for web dev 里也没有“他”“她”“它”“大家”（D1、W1）。
 - for instruction writing 里，强度词只有“必须、不得、宜、不宜、可、不必、能、不能”（I1）。
 - 数字用阿拉伯数字并带单位；中文与英文、数字之间有空格（G18、G19）。
 

@@ -2,7 +2,7 @@
 
 适用于写给 agent 照着执行的文字：系统提示词、AGENTS.md、CLAUDE.md、skill，以及给 agent 的工作流程和规范。读者是模型。
 
-本档管的是这类文字本身怎么写。把 STC 的核心规则贴进 AGENTS.md，是安装 STC 的方式，四个档位都靠这一步；往 AGENTS.md 里新写一条规则时，这条规则按本档写。
+本场景管的是这类文字本身怎么写。把 STC 的核心规则贴进 AGENTS.md，是安装 STC 的方式，四个场景都靠这一步；往 AGENTS.md 里新写一条规则时，这条规则按本场景写。
 
 通用规则（[`for-all.md`](for-all.md)）同样适用。
 

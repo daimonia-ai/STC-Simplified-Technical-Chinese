@@ -16,7 +16,7 @@ STC 受控中文是给 AI 用的中文写作规范：一套写作规则、一份
 请在当前项目里安装 STC 受控中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese），然后演示一次：
 1. 运行 npx -y @daimonia/stc init。
 2. 挑项目里一份中文文档，运行 npx -y @daimonia/stc check <文件名>，把结果整理成表格。
-3. 按 STC 的 for document 档位改写下面这段话。列出改前和改后，写明每处改动对应哪条规则：
+3. 按 STC 的 for document 场景改写下面这段话。列出改前和改后，写明每处改动对应哪条规则：
 本周我们进行了大量优化，整体链路已基本打通，后续将持续赋能业务增长。
 ```
 
@@ -37,7 +37,7 @@ npx @daimonia/stc check docs/
 
 运行 `npx @daimonia/stc init`。这条命令做两件事：
 
-1. 把核心规则写进项目的 AGENTS.md 或 CLAUDE.md。agent 每次会话都会读到这一段。这一段开头要求 agent 动笔前先判断在写哪类文字，再按对应档位写。
+1. 把核心规则写进项目的 AGENTS.md 或 CLAUDE.md。agent 每次会话都会读到这一段。这一段开头要求 agent 动笔前先判断在写哪类文字，再按对应场景写。
 2. 把 skill 放进 `.claude/skills/stc/`。agent 写、改、审中文时，加载全套规则和词表。
 
 也可以手动装：把 [`snippets/agents-md.md`](snippets/agents-md.md) 的内容贴进 AGENTS.md 或 CLAUDE.md，再把本仓库放进 agent 的技能目录，比如 `~/.claude/skills/stc/`。
@@ -67,17 +67,17 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 
 | 组成 | 内容 | 位置 |
 |---|---|---|
-| 规则 | 通用规则，加四个档位各自的规则 | [`rules/`](rules/) |
+| 规则 | 通用规则，加四个场景各自的规则 | [`rules/`](rules/) |
 | 词表 | 推荐词（一个词一个意思）、不推荐写法（附推荐写法）、项目术语表模板 | [`dictionary/`](dictionary/) |
 | 核心规则片段 | 贴进 AGENTS.md 或 CLAUDE.md 的十来行规则 | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | skill | agent 写、改、审中文时加载的技能包 | [`SKILL.md`](SKILL.md) |
 | 命令行工具 | `stc init` 把 STC 装进项目，`stc check` 找出机器能判断的问题 | [`tools/`](tools/) |
 
-### 四个档位
+### 四个场景
 
-写之前先判断在写哪类文字，再用“通用规则 + 对应档位的规则”。
+写之前先判断在写哪类文字，再用“通用规则 + 对应场景的规则”。
 
-| 档位 | 写的是什么 | 和其他档位的主要区别 |
+| 场景 | 写的是什么 | 和其他场景的主要区别 |
 |---|---|---|
 | for chat | agent 在对话里回复人 | 可以用“我”“你”；第一句回答问题 |
 | for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写“我们”“你们” |
@@ -87,8 +87,8 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 ## 仓库结构
 
 ```
-SKILL.md        skill 入口：判断档位，读规则和词表，写、改写、审查
-rules/          规则：通用规则与四个档位
+SKILL.md        skill 入口：判断场景，读规则和词表，写、改写、审查
+rules/          规则：通用规则与四个场景
 dictionary/     词表：推荐词、不推荐写法、项目术语表模板
 snippets/       贴进 AGENTS.md / CLAUDE.md 的核心规则
 tools/          命令行工具 stc：init 安装，check 检查
@@ -119,7 +119,7 @@ ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Associa
 - [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh)：受控中文改写 skill 与检查脚本
 - [RinStel/cste-zh](https://github.com/RinStel/cste-zh)：受控简明技术中文 skill
 
-STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for document、for web dev、for instruction writing 四个档位分别给出规则。
+STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for document、for web dev、for instruction writing 四个场景分别给出规则。
 
 ## 许可
 

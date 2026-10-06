@@ -14,7 +14,7 @@ export const checkHelp = (usage) => `用法：${usage} [选项] <文件或目录
   跳过以“.”开头的目录和 node_modules、dist、build 等目录。
 
 选项：
-  --profile <档位>   for-chat | for-document | for-web-dev | for-instruction-writing
+  --profile <场景>   for-chat | for-document | for-web-dev | for-instruction-writing
                      不指定时按文件判断：AGENTS.md、CLAUDE.md、SKILL.md 用 for-instruction-writing，
                      代码文件用 for-web-dev（只查字符串和 JSX 文字），其余用 for-document
   --json             输出 JSON
@@ -59,7 +59,7 @@ export function runCheck(argv, { usage = 'stc check' } = {}) {
     return 0;
   }
   if (opts.profile && !PROFILES.includes(opts.profile)) {
-    console.error(`未知档位：${opts.profile}。可选：${PROFILES.join('、')}`);
+    console.error(`未知场景：${opts.profile}。可选：${PROFILES.join('、')}`);
     return 2;
   }
 
