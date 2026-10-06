@@ -2,11 +2,11 @@
 
 中文 | [English](README.en.md)
 
-STC 是一套受控中文：写作规则、词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
+STC 受控中文是给 AI 用的中文写作规范：一套写作规则、一份词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
-**English summary.** STC (Simplified Technical Chinese) is a controlled natural language for written Chinese. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
+**English summary.** STC (Simplified Technical Chinese) is a Chinese writing specification for AI. It is a controlled natural language for written Chinese. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
 
 ## 快速开始
 
@@ -27,7 +27,26 @@ npx @daimonia/stc init
 npx @daimonia/stc check docs/
 ```
 
-`init` 把 skill 文件放进 `.claude/skills/stc/`，把核心规则写进项目的 AGENTS.md 或 CLAUDE.md。`check` 检查文件或目录里的中文文字，发现错误时返回退出码 1，可以放进 CI。命令的完整说明见 [`tools/README.md`](tools/README.md)。
+`init` 管写之前，`check` 管写之后，两者的区别见下一节[两种用法](#两种用法)。命令的完整说明见 [`tools/README.md`](tools/README.md)。
+
+## 两种用法
+
+可以只用一种，也可以两种一起用。一起用时，写之前装好的规则让 agent 一开始就按 STC 写，写之后的检查找出漏掉的问题。
+
+### 写之前：装进 agent
+
+运行 `npx @daimonia/stc init`。这条命令做两件事：
+
+1. 把核心规则写进项目的 AGENTS.md 或 CLAUDE.md。agent 每次会话都会读到这一段。这一段开头要求 agent 动笔前先判断在写哪类文字，再按对应档位写。
+2. 把 skill 放进 `.claude/skills/stc/`。agent 写、改、审中文时，加载全套规则和词表。
+
+也可以手动装：把 [`snippets/agents-md.md`](snippets/agents-md.md) 的内容贴进 AGENTS.md 或 CLAUDE.md，再把本仓库放进 agent 的技能目录，比如 `~/.claude/skills/stc/`。
+
+### 写之后：检查
+
+运行 `npx @daimonia/stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
+
+机器判断不了的规则（比如事实有没有出处），由 agent 按 skill 审查，或由人审稿。不装任何东西也可以直接读 `rules/` 和 `dictionary/`，用来审稿、培训或自己写工具。
 
 ## 为什么做
 
@@ -64,16 +83,6 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写“我们”“你们” |
 | for web dev | 网页和应用界面上给用户看的文字 | 不用复数人称和第三人称代词；按钮以动词开头 |
 | for instruction writing | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用“必须、不得、宜、不宜、可、不必、能、不能” |
-
-## 怎么用
-
-| 方式 | 做法 | 作用 |
-|---|---|---|
-| 安装命令 | `npx @daimonia/stc init` | 一步装好 skill 和核心规则 |
-| 核心规则 | 把 [`snippets/agents-md.md`](snippets/agents-md.md) 的内容贴进 AGENTS.md 或 CLAUDE.md | 每次会话都带着，agent 不用记得去调用 |
-| skill | 把本仓库放进 agent 的技能目录，比如 `~/.claude/skills/stc/` | agent 写中文时按需加载全套规则和词表 |
-| 检查命令 | `npx @daimonia/stc check <文件或目录>`，可放进 CI，发现错误时返回退出码 1 | 机器能判断的规则自动检查 |
-| 原文 | 直接读 `rules/` 和 `dictionary/` | 审稿、培训、自己写工具 |
 
 ## 仓库结构
 

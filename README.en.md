@@ -2,7 +2,7 @@
 
 [中文](README.md) | English
 
-STC is a controlled language for written Chinese. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
+STC is a Chinese writing specification for AI. It is a controlled language for written Chinese: it gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
 
 STC is for teams that write or process Chinese text: developers who build Chinese AI products, localization teams, and engineers who check Chinese output from language models. The rules and the dictionary are in Chinese. This page explains them in English.
 
@@ -25,7 +25,26 @@ npx @daimonia/stc init
 npx @daimonia/stc check docs/
 ```
 
-`init` puts the skill files in `.claude/skills/stc/` and writes the core rules into the AGENTS.md or CLAUDE.md of the project. `check` checks the Chinese text in files or directories. It returns exit code 1 when it finds errors, so you can use it in CI. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
+`init` works before the agent writes. `check` works after the text is written. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
+
+## Two ways to use STC
+
+You can use one way or both. When you use both, the rules make the agent write in STC from the start, and the check finds the problems that remain.
+
+### Before writing: load STC into the agent
+
+Run `npx @daimonia/stc init`. The command does two things:
+
+1. It writes the core rules into the AGENTS.md or CLAUDE.md of the project. The agent reads these rules at the start of each session. The rules start with an instruction: identify the type of text before you write, then apply the rules of that profile.
+2. It puts the skill in `.claude/skills/stc/`. The agent loads the full rules and the dictionary when it writes, rewrites, or reviews Chinese.
+
+You can also do these steps manually. Paste the contents of [`snippets/agents-md.md`](snippets/agents-md.md) into AGENTS.md or CLAUDE.md. Then put this repository in the skills directory of the agent, for example `~/.claude/skills/stc/`.
+
+### After writing: check the text
+
+Run `npx @daimonia/stc check <file or directory>`. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
+
+A machine cannot check all rules, for example whether a fact has a source. For these rules, the agent reviews the text with the skill, or a person reviews it.
 
 ## Why STC
 
