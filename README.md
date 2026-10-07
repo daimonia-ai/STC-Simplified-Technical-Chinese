@@ -2,6 +2,8 @@
 
 中文 | [English](README.en.md)
 
+[介绍视频（中文，2 分 31 秒）](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/download/v0.1.3/stc-intro-zh.mp4) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
+
 STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
@@ -21,17 +23,31 @@ STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作
 不用 agent 时，先装命令行工具，再在项目里运行，需要 Node.js 18 以上版本：
 
 ```bash
-npm install -g @daimonia/stc
+npm install -g @daimonia/stc@latest
 stc init
 ```
 
-不想装到本机，也可以用 `npx @daimonia/stc init` 直接运行。`init` 安装 skill 和按需使用入口，`init --defaults` 设置默认输出规则，`check` 检查已有的文字，两者的区别见下一节[两种用法](#两种用法)。命令的完整说明见 [`tools/README.md`](tools/README.md)。
+也可以用 `npx --yes @daimonia/stc@latest init` 临时运行。`init` 安装 skill 和按需使用入口，`init --defaults` 设置默认输出规则，`check` 检查已有文字。使用示例见下一节[两种用法](#两种用法)，全部命令见 [`tools/README.md`](tools/README.md)。
 
 ## 两种用法
 
 可以只用一种，也可以两种一起用。一起用时，默认输出规则让 agent 一开始就按 STC 写，审阅时再找出漏掉的问题。
 
 ### 用法一：设成 agent 的默认输出规则
+
+把这段话直接贴给 agent：
+
+```text
+请在当前项目安装或更新 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese，并设为默认中文输出规则，保留其他项目配置，完成后说明生效范围。
+```
+
+这段指令已授权设置默认规则。生效后可以直接提出写作任务，例如：
+
+```text
+请根据以下要点写一份项目进展说明：【粘贴要点】
+```
+
+手动配置时，按以下步骤操作：
 
 在项目里运行 `stc init`，装好 skill、规则和词表。首次安装登记按需使用入口。
 
@@ -43,9 +59,61 @@ stc init
 
 ### 用法二：让 agent 审阅并优化已有内容
 
+安装后，把这段话和待处理文字一起贴给 agent：
+
+```text
+请按 STC 审阅并优化以下中文，保留事实、数字、名称和原意，给出改写稿并简要说明主要改动：【粘贴文字】
+```
+
+审阅项目文件时，可以这样说：
+
+```text
+请按 STC 审阅【文件路径】，列出主要问题和具体改法，保留源文件。
+```
+
+需要 agent 挑选首次体验的材料时，可以直接授权：
+
+```text
+请从当前项目挑选一份中文文档，说明选择理由，再按 STC 做一次只读审阅并给出具体改法。
+```
+
+此用法可按需调用，无须启用默认输出规则。
+
 对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 审阅用户指定或授权挑选的材料，给出问题、原因和改法。用户要求修改时，agent 再按授权修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
 
 机器判断不了的规则（比如事实有没有出处），由 agent 按 skill 审查，或由人审稿。不装任何东西也可以直接读 `rules/` 和 `dictionary/`，用来审稿、培训或自己写工具。
+
+## 更新版本
+
+更新分两步：先更新 npm 命令行包，再刷新项目里的 skill 和规则。
+
+把这段话贴给 agent：
+
+```text
+请把 STC 的 npm 命令行工具更新到最新版，并刷新当前项目实际引用的 STC skill 和规则，保留已启用的默认规则、其他项目配置和项目术语，最后核对两处版本。
+```
+
+手动更新时，在已安装 STC 的项目根目录运行：
+
+```bash
+npm install -g @daimonia/stc@latest
+stc --version
+stc init
+node .claude/skills/stc/tools/cli.mjs --version
+```
+
+`npm install` 更新本机 CLI。`stc init` 将新版文件复制到当前项目，并保留已有的默认设置。两条版本命令的结果须一致。
+
+- 每个已安装 STC 的项目都需要运行一次 `stc init`。
+- 安装时用了 `--dir`，更新时须使用相同目录。第二条版本命令也须改为该目录。
+- `--dir` 只改变 skill 的位置；项目配置仍写在当前目录。
+- 手动安装或技能管理器安装的全局 skill，须沿用原安装方式更新。npm 更新不会刷新这些副本。
+
+临时运行最新版并刷新当前项目，也可以用：
+
+```bash
+npx --yes @daimonia/stc@latest init
+```
 
 ## 为什么做
 

@@ -4,20 +4,37 @@
 
 ## 安装
 
-不安装，直接运行：
+安装命令行工具，再在项目根目录运行：
 
 ```bash
-npx @daimonia/stc init
-```
-
-装到本机后，直接用 `stc`：
-
-```bash
-npm install -g @daimonia/stc
+npm install -g @daimonia/stc@latest
 stc init
 ```
 
+也可以临时运行最新版：
+
+```bash
+npx --yes @daimonia/stc@latest init
+```
+
 `npx` 后面必须写完整的包名 `@daimonia/stc`。
+
+## 更新
+
+在已安装 STC 的项目根目录运行：
+
+```bash
+npm install -g @daimonia/stc@latest
+stc --version
+stc init
+node .claude/skills/stc/tools/cli.mjs --version
+```
+
+第一条命令更新本机 CLI。`init` 刷新当前项目的 skill 和规则，并保留默认使用状态。每个项目须分别刷新，两条版本命令的结果须一致。
+
+自定义安装目录时，须继续使用原来的 `--dir <目录>`。核对 skill 版本时，也须改为实际路径。`--dir` 只改变 skill 的位置，项目配置仍写在当前目录。
+
+全局 skill 若由手动安装或技能管理器安装，须沿用原方式更新。给 agent 的更新提示词见 [README](../README.md#更新版本)。
 
 ## init
 
