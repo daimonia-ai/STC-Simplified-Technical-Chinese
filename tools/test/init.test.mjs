@@ -99,3 +99,15 @@ test('已有 STC 段落时只替换这一段', () => {
   const before = '前\n\n<!-- stc:start -->\n旧\n<!-- stc:end -->\n后\n';
   assert.equal(upsertBlock(before, block), '前\n\n<!-- stc:start -->\n新\n<!-- stc:end -->\n后\n');
 });
+
+
+test('安装完成后等待用户选择材料，不附带业务审查', () => {
+  const cwd = tmp();
+  const source = '本周我们进行了大量优化。';
+  writeFileSync(join(cwd, '业务文档.md'), source);
+  const output = [];
+  assert.equal(runInit([], { cwd, log: (s) => output.push(s), error: () => {} }), 0);
+  assert.match(output.join('\n'), /第一份材料由用户选择/);
+  assert.doesNotMatch(output.join('\n'), /G4|下一步：运行/);
+  assert.equal(read(cwd, '业务文档.md'), source);
+});

@@ -10,14 +10,13 @@ STC 简明技术性中文是给 AI 用的中文写作规范：一套写作规则
 
 ## 快速开始
 
-把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent。agent 会装好 STC，再演示一次检查和改写：
+把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent。安装完成后，由用户选择第一份材料。
 
 ```text
-请在当前项目里安装 STC 简明技术性中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese），然后演示一次：
-1. 运行 npx -y @daimonia/stc init。
-2. 挑项目里一份中文文档，运行 npx -y @daimonia/stc check <文件名>，把结果整理成表格。
-3. 按 STC 的 for document 场景改写下面这段话。列出改前和改后，写明每处改动对应哪条规则：
-本周我们进行了大量优化，整体链路已基本打通，后续将持续赋能业务增长。
+请在当前项目里安装 STC 简明技术性中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese）。
+1. 说明安装位置和将修改的配置，再按当前授权运行安装命令。
+2. 安装完成后，说明已启用的功能，并提示可以使用了。
+3. 等我粘贴文字或指定文件，再开始审阅。不得自行挑选项目文档、运行演示审查或改写业务文件。
 ```
 
 不用 agent 时，先装命令行工具，再在项目里运行，需要 Node.js 18 以上版本：
@@ -25,7 +24,6 @@ STC 简明技术性中文是给 AI 用的中文写作规范：一套写作规则
 ```bash
 npm install -g @daimonia/stc
 stc init
-stc check docs/
 ```
 
 不想装到本机，也可以用 `npx @daimonia/stc init` 直接运行。`init` 把 STC 设成 agent 的默认输出规则，`check` 检查已有的文字，两者的区别见下一节[两种用法](#两种用法)。命令的完整说明见 [`tools/README.md`](tools/README.md)。
@@ -45,7 +43,7 @@ stc check docs/
 
 ### 用法二：让 agent 审阅并优化已有内容
 
-对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 运行检查命令、按规则修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
+对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 审阅用户指定的材料，给出问题、原因和改法。用户要求修改时，agent 再按授权修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
 
 机器判断不了的规则（比如事实有没有出处），由 agent 按 skill 审查，或由人审稿。不装任何东西也可以直接读 `rules/` 和 `dictionary/`，用来审稿、培训或自己写工具。
 

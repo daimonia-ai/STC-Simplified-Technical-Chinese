@@ -8,14 +8,13 @@ STC is for anyone who wants AI to write clear Chinese with fewer unnecessary wor
 
 ## Quick start
 
-Paste this prompt into an agent such as Claude Code, Codex, or Cursor. The agent installs STC, checks a document, and rewrites a sample sentence:
+Paste this prompt into Claude Code, Codex, Cursor, or a similar agent. After installation, the user chooses the first material to review.
 
 ```text
-Install STC (Simplified Technical Chinese) in this project from https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese, then show me a demo:
-1. Run npx -y @daimonia/stc init.
-2. Pick a Chinese document in this project. Run npx -y @daimonia/stc check <file> and show the results in a table.
-3. Rewrite this paragraph with the STC "for document" profile. Show the text before and after, and name the rule for each change:
-本周我们进行了大量优化，整体链路已基本打通，后续将持续赋能业务增长。
+Install STC (Simplified Technical Chinese) in this project from https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese.
+1. State the installation location and configuration changes, then install within the current authorization.
+2. Report which features are enabled and tell me that STC is ready.
+3. Wait for me to paste text or name a file before reviewing it. Do not select project documents, run a review demo, or rewrite business files on your own.
 ```
 
 Without an agent, install the CLI, then run it in your project. You need Node.js 18 or later:
@@ -23,7 +22,6 @@ Without an agent, install the CLI, then run it in your project. You need Node.js
 ```bash
 npm install -g @daimonia/stc
 stc init
-stc check docs/
 ```
 
 To run the CLI without installing it, use `npx @daimonia/stc init`. `init` makes STC the default output rules of the agent. `check` checks existing text. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
@@ -43,7 +41,7 @@ You can also do these steps manually. Paste the contents of [`snippets/agents-md
 
 ### Way 2: Let the agent review and improve existing text
 
-Tell the agent "Review this document with STC". The agent uses the STC skill to run the check and to fix the text. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
+Tell the agent "Review this document with STC". The agent uses the STC skill to review the material selected by the user. It explains each problem and gives a proposed change. It edits the material when the user requests that action. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
 
 A machine cannot check all rules, for example whether a fact has a source. For these rules, the agent reviews the text with the skill, or a person reviews it.
 

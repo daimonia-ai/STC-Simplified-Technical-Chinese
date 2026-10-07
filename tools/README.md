@@ -8,7 +8,6 @@
 
 ```bash
 npx @daimonia/stc init
-npx @daimonia/stc check docs/
 ```
 
 装到本机后，直接用 `stc`：
@@ -16,7 +15,6 @@ npx @daimonia/stc check docs/
 ```bash
 npm install -g @daimonia/stc
 stc init
-stc check docs/
 ```
 
 `npx` 后面必须写完整的包名 `@daimonia/stc`。
@@ -35,6 +33,8 @@ stc check docs/
 | `--dir <目录>` | skill 文件放在哪个目录，默认 `.claude/skills/stc` |
 | `--dry-run` | 只列出要改的文件，不写入 |
 
+安装完成后，用户可以粘贴文字或指定文件，要求 agent 审阅。安装授权不包含自动挑选业务文件或执行演示审查。
+
 ## check
 
 ```bash
@@ -47,13 +47,27 @@ echo "本周我们进行了大量优化。" | stc check --profile for-document
 | 选项 | 作用 |
 |---|---|
 | `--profile <场景>` | 指定场景：`for-chat`、`for-document`、`for-web-dev`、`for-instruction-writing` |
-| `--json` | 输出 JSON |
+| `--format text` | 可读报告，按原句列出问题、原因和改法；默认格式 |
+| `--format markdown` | Markdown 报告，可保存到用户指定的文件 |
+| `--json` | 结构化问题，含位置、原句、原因和改法；保留原有字段 |
 | `--max-errors <n>` | 错误超过 n 个时返回退出码 1，默认 0 |
 | `--no-warnings` | 只显示错误 |
 
 给目录时，逐层检查其中的 Markdown、文本和代码文件，跳过以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录。
 
 不指定场景时，按文件判断：AGENTS.md、CLAUDE.md、SKILL.md 用 for instruction writing；代码文件（`.ts`、`.tsx`、`.js`、`.jsx`、`.vue`、`.html` 等）用 for web dev，只检查字符串和 JSX 里的文字；其余文件用 for document。
+
+### 报告怎么读
+
+报告先给需修改项与待确认项的数量，再按原句分组。每条问题包含触发文字、原因和改法，规则编号用于查阅依据。待确认项必须结合上下文判断。
+
+`check` 只读取用户指定的材料。目录中的符号链接不继续展开。原文缺少事实时，建议用“【待补：具体事实】”标明缺项。
+
+用户确定材料和报告位置后，可以运行：
+
+```bash
+stc check 指定文档.md --format markdown > 审查报告.md
+```
 
 ### 检查什么
 

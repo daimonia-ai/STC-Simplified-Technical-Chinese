@@ -4,7 +4,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { CMD, PACKAGE } from '../../meta.mjs';
+import { CMD } from '../../meta.mjs';
 
 const ROOT = resolve(fileURLToPath(new URL('../../../', import.meta.url)));
 export const DEFAULT_DIR = '.claude/skills/stc';
@@ -153,7 +153,9 @@ export function runInit(argv, { cwd = process.cwd(), log = console.log, error = 
     }
     log(`STC 已装好。\n${describeFiles(plan)}`);
     for (const r of plan.rules) log(describeRule(r));
-    log(`下一步：运行 npx ${PACKAGE} check <文件或目录>，检查项目里的中文文字。`);
+    log('\n现在可以使用 STC。当前项目已启用默认输出规则，也可以审阅指定材料。');
+    log('要开始审阅，请粘贴一段文字或指定一个文件，再告诉 agent：“按 STC 审阅，先给修改建议。”');
+    log('安装后的第一份材料由用户选择。');
     return 0;
   } catch (e) {
     error(`安装失败：${e.message}`);

@@ -1,5 +1,6 @@
 // Checks text segments against STC rules and the avoid list.
 import { readFileSync } from 'node:fs';
+import { issueAdvice } from './advice.mjs';
 import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.mjs';
 
 export const PROFILES = ['for-chat', 'for-document', 'for-web-dev', 'for-instruction-writing'];
@@ -84,8 +85,8 @@ export function lintSegments(segments, profile, dictionary) {
     .filter((e) => !e.profiles || e.profiles.includes(profile))
     .map((e) => ({ entry: e, patterns: compileEntry(e), soft: CONTEXT_DEPENDENT.some((p) => e.avoid.startsWith(p)) }));
 
-  const add = (segment, index, rule, level, message, match) => {
-    issues.push({ ...locate(segment, index), rule, level, message, match });
+  const add = (segment, index, rule, level, message, match, entry) => {
+    issues.push({ ...locate(segment, index), rule, level, message, match, ...issueAdvice(rule, message, entry, match) });
   };
   const scan = (segment, regex, fn, text = segment.text) => {
     regex.lastIndex = 0;
@@ -103,7 +104,7 @@ export function lintSegments(segments, profile, dictionary) {
       const rule = entry.type === '人称代词' ? (profile === 'for-web-dev' ? 'W1' : 'D1') : TYPE_RULE[entry.type] ?? 'G3';
       for (const pattern of patterns) {
         scan(segment, pattern, (m) =>
-          add(segment, m.index, rule, soft ? 'warning' : 'error', `${entry.type}：${entry.why}。推荐写法：${entry.use}`, m[0]),
+          add(segment, m.index, rule, soft ? 'warning' : 'error', `${entry.type}：${entry.why}。推荐写法：${entry.use}`, m[0], entry),
         );
       }
     }
@@ -117,7 +118,7 @@ export function lintSegments(segments, profile, dictionary) {
     }
     if (profile === 'for-document') {
       scan(segment, /(?<!其)[他她它]们?/g, (m) =>
-        add(segment, m.index, 'D1', 'error', '文档的主语应写名称，不写“他、她、它”', m[0]),
+        add(segment, m.index, 'D1', 'error', '文档的主语必须写名称，不写“他、她、它”', m[0]),
       );
     }
     if (profile === 'for-instruction-writing') {
@@ -138,7 +139,7 @@ export function lintSegments(segments, profile, dictionary) {
     );
 
     scan(original, /[「」『』]/g, (m) =>
-      add(segment, m.index, 'G17', 'error', '引号应使用全角双引号“”和单引号‘’，不使用直角引号', m[0]),
+      add(segment, m.index, 'G17', 'error', '引号必须使用全角双引号“”和单引号‘’，不使用直角引号', m[0]),
     );
     scan(original, new RegExp(`"[^"\\n]*[${CJK}][^"\\n]*"`, 'g'), (m) =>
       add(segment, m.index, 'G17', 'warning', '中文里的引号宜使用全角双引号“”', m[0]),
@@ -158,7 +159,7 @@ export function lintSegments(segments, profile, dictionary) {
   }
 
   if (usesNi && usesNin) {
-    issues.push({ line: segments[0]?.line ?? 1, col: 1, rule: 'W2', level: 'warning', message: '“你”和“您”应二选一，全站统一', match: '你 / 您' });
+    issues.push({ line: segments[0]?.line ?? 1, col: 1, rule: 'W2', level: 'warning', message: '“你”和“您”必须二选一，全站统一', match: '你 / 您' });
   }
 
   return issues.sort((a, b) => a.line - b.line || a.col - b.col);
@@ -166,5 +167,9 @@ export function lintSegments(segments, profile, dictionary) {
 
 export function lintText(text, { path = 'stdin.md', profile, dictionary = loadDictionary() } = {}) {
   const chosen = profile ?? detectProfile(path);
-  return { profile: chosen, issues: lintSegments(segmentsFor(path, text), chosen, dictionary) };
+  const lines = text.split(/\r?\n/);
+  const issues = lintSegments(segmentsFor(path, text), chosen, dictionary).map((issue) => ({
+    ...issueAdvice(issue.rule, issue.message, undefined, issue.match), ...issue, context: lines[issue.line - 1] ?? '',
+  }));
+  return { profile: chosen, issues };
 }
