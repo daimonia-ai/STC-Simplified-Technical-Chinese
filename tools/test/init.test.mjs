@@ -14,11 +14,13 @@ const blocks = (text) => text.split('<!-- stc:start -->').length - 1;
 test('空项目：装好 skill 文件，新建 AGENTS.md，不建 CLAUDE.md', () => {
   const cwd = tmp();
   assert.equal(init(cwd), 0);
-  for (const file of ['SKILL.md', 'LICENSE', 'rules/for-all.md', 'dictionary/avoid.yaml', 'tools/cli.mjs', 'tools/check/data/avoid.json']) {
+  for (const file of ['SKILL.md', 'ONBOARDING.md', 'README.en.md', 'LICENSE', 'rules/for-all.md', 'dictionary/avoid.yaml', 'tools/cli.mjs', 'tools/check/data/avoid.json']) {
     assert.ok(existsSync(join(cwd, '.claude/skills/stc', file)), file);
   }
   const agents = read(cwd, 'AGENTS.md');
   assert.equal(blocks(agents), 1);
+  assert.match(agents, /stc:mode=available/);
+  assert.doesNotMatch(agents, /写中文时必须按 STC 写/);
   assert.match(agents, /完整规则见 `\.claude\/skills\/stc\/SKILL\.md`/);
   assert.ok(!existsSync(join(cwd, 'CLAUDE.md')));
 });
@@ -107,7 +109,56 @@ test('安装完成后等待用户选择材料，不附带业务审查', () => {
   writeFileSync(join(cwd, '业务文档.md'), source);
   const output = [];
   assert.equal(runInit([], { cwd, log: (s) => output.push(s), error: () => {} }), 0);
-  assert.match(output.join('\n'), /第一份材料由用户选择/);
+  assert.match(output.join('\n'), /选一份文档，或授权 agent 从当前项目挑一份来审阅/);
   assert.doesNotMatch(output.join('\n'), /G4|下一步：运行/);
   assert.equal(read(cwd, '业务文档.md'), source);
+});
+
+
+test('确认默认使用后更新同一配置块；后续更新保留默认状态', () => {
+  const cwd = tmp();
+  writeFileSync(join(cwd, 'AGENTS.md'), '# 项目\n\n自定义要求。\n');
+  init(cwd);
+  assert.doesNotMatch(read(cwd, 'AGENTS.md'), /写中文时必须按 STC 写/);
+  assert.equal(init(cwd, ['--defaults']), 0);
+  init(cwd);
+  const text = read(cwd, 'AGENTS.md');
+  assert.equal(blocks(text), 1);
+  assert.match(text, /stc:mode=default/);
+  assert.match(text, /写中文时必须按 STC 写/);
+  assert.ok(text.startsWith('# 项目\n\n自定义要求。'));
+});
+
+test('升级旧版时保留已启用的默认规则，并同步两份配置', () => {
+  const cwd = tmp();
+  writeFileSync(join(cwd, 'AGENTS.md'), '<!-- stc:start -->\n写中文时必须按 STC 写。\n<!-- stc:end -->\n');
+  writeFileSync(join(cwd, 'CLAUDE.md'), '# 项目约定\n');
+  init(cwd);
+  for (const name of ['AGENTS.md', 'CLAUDE.md']) {
+    assert.match(read(cwd, name), /stc:mode=default/);
+    assert.match(read(cwd, name), /写中文时必须按 STC 写/);
+  }
+});
+
+test('预演默认设置不改变已经安装的按需入口', () => {
+  const cwd = tmp(); init(cwd);
+  const before = read(cwd, 'AGENTS.md');
+  assert.equal(init(cwd, ['--dry-run', '--defaults']), 0);
+  assert.equal(read(cwd, 'AGENTS.md'), before);
+});
+
+test('第二份配置标记不完整时，默认设置也必须在写入前停止', () => {
+  const cwd = tmp();
+  const a = '<!-- stc:start -->\n写中文时必须按 STC 写。\n<!-- stc:end -->\n';
+  const c = '# 规则\n<!-- stc:start -->\n待修复\n';
+  writeFileSync(join(cwd, 'AGENTS.md'), a); writeFileSync(join(cwd, 'CLAUDE.md'), c);
+  assert.equal(init(cwd, ['--defaults']), 1);
+  assert.equal(read(cwd, 'AGENTS.md'), a); assert.equal(read(cwd, 'CLAUDE.md'), c);
+  assert.ok(!existsSync(join(cwd, '.claude')));
+});
+
+test('--dir 缺少值时不得把下一个选项当成目录', () => {
+  const cwd = tmp();
+  assert.equal(init(cwd, ['--dir', '--defaults']), 2);
+  assert.ok(!existsSync(join(cwd, '--defaults')));
 });

@@ -21,19 +21,25 @@ stc init
 
 ## init
 
-在项目根目录运行。`init` 做两件事：
+在项目根目录运行。`init` 安装 skill、规则、词表和离线命令，并写入按需使用入口。
 
-1. 把 skill 文件放进 `.claude/skills/stc/`，包括 SKILL.md、规则、词表和命令行工具。skill 自查时运行这里的命令行工具，不用联网。
-2. 把核心规则写进项目里已有的 AGENTS.md 和 CLAUDE.md；两个都没有时，新建 AGENTS.md。CLAUDE.md 用 `@AGENTS.md` 引用了 AGENTS.md 时，只写 AGENTS.md。
+用户确认默认使用后，运行：
 
-核心规则写在 `<!-- stc:start -->` 和 `<!-- stc:end -->` 之间。再次运行 `init` 只更新这一段，不会重复写入。
+```bash
+stc init --defaults
+```
+
+STC 配置写在项目的 AGENTS.md 和 CLAUDE.md 中。两个文件都不存在时，新建 AGENTS.md；CLAUDE.md 用 `@AGENTS.md` 引用 AGENTS.md 时，只写 AGENTS.md。
+
+配置位于 `<!-- stc:start -->` 与 `<!-- stc:end -->` 之间。再次安装只更新这一段。已启用的默认规则会保留，包括旧版安装。
 
 | 选项 | 作用 |
 |---|---|
-| `--dir <目录>` | skill 文件放在哪个目录，默认 `.claude/skills/stc` |
-| `--dry-run` | 只列出要改的文件，不写入 |
+| `--defaults` | 设置为当前项目的默认输出规则 |
+| `--dir <目录>` | skill 安装位置，默认 `.claude/skills/stc` |
+| `--dry-run` | 列出计划改动，不写入 |
 
-安装完成后，用户可以粘贴文字或指定文件，要求 agent 审阅。安装授权不包含自动挑选业务文件或执行演示审查。
+安装后按 [`Onboarding for Agents`](../ONBOARDING.md) 引导用户：建议默认使用，并建议体验一次文档审阅。用户可以指定材料，也可以授权 agent 挑选一份。
 
 ## check
 

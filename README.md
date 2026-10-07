@@ -2,7 +2,7 @@
 
 中文 | [English](README.en.md)
 
-STC 简明技术性中文是给 AI 用的中文写作规范：一套写作规则、一份词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
+STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
@@ -10,13 +10,12 @@ STC 简明技术性中文是给 AI 用的中文写作规范：一套写作规则
 
 ## 快速开始
 
-把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent。安装完成后，由用户选择第一份材料。
+把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent：
 
 ```text
-请在当前项目里安装 STC 简明技术性中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese）。
-1. 说明安装位置和将修改的配置，再按当前授权运行安装命令。
-2. 安装完成后，说明已启用的功能，并提示可以使用了。
-3. 等我粘贴文字或指定文件，再开始审阅。不得自行挑选项目文档、运行演示审查或改写业务文件。
+请在当前项目安装 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。
+先运行 npm install -g @daimonia/stc@latest，再运行 stc init。
+装好后读取安装目录中的 ONBOARDING.md：建议设为默认，询问我是否设置；再建议选一份文档体验审阅。文档可以由我指定，也可以由我授权你挑选。等我选择后再继续。
 ```
 
 不用 agent 时，先装命令行工具，再在项目里运行，需要 Node.js 18 以上版本：
@@ -26,7 +25,7 @@ npm install -g @daimonia/stc
 stc init
 ```
 
-不想装到本机，也可以用 `npx @daimonia/stc init` 直接运行。`init` 把 STC 设成 agent 的默认输出规则，`check` 检查已有的文字，两者的区别见下一节[两种用法](#两种用法)。命令的完整说明见 [`tools/README.md`](tools/README.md)。
+不想装到本机，也可以用 `npx @daimonia/stc init` 直接运行。`init` 安装 skill 和按需使用入口，`init --defaults` 设置默认输出规则，`check` 检查已有的文字，两者的区别见下一节[两种用法](#两种用法)。命令的完整说明见 [`tools/README.md`](tools/README.md)。
 
 ## 两种用法
 
@@ -34,16 +33,17 @@ stc init
 
 ### 用法一：设成 agent 的默认输出规则
 
-在项目里运行 `stc init`。这条命令做两件事：
+在项目里运行 `stc init`，装好 skill、规则和词表。首次安装登记按需使用入口。
 
-1. 把核心规则写进项目的 AGENTS.md 或 CLAUDE.md。agent 每次会话都会读到这一段。这一段开头要求 agent 动笔前先判断在写哪类文字，再按对应场景写。
-2. 把 skill 放进 `.claude/skills/stc/`。agent 写、改、审中文时，加载全套规则和词表。
+用户确认后，运行 `stc init --defaults`，将核心规则写入项目上下文。之后 agent 写中文时，先判断场景，再读取规则。
 
-也可以手动装：把 [`snippets/agents-md.md`](snippets/agents-md.md) 的内容贴进 AGENTS.md 或 CLAUDE.md，再把本仓库放进 agent 的技能目录，比如 `~/.claude/skills/stc/`。
+安装后的引导见 [Onboarding for Agents](ONBOARDING.md)。已启用默认规则的项目再次运行 `init` 时，会保留该状态。
+
+也可以手动安装：将本仓库放入 agent 的技能目录，再按 [`snippets/agents-md.md`](snippets/agents-md.md) 配置默认规则。
 
 ### 用法二：让 agent 审阅并优化已有内容
 
-对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 审阅用户指定的材料，给出问题、原因和改法。用户要求修改时，agent 再按授权修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
+对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 审阅用户指定或授权挑选的材料，给出问题、原因和改法。用户要求修改时，agent 再按授权修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
 
 机器判断不了的规则（比如事实有没有出处），由 agent 按 skill 审查，或由人审稿。不装任何东西也可以直接读 `rules/` 和 `dictionary/`，用来审稿、培训或自己写工具。
 
@@ -51,15 +51,15 @@ stc init
 
 大模型写中文，常见的问题是写得多、写法散。同一个东西换着叫法，程度词代替数字。“进行优化”“赋能”“闭环”这类词把句子撑长，代词也指代不清。还常加读者不需要的说明，比如“西红柿炒鸡蛋（没有东坡肉）”。读的人要花时间猜，agent 之间传话也会走样。
 
-英文有 ASD-STE100：53 条写作规则，加一本约 900 个许可词的词典，每个词只有一个意思、一个词性。ASD-STE100 在 1986 年首次发布，用于航空维修手册，现行版本是 2025 年发布的第 9 版。中文没有对应的国家标准或行业标准。
+英文有 ASD-STE100：53 条写作规则，加一本约 900 个许可词的词典，每个词只有一个意思、一个词性。ASD-STE100 在 1986 年首次发布，用于航空维修手册，现行版本是 2025 年发布的第 9 版。中文输出也需要这样的表达规范。
 
 STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设计。
 
-## 适合谁用
+## 对谁有用
 
-STC 适合所有希望 AI 好好说话、减少废话、保持用词一致的人。日常对话、写文档、写界面文字时都可以用。
+日常使用 AI 聊天、写文档的人可以用 STC。回复少些废话，文档把意思讲清楚。
 
-也适合这些专业使用者：
+也可用于这些专业工作：
 
 - 开发 AI 产品、编写 agent 的团队：系统提示词、规则文件、agent 的输出
 - 写产品界面文字的人：按钮、提示、报错、说明
@@ -90,6 +90,7 @@ STC 适合所有希望 AI 好好说话、减少废话、保持用词一致的人
 ## 仓库结构
 
 ```
+ONBOARDING.md   安装后建议默认使用，提供一次文档审阅体验
 SKILL.md        skill 入口：判断场景，读规则和词表，写、改写、审查
 rules/          规则：通用规则与四个场景
 dictionary/     词表：推荐词、不推荐写法、项目术语表模板
@@ -104,7 +105,7 @@ evals/          skill 的测试任务
 
 ## 和 ASD-STE100 的关系
 
-STC 参考 ASD-STE100 的结构：写作规则、词义明确的词表、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。STC 另外加了规则，解决大模型写中文时额外出现的问题，比如 G20 不写读者不需要的排除说明；ASD-STE100 没有专门管这个问题的规则。
+STC 参考 ASD-STE100 的结构：写作规则、词义明确的词表、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。针对大模型输出中文的常见问题，STC 补充了表达规则和词表。例如 G20 要求删掉读者不需要的排除说明。
 
 ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Association of Europe）所有，“ASD-STE100 Simplified Technical English”是 ASD 的欧盟注册商标。STC 不是 ASD-STE100 的官方中文版本，本仓库不分发 ASD-STE100 的文本。需要原文请到官网免费申请：<https://www.asd-ste100.org/>
 

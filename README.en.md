@@ -8,13 +8,12 @@ STC is for anyone who wants AI to write clear Chinese with fewer unnecessary wor
 
 ## Quick start
 
-Paste this prompt into Claude Code, Codex, Cursor, or a similar agent. After installation, the user chooses the first material to review.
+Paste this prompt into Claude Code, Codex, Cursor, or a similar agent:
 
 ```text
-Install STC (Simplified Technical Chinese) in this project from https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese.
-1. State the installation location and configuration changes, then install within the current authorization.
-2. Report which features are enabled and tell me that STC is ready.
-3. Wait for me to paste text or name a file before reviewing it. Do not select project documents, run a review demo, or rewrite business files on your own.
+Install STC (Simplified Technical Chinese) in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese.
+Run npm install -g @daimonia/stc@latest, then stc init.
+Read ONBOARDING.md in the installed skill. Recommend enabling the default output rules and ask whether I want that. Suggest a first document review: I can name a file or authorize you to choose one. Wait for my choice before continuing.
 ```
 
 Without an agent, install the CLI, then run it in your project. You need Node.js 18 or later:
@@ -24,7 +23,7 @@ npm install -g @daimonia/stc
 stc init
 ```
 
-To run the CLI without installing it, use `npx @daimonia/stc init`. `init` makes STC the default output rules of the agent. `check` checks existing text. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
+To run the CLI without installing it, use `npx @daimonia/stc init`. `init` installs the skill and its on-demand entry. `init --defaults` enables default output rules. `check` checks existing text. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
 
 ## Two ways to use STC
 
@@ -32,16 +31,17 @@ You can use one way or both. When you use both, the default output rules make th
 
 ### Way 1: Make STC the default output rules of the agent
 
-In your project, run `stc init`. The command does two things:
+Run `stc init` in your project to install the skill, rules, and dictionary. A fresh installation registers the skill for on-demand use.
 
-1. It writes the core rules into the AGENTS.md or CLAUDE.md of the project. The agent reads these rules at the start of each session. The rules start with an instruction: identify the type of text before you write, then apply the rules of that profile.
-2. It puts the skill in `.claude/skills/stc/`. The agent loads the full rules and the dictionary when it writes, rewrites, or reviews Chinese.
+After the user agrees, run `stc init --defaults` to put the core writing rules in the project context. The agent then identifies the writing profile and reads the rules before writing Chinese.
 
-You can also do these steps manually. Paste the contents of [`snippets/agents-md.md`](snippets/agents-md.md) into AGENTS.md or CLAUDE.md. Then put this repository in the skills directory of the agent, for example `~/.claude/skills/stc/`.
+[Onboarding for Agents](ONBOARDING.md) defines the next steps. Running `init` again preserves default rules that are already enabled, including installations from earlier releases.
+
+For manual installation, put this repository in the agent's skill directory and use [`snippets/agents-md.md`](snippets/agents-md.md) to enable default rules.
 
 ### Way 2: Let the agent review and improve existing text
 
-Tell the agent "Review this document with STC". The agent uses the STC skill to review the material selected by the user. It explains each problem and gives a proposed change. It edits the material when the user requests that action. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
+Tell the agent "Review this document with STC". The agent uses the STC skill to review the material selected by the user or chosen with the user's permission. It explains each problem and gives a proposed change. It edits the material when the user requests that action. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
 
 A machine cannot check all rules, for example whether a fact has a source. For these rules, the agent reviews the text with the skill, or a person reviews it.
 
@@ -54,7 +54,7 @@ Chinese text from language models often has the same problems:
 - Exclusions that the reader does not need, such as 西红柿炒鸡蛋（没有东坡肉） ("stir-fried tomato and egg, with no braised pork"). The reader starts to think about something that is not there.
 - Mixed strength words in rules for agents, such as 应 (should), 尽量 (try to), and 务必 (be sure to). The agent cannot tell which rule is a requirement.
 
-English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved words, each with one meaning. It was first released in 1986 for aerospace maintenance documentation. Chinese has no equivalent national or industry standard. STC fills this gap, and it is designed for AI agents from the start.
+English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved words, each with one meaning. It was first released in 1986 for aerospace maintenance documentation. Chinese output needs clear writing rules too. STC is designed for AI agents from the start.
 
 ## Contents
 
@@ -83,7 +83,7 @@ Entries are ordered by how often they occur in real Chinese output from AI model
 
 ## Relation to ASD-STE100
 
-STC follows the structure of ASD-STE100: writing rules, a dictionary with defined word meanings, and project term lists. The STC rules and entries are written independently. They do not translate or copy the text, rules, or dictionary entries of ASD-STE100. STC also adds rules that solve the additional problems in Chinese text from language models. For example, rule G20 tells writers not to add exclusions that the reader does not need. ASD-STE100 has no specific rule for this problem.
+STC follows the structure of ASD-STE100: writing rules, a dictionary with defined word meanings, and project term lists. The STC rules and entries are written independently. They do not translate or copy the text, rules, or dictionary entries of ASD-STE100. STC adds writing rules and dictionary entries for common problems in Chinese model output. For example, rule G20 tells writers not to add exclusions that the reader does not need. ASD-STE100 has no specific rule for this problem.
 
 ASD-STE100 is copyright of ASD (Aerospace, Security and Defence Industries Association of Europe), and "ASD-STE100 Simplified Technical English" is a registered EU trademark of ASD. STC is not an official Chinese version of ASD-STE100. To get the specification, request it from <https://www.asd-ste100.org/>.
 
