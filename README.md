@@ -1,19 +1,19 @@
-# STC (Simplified Technical Chinese) · 受控中文
+# STC (Simplified Technical Chinese) · 简明技术性中文
 
 中文 | [English](README.en.md)
 
-STC 受控中文是给 AI 用的中文写作规范：一套写作规则、一份词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
+STC 简明技术性中文是给 AI 用的中文写作规范：一套写作规则、一份词表，以及让 AI agent 直接使用的工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
-**English summary.** STC (Simplified Technical Chinese) is a Chinese writing specification for AI. It is a controlled natural language for written Chinese. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
+**English summary.** STC (Simplified Technical Chinese) is a Chinese writing specification for AI. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
 
 ## 快速开始
 
 把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent。agent 会装好 STC，再演示一次检查和改写：
 
 ```text
-请在当前项目里安装 STC 受控中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese），然后演示一次：
+请在当前项目里安装 STC 简明技术性中文（https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese），然后演示一次：
 1. 运行 npx -y @daimonia/stc init。
 2. 挑项目里一份中文文档，运行 npx -y @daimonia/stc check <文件名>，把结果整理成表格。
 3. 按 STC 的 for document 场景改写下面这段话。列出改前和改后，写明每处改动对应哪条规则：
@@ -57,7 +57,11 @@ stc check docs/
 
 STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设计。
 
-## 给谁用
+## 适合谁用
+
+STC 适合所有希望 AI 好好说话、减少废话、保持用词一致的人。日常对话、写文档、写界面文字时都可以用。
+
+也适合这些专业使用者：
 
 - 开发 AI 产品、编写 agent 的团队：系统提示词、规则文件、agent 的输出
 - 写产品界面文字的人：按钮、提示、报错、说明
@@ -102,7 +106,7 @@ evals/          skill 的测试任务
 
 ## 和 ASD-STE100 的关系
 
-STC 参考 ASD-STE100 的结构：写作规则、受控词典、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。STC 另外加了规则，解决大模型写中文时额外出现的问题，比如 G20 不写读者不需要的排除说明；ASD-STE100 没有专门管这个问题的规则。
+STC 参考 ASD-STE100 的结构：写作规则、词义明确的词表、允许项目自建术语表。规则和词条由 STC 独立编写，不翻译、不摘抄 ASD-STE100 的正文、规则原文或词典条目。STC 另外加了规则，解决大模型写中文时额外出现的问题，比如 G20 不写读者不需要的排除说明；ASD-STE100 没有专门管这个问题的规则。
 
 ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Association of Europe）所有，“ASD-STE100 Simplified Technical English”是 ASD 的欧盟注册商标。STC 不是 ASD-STE100 的官方中文版本，本仓库不分发 ASD-STE100 的文本。需要原文请到官网免费申请：<https://www.asd-ste100.org/>
 
@@ -117,8 +121,8 @@ ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Associa
 
 ## 同类项目
 
-- [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh)：受控中文改写 skill 与检查脚本
-- [RinStel/cste-zh](https://github.com/RinStel/cste-zh)：受控简明技术中文 skill
+- [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh)：中文改写 skill 与检查脚本
+- [RinStel/cste-zh](https://github.com/RinStel/cste-zh)：中文写作 skill
 
 STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for document、for web dev、for instruction writing 四个场景分别给出规则。
 
