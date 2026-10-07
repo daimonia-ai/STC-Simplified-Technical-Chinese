@@ -2,7 +2,7 @@
 
 [中文](README.md) | English
 
-[Introduction video (Chinese, 2:31)](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/download/v0.1.3/stc-intro-zh.mp4) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
+[Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
 
 STC is a Chinese writing specification for AI. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
 

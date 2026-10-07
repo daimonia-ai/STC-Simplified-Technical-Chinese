@@ -2,7 +2,7 @@
 
 中文 | [English](README.en.md)
 
-[介绍视频（中文，2 分 31 秒）](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/download/v0.1.3/stc-intro-zh.mp4) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
+[快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
 
 STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
