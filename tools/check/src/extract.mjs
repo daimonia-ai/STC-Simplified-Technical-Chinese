@@ -140,5 +140,5 @@ export function segmentsFromCode(text) {
 }
 
 export function isCodeFile(path) {
-  return /\.(tsx?|jsx?|mjs|cjs|vue|svelte|html?)$/i.test(path);
+  return /\.(tsx?|jsx?|mjs|cjs|vue|svelte|astro|html?)$/i.test(path);
 }

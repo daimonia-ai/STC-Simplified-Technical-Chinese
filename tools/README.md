@@ -75,6 +75,8 @@ echo "本周我们进行了大量优化。" | stc check --profile for-document
 | `--json` | 结构化问题，含位置、原句、原因和改法；保留原有字段 |
 | `--max-errors <n>` | 错误超过 n 个时返回退出码 1，默认 0 |
 | `--no-warnings` | 只显示错误 |
+| `--anti-echo` | 未复核的 G20 疑点会使检查返回 1 |
+| `--review-decisions <文件>` | 读取与原文绑定的保留理由，与 `--anti-echo` 一起用 |
 
 给目录时，逐层检查其中的 Markdown、文本和代码文件，跳过以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录。
 
@@ -92,6 +94,39 @@ echo "本周我们进行了大量优化。" | stc check --profile for-document
 stc check 指定文档.md --format markdown > 审查报告.md
 ```
 
+### Anti-Echo 复核
+
+交付检查使用：
+
+```bash
+stc check 指定文档.md --anti-echo --json
+```
+
+报告的 `antiEcho.pending` 包含待复核的原文、位置和 `id`。Agent 必须结合读者与用途判断。无用说明直接删掉，再运行检查。必要边界可以保留，并将具体理由写进复核文件：
+
+```json
+{
+  "version": 1,
+  "decisions": [
+    {
+      "id": "从当前报告复制完整的 id",
+      "decision": "keep",
+      "reason": "报价单必须说明税费范围，避免客户按含税价格判断。"
+    }
+  ]
+}
+```
+
+```bash
+stc check 指定文档.md --anti-echo --review-decisions 审阅决定.json
+```
+
+保留理由与文件路径、完整文件校验值、位置、原文和触发文字绑定。文件改动后须重新核对，旧记录不会豁免新文字。复核文件留在开发或审稿资料中。
+
+普通检查保留原有的错误与警告分类。加 `--anti-echo` 后，即使使用 `--no-warnings` 或放宽错误数量，未复核的 G20 疑点仍会返回 1。返回 0 表示通过机器检查及已有记录核对，内容是否必要仍须由 Agent 按 G20、W9 审阅。
+
+项目已有内容提取脚本时，可从 `tools/check/src/anti-echo.mjs` 导入 `reviewAntiEcho(files, decisions)`。`files` 中每项包含 `path`、`issues` 和原文件的 SHA-256 `contentHash`；每条问题须提供原文 `context`。函数返回 `pending` 和 `accepted`，CI 须在 `pending` 非空时失败。
+
 ### 检查什么
 
 | 编号 | 检查 | 级别 |
@@ -100,6 +135,7 @@ stc check 指定文档.md --format markdown > 审查报告.md
 | G12 | 一句超过 40 个字 | 警告 |
 | G17 | 直角引号 | 错误 |
 | G19 | 中文与英文、数字之间没有空格 | 警告 |
+| G20 | 排除说明、自证，以及界面中的制作标签 | 待复核；`--anti-echo` 阻止未处理项通过 |
 | C3 | 对话里的感叹号 | 错误 |
 | D1 | 文档里的“他、她、它” | 错误 |
 | W1 | 界面文字里的复数人称代词和第三人称代词 | 错误 |

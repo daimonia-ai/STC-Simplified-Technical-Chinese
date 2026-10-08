@@ -2,6 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { issueAdvice } from './advice.mjs';
 import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.mjs';
+import { antiEchoCandidates } from './anti-echo.mjs';
 
 export const PROFILES = ['for-chat', 'for-document', 'for-web-dev', 'for-instruction-writing'];
 
@@ -130,13 +131,9 @@ export function lintSegments(segments, profile, dictionary) {
       scan(segment, /[！!]/g, (m) => add(segment, m.index, 'C3', 'error', '对话里不得使用感叹号', m[0]));
     }
 
-    // G20: a heuristic, so warnings only. Quoted text is masked in segment, so mentions of these phrases are skipped.
-    scan(segment, /（(?:不|没有?|并非|不是|也没有?)[^）\n]{0,24}）|\((?:不|没有?|并非|不是|也没有?)[^)\n]{0,24}\)/g, (m) =>
-      add(segment, m.index, 'G20', 'warning', '括号里是排除说明：读者可能误以为包含时才写，读者想不到的删掉', m[0]),
-    );
-    scan(segment, /已确认(?:不含|不包含|不涉及|没有|无)/g, (m) =>
-      add(segment, m.index, 'G20', 'warning', '结尾自证的排除说明：读者不需要的删掉', m[0]),
-    );
+    for (const candidate of antiEchoCandidates(segment.text, profile)) {
+      add(segment, candidate.index, 'G20', 'warning', candidate.message, candidate.match);
+    }
 
     scan(original, /[「」『』]/g, (m) =>
       add(segment, m.index, 'G17', 'error', '引号必须使用全角双引号“”和单引号‘’，不使用直角引号', m[0]),

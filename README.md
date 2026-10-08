@@ -2,13 +2,19 @@
 
 中文 | [English](README.en.md)
 
-[快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
+[环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
 
 STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
 **English summary.** STC (Simplified Technical Chinese) is a Chinese writing specification for AI. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
+
+## 环境要求
+
+- 规则和词表是纯文本。现有 Agent 可以直接读取并按规则写作。
+- CLI 安装与检查需要 Node.js 18 以上版本和 npm。CLI 运行时没有第三方包依赖，安装后可离线检查。
+- 让 Agent 自动安装时，Agent 必须能运行终端命令并写入当前项目。语义审阅由现有 Agent 完成。
 
 ## 快速开始
 
@@ -82,6 +88,18 @@ stc init
 对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 审阅用户指定或授权挑选的材料，给出问题、原因和改法。用户要求修改时，agent 再按授权修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
 
 机器判断不了的规则（比如事实有没有出处），由 agent 按 skill 审查，或由人审稿。不装任何东西也可以直接读 `rules/` 和 `dictionary/`，用来审稿、培训或自己写工具。
+
+## Anti-Echo 交付检查
+
+Anti-Echo 要求每句话服务当前读者，覆盖多余排除、制作说明和结尾自证。必要的价格范围、权限限制和安全提示必须保留。
+
+```bash
+stc check 文档.md --profile for-document --anti-echo
+```
+
+命令发现未复核的 G20 疑点时返回 1。Agent 必须改写，或结合上下文记录具体保留理由；语义复核还须检查规则未匹配到的内容。[复核文件与 CI 用法](tools/README.md#anti-echo-复核)。
+
+Codex 和 Claude Code 可按需配置 [Stop hook](tools/hooks/README.md)，对回复中的疑点发起一次补审。
 
 ## 更新版本
 

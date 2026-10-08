@@ -15,7 +15,7 @@ const END = '<!-- stc:end -->';
 // The CLI is included so that the skill can run its self-check offline.
 const COPY = [
   'SKILL.md', 'ONBOARDING.md', 'README.md', 'README.en.md', 'LICENSE', 'LICENSE-CODE', 'rules', 'dictionary', 'snippets',
-  'tools/meta.mjs', 'tools/cli.mjs', 'tools/check/src', 'tools/check/data', 'tools/init/src',
+  'tools/meta.mjs', 'tools/cli.mjs', 'tools/README.md', 'tools/check/src', 'tools/check/data', 'tools/init/src', 'tools/hooks',
 ];
 
 export const initHelp = () => `用法：${CMD} init [选项]

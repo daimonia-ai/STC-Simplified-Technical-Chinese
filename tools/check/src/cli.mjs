@@ -1,9 +1,11 @@
 // The check command: checks Chinese text in files, directories or stdin against STC.
 import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { lintText, loadDictionary, PROFILES } from './core.mjs';
 import { isCodeFile } from './extract.mjs';
 import { formatReport } from './report.mjs';
+import { reviewAntiEcho } from './anti-echo.mjs';
 
 // Directories skipped when walking a directory: dependencies, build output, and names that start with ".".
 const SKIP_DIRS = new Set(['node_modules', 'dist', 'build', 'out', 'coverage', 'vendor', 'target']);
@@ -22,6 +24,8 @@ export const checkHelp = (usage) => `用法：${usage} [选项] <文件或目录
   --json             输出 JSON，供程序或 agent 读取
   --max-errors <n>   错误超过 n 个时返回退出码 1，默认 0
   --no-warnings      只显示错误
+  --anti-echo        有未复核的 G20 疑点时返回 1
+  --review-decisions <文件>  读取 Anti-Echo 保留理由，与 --anti-echo 一起用
   --help             显示本说明
 
 跳过检查：在要跳过的那一行上方写一行含 stc-disable-next-line 的注释。
@@ -34,6 +38,11 @@ function parseArgs(argv) {
     if (a === '--help' || a === '-h') opts.help = true;
     else if (a === '--json') opts.json = true;
     else if (a === '--no-warnings') opts.warnings = false;
+    else if (a === '--anti-echo') opts.antiEcho = true;
+    else if (a === '--review-decisions') {
+      opts.reviewDecisions = argv[++i];
+      if (!opts.reviewDecisions || opts.reviewDecisions.startsWith('--')) opts.error = '--review-decisions 后面必须写文件路径。';
+    }
     else if (a === '--profile') {
       opts.profile = argv[++i];
       if (!opts.profile) opts.error = '--profile 后面必须写场景。';
@@ -47,6 +56,7 @@ function parseArgs(argv) {
     else opts.paths.push(a);
   }
   if (!Number.isInteger(opts.maxErrors) || opts.maxErrors < 0) opts.error = '--max-errors 必须为非负整数。';
+  if (opts.reviewDecisions && !opts.antiEcho) opts.error = '--review-decisions 必须与 --anti-echo 一起使用。';
   return opts;
 }
 
@@ -98,21 +108,33 @@ export function runCheck(argv, { usage = 'stc check' } = {}) {
   }
 
   const dictionary = loadDictionary();
+  let decisions;
+  if (opts.reviewDecisions) {
+    try {
+      decisions = JSON.parse(readFileSync(opts.reviewDecisions, 'utf8'));
+      reviewAntiEcho([], decisions);
+    } catch (error) {
+      console.error(`无法读取 Anti-Echo 复核文件：${error.message}`);
+      return 2;
+    }
+  }
   let errors = 0;
   let warnings = 0;
   const report = [];
   for (const { path, text } of inputs) {
     const { profile, issues } = lintText(text, { path, profile: opts.profile, dictionary });
-    const shown = opts.warnings ? issues : issues.filter((x) => x.level === 'error');
+    const shown = opts.warnings ? issues : issues.filter((x) => x.level === 'error' || (opts.antiEcho && x.rule === 'G20'));
     errors += issues.filter((x) => x.level === 'error').length;
     warnings += issues.filter((x) => x.level === 'warning').length;
-    report.push({ path, profile, issues: shown });
+    report.push({ path, profile, issues: shown, ...(opts.antiEcho ? { contentHash: createHash('sha256').update(text).digest('hex') } : {}) });
   }
 
+  const antiEcho = opts.antiEcho ? reviewAntiEcho(report, decisions) : undefined;
+  const result = { errors, warnings, files: report, ...(antiEcho ? { antiEcho } : {}) };
   if (opts.json) {
-    console.log(JSON.stringify({ errors, warnings, files: report }, null, 2));
+    console.log(JSON.stringify(result, null, 2));
   } else {
-    console.log(formatReport({ errors, warnings, files: report }, { format: opts.format, showWarnings: opts.warnings }));
+    console.log(formatReport(result, { format: opts.format, showWarnings: opts.warnings }));
   }
-  return errors > opts.maxErrors ? 1 : 0;
+  return errors > opts.maxErrors || antiEcho?.pending.length ? 1 : 0;
 }

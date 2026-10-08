@@ -24,6 +24,7 @@ export function formatReport(report, { format = 'text', showWarnings = true } = 
   const escape = markdown ? md : clean;
   const out = [markdown ? '# STC 中文审查' : 'STC 中文审查', ''];
   out.push(`检查了 ${report.files.length} 个文件：${report.errors} 处需修改，${report.warnings} 处待确认。`);
+  if (report.antiEcho) out.push(`Anti-Echo：${report.antiEcho.pending.length} 处待复核，${report.antiEcho.accepted.length} 处已记录保留理由。`);
   if (!showWarnings && report.warnings) out.push('本次只展示需修改项。');
   const issues = report.files.flatMap((f) => f.issues);
   if (!issues.length) {

@@ -2,11 +2,17 @@
 
 [中文](README.md) | English
 
-[Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
+[Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
 
 STC is a Chinese writing specification for AI. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
 
 STC is for anyone who wants AI to write clear Chinese with fewer unnecessary words and consistent terms. It also helps developers who build Chinese AI products, localization teams, and engineers who check Chinese output from language models. The rules and the dictionary are in Chinese. This page explains them in English.
+
+## Requirements
+
+- The rules and dictionary are plain text. An existing agent can read and apply them directly.
+- The CLI requires Node.js 18 or later and npm. It has no third-party runtime dependencies. Checks work offline after installation.
+- An agent that installs STC needs terminal access and write access to the project. Your existing agent performs semantic review.
 
 ## Quick start
 
@@ -80,6 +86,18 @@ You can request a review without enabling default output rules.
 Tell the agent "Review this document with STC". The agent uses the STC skill to review the material selected by the user or chosen with the user's permission. It explains each problem and gives a proposed change. It edits the material when the user requests that action. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
 
 A machine cannot check all rules, for example whether a fact has a source. For these rules, the agent reviews the text with the skill, or a person reviews it.
+
+## Anti-Echo review
+
+Anti-Echo requires each sentence to help the current reader understand, decide, or act. Review unnecessary exclusions, production notes, and self-verification. Preserve relevant prices, permissions, and safety boundaries.
+
+```bash
+stc check document.md --profile for-document --anti-echo
+```
+
+The command returns 1 while G20 candidates remain unresolved. The agent must revise them or record a specific reason to keep them in context. It must also review content that patterns do not detect. See [review decisions and CI](tools/README.md#anti-echo-复核).
+
+An optional [Stop hook](tools/hooks/README.md) can request one follow-up review in Codex or Claude Code.
 
 ## Update STC
 
