@@ -2,11 +2,17 @@
 
 [中文](README.md) | English
 
-[Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
+[Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
 
 STC is a Chinese writing specification for AI. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
 
 STC is for anyone who wants AI to write clear Chinese with fewer unnecessary words and consistent terms. It also helps developers who build Chinese AI products, localization teams, and engineers who check Chinese output from language models. The rules and the dictionary are in Chinese. This page explains them in English.
+
+## Introduction video
+
+[![STC introduction video](https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg)](https://youtu.be/XWga_oiD_vs)
+
+[Watch on YouTube (Chinese)](https://youtu.be/XWga_oiD_vs)
 
 ## Requirements
 

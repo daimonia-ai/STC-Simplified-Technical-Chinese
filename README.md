@@ -2,13 +2,19 @@
 
 中文 | [English](README.en.md)
 
-[环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
+[介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
 
 STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
 **English summary.** STC (Simplified Technical Chinese) is a Chinese writing specification for AI. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
+
+## 介绍视频
+
+[![STC 介绍视频封面](https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg)](https://youtu.be/XWga_oiD_vs)
+
+[在 YouTube 观看](https://youtu.be/XWga_oiD_vs)
 
 ## 环境要求
 
