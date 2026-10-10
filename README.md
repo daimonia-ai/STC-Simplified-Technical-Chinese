@@ -2,9 +2,9 @@
 
 中文 | [English](README.en.md)
 
-[介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
+[介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [任务回执](#任务回执) · [更新版本](#更新版本)
 
-STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。默认表达自然、简短、准确，同一个意思只用一个词。
+STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。默认表达自然、简短、准确，同一个意思只用一个词。任务回执分清完成结果、用户动作和知会。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
@@ -51,7 +51,7 @@ npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
 
 可用 `--agent codex`、`--agent claude-code` 或 `--agent hermes-agent` 指定入口，`--global` 安装到个人技能目录。[技能安装器文档](https://github.com/vercel-labs/skills#available-options)说明其他选项。
 
-也可以从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.2.0.zip`，将包里的 `stc/` 放到 Agent 的技能目录。
+也可以从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.2.1.zip`，将包里的 `stc/` 放到 Agent 的技能目录。
 
 给 Agent 粘贴的安装指令：
 
@@ -72,6 +72,24 @@ skill 包含规则、词表、引导与检查脚本。只装 skill 时，Agent �
 - 成品从采用的结果写起，制作和复核记录放在内部。
 
 自然表达和精简方法已内置于 skill 与默认配置。具体规则见 G14、G15、G20、G21、G22 和场景规则。
+
+## 任务回执
+
+使用 STC 汇报任务结果时，默认按三段组织：
+
+| 段落 | 内容 |
+|---|---|
+| 做完了 | 已完成的结果、交付物和必要的验证结论 |
+| 需要你 | 用户要执行的动作或决定的事项 |
+| 知会 | 不需要用户动作、但影响理解或后续使用的信息 |
+
+空段写“无”。详细分析放在文档中，回执给出摘要和入口。普通问答、成品正文和用户指定的其他格式按各自要求处理。具体规则见 [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会)。
+
+可以直接对 Agent 说：
+
+```text
+完成这个任务后，按 STC 给我任务回执。分清已经做完的结果、需要我处理的事和只需知晓的信息。
+```
 
 ## 两种用法
 

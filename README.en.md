@@ -2,7 +2,7 @@
 
 [中文](README.md) | English
 
-[Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
+[Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Update STC](#update-stc)
 
 STC is a Chinese writing specification for AI. Its default output is natural, concise, and precise. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
 
@@ -49,7 +49,7 @@ npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
 
 Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [skill installer options](https://github.com/vercel-labs/skills#available-options).
 
-You can also download `stc-skill-0.2.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` directory in your agent's skill directory.
+You can also download `stc-skill-0.2.1.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` directory in your agent's skill directory.
 
 Paste this prompt into your agent:
 
@@ -70,6 +70,24 @@ Each use of STC applies these principles:
 - Write the deliverable from the adopted result. Keep production and review records internally.
 
 These principles are built into the skill and the default configuration. See G14, G15, G20, G21, G22, and the selected profile.
+
+## Task receipts
+
+Chinese task receipts use three sections in this order:
+
+| Section | Content |
+|---|---|
+| 做完了 (Completed) | Completed results, deliverable links, and necessary verification |
+| 需要你 (Your action) | Actions or decisions required from the user |
+| 知会 (For your information) | Information that affects understanding or later use, with no action required |
+
+Write 无 (None) when a section has no items. Put detailed analysis in the deliverable and link to it from the receipt. Keep ordinary answers and deliverable bodies in their own formats. Follow another format when the user requests it. See [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会).
+
+You can tell the agent:
+
+```text
+After completing this task, give me a Chinese STC task receipt. Separate completed results, actions I need to take, and information that requires no action.
+```
 
 ## Two ways to use STC
 
