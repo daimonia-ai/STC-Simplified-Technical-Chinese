@@ -1,22 +1,16 @@
 // The init command: installs STC into the current project.
 // Skill files go to .claude/skills/stc/. Project instructions register the skill;
 // --defaults enables the writing rules after the user chooses them.
-import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CMD } from '../../meta.mjs';
+import { skillFiles } from '../../skill-files.mjs';
 
 const ROOT = resolve(fileURLToPath(new URL('../../../', import.meta.url)));
 export const DEFAULT_DIR = '.claude/skills/stc';
 const START = '<!-- stc:start -->';
 const END = '<!-- stc:end -->';
-
-// What goes into the skill directory: the skill entry, rules, dictionary, core-rules snippet, CLI and licenses.
-// The CLI is included so that the skill can run its self-check offline.
-const COPY = [
-  'SKILL.md', 'ONBOARDING.md', 'README.md', 'README.en.md', 'LICENSE', 'LICENSE-CODE', 'rules', 'dictionary', 'snippets',
-  'tools/meta.mjs', 'tools/cli.mjs', 'tools/README.md', 'tools/check/src', 'tools/check/data', 'tools/init/src', 'tools/hooks',
-];
 
 export const initHelp = () => `用法：${CMD} init [选项]
 
@@ -33,13 +27,6 @@ export const initHelp = () => `用法：${CMD} init [选项]
   --help         显示本说明`;
 
 const toPosix = (p) => p.split(sep).join('/');
-
-function listFiles(rel) {
-  const abs = join(ROOT, rel);
-  if (!existsSync(abs)) return [];
-  if (!statSync(abs).isDirectory()) return [rel];
-  return readdirSync(abs).sort().flatMap((name) => listFiles(join(rel, name)));
-}
 
 // Takes the core rules from snippets/agents-md.md and points them at the skill's path in the project.
 export function snippetBlock(skillPath, { defaults = true } = {}) {
@@ -82,7 +69,7 @@ export function planInit({ cwd = process.cwd(), dir = DEFAULT_DIR, defaults = fa
   const skillPath = !rel ? '.' : rel.startsWith('..') || isAbsolute(rel) ? toPosix(target) : rel;
   const sameAsSource = existsSync(target) && realpathSync(target) === realpathSync(ROOT);
 
-  const files = sameAsSource ? [] : COPY.flatMap(listFiles).map((file) => {
+  const files = sameAsSource ? [] : skillFiles(ROOT).map((file) => {
     const to = join(target, file);
     const data = readFileSync(join(ROOT, file));
     const status = !existsSync(to) ? 'create' : readFileSync(to).equals(data) ? 'unchanged' : 'update';
@@ -130,7 +117,7 @@ function describeRule({ name, status, hadBlock }, defaultEnabled) {
 }
 
 // Returns the exit code: 0 done, 1 write failed, 2 bad arguments.
-export function runInit(argv, { cwd = process.cwd(), log = console.log, error = console.error } = {}) {
+export function runInit(argv, { cwd = process.cwd(), command = CMD, log = console.log, error = console.error } = {}) {
   const opts = { dir: DEFAULT_DIR, dryRun: false, defaults: false };
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
@@ -170,11 +157,12 @@ export function runInit(argv, { cwd = process.cwd(), log = console.log, error = 
     }
     log(`STC 已装好。\n${describeFiles(plan)}`);
     for (const r of plan.rules) log(describeRule(r, plan.defaultEnabled));
+    const dirOption = opts.dir === DEFAULT_DIR ? '' : ` --dir ${JSON.stringify(opts.dir)}`;
     log(plan.defaultEnabled
       ? '\nSTC 已准备好，当前项目已启用默认输出规则。'
-      : '\nSTC 已准备好。建议设为当前项目的默认输出规则，确认后运行 stc init --defaults。');
+      : `\nSTC 已准备好。建议设为当前项目的默认输出规则，确认后运行 ${command} init --defaults${dirOption}。`);
     log('首次体验：选一份文档，或授权 agent 从当前项目挑一份来审阅。');
-    log('命令行检查用 stc check <文件>。');
+    log(`命令行检查用 ${command} check <文件>。`);
     log(`Agent 安装后的引导见 ${plan.skillPath}/ONBOARDING.md。`);
     return 0;
   } catch (e) {
