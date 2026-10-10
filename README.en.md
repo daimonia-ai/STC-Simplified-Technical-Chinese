@@ -4,7 +4,7 @@
 
 [Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Update STC](#update-stc)
 
-STC is a Chinese writing specification for AI. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
+STC is a Chinese writing specification for AI. Its default output is natural, concise, and precise. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
 
 STC is for anyone who wants AI to write clear Chinese with fewer unnecessary words and consistent terms. It also helps developers who build Chinese AI products, localization teams, and engineers who check Chinese output from language models. The rules and the dictionary are in Chinese. This page explains them in English.
 
@@ -16,28 +16,60 @@ STC is for anyone who wants AI to write clear Chinese with fewer unnecessary wor
 
 ## Requirements
 
-- The rules and dictionary are plain text. An existing agent can read and apply them directly.
-- The CLI requires Node.js 18 or later and npm. It has no third-party runtime dependencies. Checks work offline after installation.
-- An agent that installs STC needs terminal access and write access to the project. Your existing agent performs semantic review.
+- An existing agent performs generation, rewriting, and semantic review. The rules and dictionary are plain text.
+- The CLI and the check scripts bundled with the skill require Node.js 18 or later. CLI installation and the skill installer require npm. You can also download the skill archive and install it manually.
+- An agent needs write access to the selected directory for installation or default configuration. Machine checks have no third-party runtime dependencies and work offline after installation.
 
 ## Quick start
 
-Paste this prompt into Claude Code, Codex, Cursor, or a similar agent:
+The same repository offers two installation routes. The CLI supports terminal checks and CI. The skill lets an agent write, rewrite, and review Chinese.
 
-```text
-Install STC (Simplified Technical Chinese) in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese.
-Run npm install -g @daimonia/stc@latest, then stc init.
-Read ONBOARDING.md in the installed skill. Recommend enabling the default output rules and ask whether I want that. Suggest a first document review: I can name a file or authorize you to choose one. Wait for my choice before continuing.
-```
-
-Without an agent, install the CLI, then run it in your project. You need Node.js 18 or later:
+### Install the CLI with npm
 
 ```bash
 npm install -g @daimonia/stc@latest
 stc init
 ```
 
-To run the latest CLI temporarily, use `npx --yes @daimonia/stc@latest init`. `init` installs the skill and its on-demand entry. `init --defaults` enables default output rules. `check` checks existing text. The next section explains the two ways. See [`tools/README.md`](tools/README.md) (in Chinese) for all options.
+`init` installs the skill and its on-demand entry. After the user chooses default use, run `stc init --defaults`. Check a file with `stc check <file>`. For a temporary CLI invocation, use `npx --yes @daimonia/stc@latest init`.
+
+Paste this prompt into your agent:
+
+```text
+Install STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Install @daimonia/stc@latest with npm, then run stc init. Read ONBOARDING.md, recommend making STC the default Chinese output rules, and wait for my confirmation. I can also select material for a first review.
+```
+
+### Install only the skill
+
+Choose your agent and installation scope when prompted:
+
+```bash
+npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
+```
+
+Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [skill installer options](https://github.com/vercel-labs/skills#available-options).
+
+You can also download `stc-skill-0.2.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` directory in your agent's skill directory.
+
+Paste this prompt into your agent:
+
+```text
+Install the STC skill: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Use the skill directory for the current agent. Read ONBOARDING.md, recommend making STC the default Chinese output rules, and wait for my confirmation. Review only material that I select or authorize you to choose.
+```
+
+The skill contains the rules, dictionary, onboarding guide, and check scripts. Its natural and concise output principles apply whenever the agent uses STC. Run a machine check with `node <skill-directory>/tools/cli.mjs check <file>`.
+
+## Default expression
+
+Each use of STC applies these principles:
+
+- Use natural word order and complete sentences. Give the answer or result directly.
+- Remove pleasantries, repetition, empty phrases, and explanations the reader does not need.
+- Preserve facts, numbers, names, negation, permissions, and real uncertainty.
+- Match the requested scope. Deliver full documents and detailed explanations when requested.
+- Write the deliverable from the adopted result. Keep production and review records internally.
+
+These principles are built into the skill and the default configuration. See G14, G15, G20, G21, G22, and the selected profile.
 
 ## Two ways to use STC
 
@@ -48,7 +80,7 @@ You can use one way or both. When you use both, the default output rules make th
 Paste this prompt into your agent:
 
 ```text
-Install or update STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Enable STC as the default rules for Chinese output, preserve other project settings, and tell me where the rules apply.
+Install or update STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Enable STC as the default rules for natural, concise, and precise Chinese output. Preserve other project settings and tell me where the rules apply.
 ```
 
 This request authorizes the agent to enable the default rules. Then give the agent a writing task, for example:
@@ -65,7 +97,7 @@ After the user agrees, run `stc init --defaults` to put the core writing rules i
 
 [Onboarding for Agents](ONBOARDING.md) defines the next steps. Running `init` again preserves default rules that are already enabled, including installations from earlier releases.
 
-For manual installation, put this repository in the agent's skill directory and use [`snippets/agents-md.md`](snippets/agents-md.md) to enable default rules.
+For a standalone skill, follow [ONBOARDING.md](ONBOARDING.md) with the actual skill path. The default-use prompt above already authorizes configuration.
 
 ### Way 2: Let the agent review and improve existing text
 
@@ -107,6 +139,8 @@ An optional [Stop hook](tools/hooks/README.md) can request one follow-up review 
 
 ## Update STC
 
+### CLI installation
+
 Update the npm CLI package, then refresh the skill and rules copied into each project.
 
 Paste this prompt into your agent:
@@ -136,6 +170,25 @@ You can also run the latest CLI temporarily to refresh the current project:
 ```bash
 npx --yes @daimonia/stc@latest init
 ```
+
+
+### Standalone skill installation
+
+For a project skill installed by the skill manager, run this in the project root:
+
+```bash
+npx skills update stc
+```
+
+For a global skill, use `npx skills update stc --global`. For a downloaded archive, replace the installed skill directory with the new archive contents. Preserve project terms and existing default configuration.
+
+Paste this update prompt into your agent:
+
+```text
+Update the STC skill with its original installation method. Verify its actual directory and version. Preserve default rules, project terms, and other configuration. Check the activation state with the updated ONBOARDING.md.
+```
+
+Verify the bundled version with `node <skill-directory>/tools/cli.mjs --version`. The skill and npm package are released from the same source files.
 
 ## Why STC
 

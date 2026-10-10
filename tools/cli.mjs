@@ -14,12 +14,15 @@ const HELP = `用法：${CMD} <命令> [选项]
 项目主页：${HOMEPAGE}`;
 
 const [command, ...rest] = process.argv.slice(2);
+const invocation = process.argv[1]?.endsWith('cli.mjs')
+  ? `node ${JSON.stringify(process.argv[1])}`
+  : CMD;
 if (!command || command === '--help' || command === '-h') {
   console.log(HELP);
 } else if (command === '--version' || command === '-v') {
   console.log(VERSION);
 } else if (command === 'init') {
-  process.exitCode = runInit(rest);
+  process.exitCode = runInit(rest, { command: invocation });
 } else if (command === 'check') {
   process.exitCode = runCheck(rest, { usage: `${CMD} check` });
 } else {

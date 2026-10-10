@@ -4,7 +4,7 @@
 
 [介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [更新版本](#更新版本)
 
-STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。目标是同一个意思只有一种写法，写出来的中文读不错、查得出。
+STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。默认表达自然、简短、准确，同一个意思只用一个词。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
@@ -18,28 +18,60 @@ STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作
 
 ## 环境要求
 
-- 规则和词表是纯文本。现有 Agent 可以直接读取并按规则写作。
-- CLI 安装与检查需要 Node.js 18 以上版本和 npm。CLI 运行时没有第三方包依赖，安装后可离线检查。
-- 让 Agent 自动安装时，Agent 必须能运行终端命令并写入当前项目。语义审阅由现有 Agent 完成。
+- 单独 skill 的生成、改写和语义审阅由现有 Agent 执行。规则和词表是纯文本，可直接读取。
+- CLI 和随 skill 提供的机器检查需要 Node.js 18 以上版本。安装 CLI 或运行技能安装器需要 npm；直接下载 skill 包可以手动安装。
+- 自动安装和默认配置需要 Agent 能写入选定目录。机器检查没有第三方运行时依赖，安装后可离线运行。
 
 ## 快速开始
 
-把下面这段话贴给 Claude Code、Codex、Cursor 这类 agent：
+同一个仓库提供两条安装路径。CLI 适合需要终端检查和 CI 的用户；skill 适合让 Agent 直接生成、改写和审阅中文。
 
-```text
-请在当前项目安装 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。
-先运行 npm install -g @daimonia/stc@latest，再运行 stc init。
-装好后读取安装目录中的 ONBOARDING.md：建议设为默认，询问我是否设置；再建议选一份文档体验审阅。文档可以由我指定，也可以由我授权你挑选。等我选择后再继续。
-```
-
-不用 agent 时，先装命令行工具，再在项目里运行，需要 Node.js 18 以上版本：
+### npm 安装 CLI
 
 ```bash
 npm install -g @daimonia/stc@latest
 stc init
 ```
 
-也可以用 `npx --yes @daimonia/stc@latest init` 临时运行。`init` 安装 skill 和按需使用入口，`init --defaults` 设置默认输出规则，`check` 检查已有文字。使用示例见下一节[两种用法](#两种用法)，全部命令见 [`tools/README.md`](tools/README.md)。
+`init` 安装 skill 和按需入口。确认默认使用后，运行 `stc init --defaults`。检查文件用 `stc check <文件>`。也可以用 `npx --yes @daimonia/stc@latest init` 临时运行。
+
+给 Agent 粘贴的安装指令：
+
+```text
+请在当前项目安装 STC：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。使用 npm 安装 @daimonia/stc@latest，再运行 stc init。装好后读取 ONBOARDING.md，建议设为默认中文输出规则，等我确认；也可以由我指定材料体验一次审阅。
+```
+
+### 单独安装 skill
+
+使用技能安装器，按提示选择 Agent 和项目范围：
+
+```bash
+npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
+```
+
+可用 `--agent codex`、`--agent claude-code` 或 `--agent hermes-agent` 指定入口，`--global` 安装到个人技能目录。[技能安装器文档](https://github.com/vercel-labs/skills#available-options)说明其他选项。
+
+也可以从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.2.0.zip`，将包里的 `stc/` 放到 Agent 的技能目录。
+
+给 Agent 粘贴的安装指令：
+
+```text
+请单独安装 STC skill：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。为当前 Agent 选择合适的技能目录。装好后读取 ONBOARDING.md，建议设为默认中文输出规则，等我确认；审阅材料由我指定或授权挑选。
+```
+
+skill 包含规则、词表、引导与检查脚本。只装 skill 时，Agent 已能使用内置的自然、简短表达原则。运行机器检查可用 `node <skill目录>/tools/cli.mjs check <文件>`。
+
+## 默认表达
+
+每次使用 STC，都会同时执行这套表达原则：
+
+- 用自然语序和完整句子，直接给出答案或结果。
+- 删除客套、重复、空话和读者不需要的解释。
+- 保留事实、数字、名称、否定词、权限和真实不确定性。
+- 按任务需要展开，完整文稿和详细解释必须满足请求。
+- 成品从采用的结果写起，制作和复核记录放在内部。
+
+自然表达和精简方法已内置于 skill 与默认配置。具体规则见 G14、G15、G20、G21、G22 和场景规则。
 
 ## 两种用法
 
@@ -50,7 +82,7 @@ stc init
 把这段话直接贴给 agent：
 
 ```text
-请在当前项目安装或更新 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese，并设为默认中文输出规则，保留其他项目配置，完成后说明生效范围。
+请在当前项目安装或更新 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese，并设为默认中文输出规则，让表达自然、简短、准确。保留其他项目配置，完成后说明生效范围。
 ```
 
 这段指令已授权设置默认规则。生效后可以直接提出写作任务，例如：
@@ -67,7 +99,7 @@ stc init
 
 安装后的引导见 [Onboarding for Agents](ONBOARDING.md)。已启用默认规则的项目再次运行 `init` 时，会保留该状态。
 
-也可以手动安装：将本仓库放入 agent 的技能目录，再按 [`snippets/agents-md.md`](snippets/agents-md.md) 配置默认规则。
+单独安装 skill 时，按 [ONBOARDING.md](ONBOARDING.md) 用实际安装路径启用默认规则。只有安装授权时，先等待用户选择；上面的默认使用指令已经包含启用授权。
 
 ### 用法二：让 agent 审阅并优化已有内容
 
@@ -109,7 +141,11 @@ Codex 和 Claude Code 可按需配置 [Stop hook](tools/hooks/README.md)，对�
 
 ## 更新版本
 
-更新分两步：先更新 npm 命令行包，再刷新项目里的 skill 和规则。
+按安装方式更新。
+
+### CLI 安装
+
+先更新 npm 命令行包，再刷新项目里的 skill 和规则。
 
 把这段话贴给 agent：
 
@@ -131,13 +167,31 @@ node .claude/skills/stc/tools/cli.mjs --version
 - 每个已安装 STC 的项目都需要运行一次 `stc init`。
 - 安装时用了 `--dir`，更新时须使用相同目录。第二条版本命令也须改为该目录。
 - `--dir` 只改变 skill 的位置；项目配置仍写在当前目录。
-- 手动安装或技能管理器安装的全局 skill，须沿用原安装方式更新。npm 更新不会刷新这些副本。
+
 
 临时运行最新版并刷新当前项目，也可以用：
 
 ```bash
 npx --yes @daimonia/stc@latest init
 ```
+
+### 单独 skill 安装
+
+用技能安装器安装的项目 skill，在项目根目录运行：
+
+```bash
+npx skills update stc
+```
+
+全局 skill 使用 `npx skills update stc --global`。下载包装的 skill，下载新包后替换原技能目录。更新时保留项目术语和现有默认配置。
+
+给 Agent 粘贴的更新指令：
+
+```text
+请按原来的安装方式更新 STC skill，核对实际技能目录和版本，保留已有默认规则、项目术语及其他配置。使用新的 ONBOARDING.md 核对启用状态。
+```
+
+skill 的检查脚本可用 `node <skill目录>/tools/cli.mjs --version` 核对版本。技能与 npm 从同一份源文件发布。
 
 ## 为什么做
 

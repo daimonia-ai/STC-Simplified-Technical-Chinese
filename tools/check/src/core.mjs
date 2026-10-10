@@ -48,6 +48,9 @@ function compileEntry(entry) {
     } else if (alt === '应') {
       // Modal 应 only: skip 应用、对应、响应、应对 and the like, and 不应 (its own entry).
       patterns.push(/(?<![不对相响适回供答呼反])应(?![用对答急聘该当变])/g);
+    } else if (alt === '务必') {
+      // Nouns ending in 务 followed by 必须 are standard requirements.
+      patterns.push(/务必(?!须)/g);
     } else {
       patterns.push(new RegExp(escape(alt), 'g'));
     }

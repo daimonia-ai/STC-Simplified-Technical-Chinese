@@ -1,0 +1,33 @@
+{
+  "skill_name": "stc",
+  "version": "0.2.0",
+  "method": "One independent, read-only Codex run on four requests. Checks cover requested scope and semantic preservation.",
+  "cases": [
+    {
+      "id": 1,
+      "prompt": "只回答导出按钮的位置。已知事实：导出按钮在报告页右上角。",
+      "output": "“导出”按钮在报告页右上角。"
+    },
+    {
+      "id": 2,
+      "prompt": "把下面的操作写成完整的三步说明：打开报告页、选择月份、点击导出。删除模板废话，但保留全部步骤。",
+      "output": "1. 打开报告页。\n2. 选择要导出的月份。\n3. 点击“导出”。"
+    },
+    {
+      "id": 3,
+      "prompt": "请改写下面的项目说明，保留事实和不确定性，只给改写正文：本周研发组进行了导出功能的测试，导出 1000 行数据耗时 3 秒。登录偶尔失败，可能与网关配置有关，原因尚未确认。西红柿炒鸡蛋（没有东坡肉）是午餐菜单。",
+      "output": "本周研发组测试了导出功能。导出 1000 行数据耗时 3 秒。\n\n登录偶尔失败，可能与网关配置有关。原因尚未确认。\n\n午餐菜单是西红柿炒鸡蛋。"
+    },
+    {
+      "id": 4,
+      "prompt": "请精简下面的删除文件说明，保留权限和后果，只给正文：只有管理员可以删除文件。只读成员不能删除。删除后无法恢复。这个删除功能不是一种删除之外的其他操作，也不涉及任何没有提到的功能。希望以上说明能够帮助你更好地理解。",
+      "output": "只有管理员可以删除文件。只读成员不能删除文件。\n\n警告：删除后，文件无法恢复。"
+    }
+  ],
+  "checks": {
+    "short_answer": true,
+    "all_steps": true,
+    "facts_and_uncertainty": true,
+    "permission_and_consequence": true
+  }
+}

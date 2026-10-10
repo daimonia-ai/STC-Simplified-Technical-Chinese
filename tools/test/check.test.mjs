@@ -41,6 +41,11 @@ test('“必须、不得、宜”和“应用、对应”不报强度词', () =>
   assert.deepEqual(rules('提交前必须运行测试。不得直接推送。宜写单元测试。在应用里打开对应的页面。', { path: 'AGENTS.md' }), []);
 });
 
+test('任务必须与财务必须保留规范强度，务必提交仍报错', () => {
+  assert.deepEqual(rules('长任务必须说明进展。财务必须核对金额。', { profile: 'for-instruction-writing' }), []);
+  assert.ok(rules('提交前务必运行测试。', { profile: 'for-instruction-writing' }).includes('I1'));
+});
+
 test('直角引号报错', () => {
   assert.ok(rules('点击「保存」。', { profile: 'for-document' }).includes('G17'));
 });

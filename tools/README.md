@@ -19,6 +19,17 @@ npx --yes @daimonia/stc@latest init
 
 `npx` 后面必须写完整的包名 `@daimonia/stc`。
 
+单独 skill 的安装入口见 [README](../README.md#单独安装-skill)。该路径使用同一套规则、词表和检查脚本。
+
+只装 skill 时，按实际安装路径运行：
+
+```bash
+node <skill目录>/tools/cli.mjs check <文件>
+node <skill目录>/tools/cli.mjs init --dir <skill目录> --defaults
+```
+
+第二条命令在项目根目录执行，并保留原技能位置。启用默认规则以用户已有授权为准。
+
 ## 更新
 
 在已安装 STC 的项目根目录运行：
