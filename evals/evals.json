@@ -21,6 +21,41 @@
       "prompt": "我要给团队的 AGENTS.md 加几条规则，内容是：提交代码前要跑测试；不能直接推到 main 分支；最好给新函数写单元测试；紧急修复可以先上线，但要在一天内补文档。帮我写成规则，按简明技术性中文写。",
       "expected_output": "按 for instruction writing 写：强度词只用必须、不得、宜、不宜、可、不必、能、不能；一条只写一个要求；紧急修复的例外写在同一条里；时间写成阿拉伯数字。",
       "files": []
+    },
+    {
+      "id": 4,
+      "name": "task-receipt-awaiting-publish",
+      "prompt": "用 STC 根据这些已确认事实写一份任务回执：页面文案已修改，预览已生成，检查通过；用户明确要求确认预览后再发布；线上当前仍显示旧版。",
+      "expected_output": "结果、用户动作和知会分段；发布确认只放在需要你；不声称已上线，不编造截止时间或额外问题。",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "task-receipt-no-action",
+      "prompt": "用 STC 写任务回执。已确认事实：用户要求的材料索引已按日期倒序整理，全部链接已核对；用户没有待处理的动作，也没有其他需知事项。",
+      "expected_output": "做完了只写已经完成的结果；需要你和知会写无；不为凑段落要求用户再次确认。",
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "direct-answer-without-receipt",
+      "prompt": "导出按钮在哪里？只回答位置。已知按钮在报告页右上角。按 STC 回答。",
+      "expected_output": "直接回答报告页右上角，不套任务回执，不添加无关说明。",
+      "files": []
+    },
+    {
+      "id": 7,
+      "name": "deliverable-body-without-receipt",
+      "prompt": "按 STC 把“请在周五之前完成反馈意见的提交”改短一点，只给改写后的句子。",
+      "expected_output": "只给改写句子，保留周五前和提交反馈；不附任务回执、检查过程或解释。",
+      "files": []
+    },
+    {
+      "id": 8,
+      "name": "research-receipt-without-invented-decision",
+      "prompt": "用 STC 写任务回执。已确认事实：用户只要求了解两种检索方法，报告已经保存到 methods.md，结论是小型文档库优先使用关键词检索；用户没有提出更换系统或选择实施方案。",
+      "expected_output": "回执给出报告和核心结论，需要你写无；不把调研包装成必须由用户选择的系统改造方案。",
+      "files": []
     }
   ]
 }
