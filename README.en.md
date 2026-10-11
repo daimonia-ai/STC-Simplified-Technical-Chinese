@@ -4,9 +4,9 @@
 
 [Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Update STC](#update-stc)
 
-STC is a Chinese writing specification for AI. Its default output is natural, concise, and precise. It gives each meaning one way to write it. It has writing rules, a dictionary, and tools that AI agents can use directly. "Simplified" refers to simplified writing, not to Simplified Chinese characters.
+STC is a Chinese writing specification for AI. It provides writing rules, a dictionary, and tools for AI agents. Its default output is natural, concise, and precise, with one term for each meaning. Task results use three sections: completed work, user actions, and information for the user.
 
-STC is for anyone who wants AI to write clear Chinese with fewer unnecessary words and consistent terms. It also helps developers who build Chinese AI products, localization teams, and engineers who check Chinese output from language models. The rules and the dictionary are in Chinese. This page explains them in English.
+"Simplified" refers to simplified writing, not to Simplified Chinese characters. The rules and dictionary are in Chinese. This page explains how to use STC in English.
 
 ## Introduction video
 
@@ -16,13 +16,20 @@ STC is for anyone who wants AI to write clear Chinese with fewer unnecessary wor
 
 ## Requirements
 
-- An existing agent performs generation, rewriting, and semantic review. The rules and dictionary are plain text.
-- The CLI and the check scripts bundled with the skill require Node.js 18 or later. CLI installation and the skill installer require npm. You can also download the skill archive and install it manually.
-- An agent needs write access to the selected directory for installation or default configuration. Machine checks have no third-party runtime dependencies and work offline after installation.
+An agent reads the rules and dictionary to write, rewrite, and review Chinese.
+
+| Use | Requirements |
+|---|---|
+| Install the skill manually, or read the rules directly | An agent that can read files; the rules and dictionary are plain text |
+| Install the CLI (command-line interface) | Node.js 18+ and npm |
+| Install the skill with `npx skills` | Node.js 22.20+ and npm; see the [installer requirements](https://github.com/vercel-labs/skills/blob/main/package.json) |
+| Run machine checks from the CLI or the skill | Node.js 18+; checks work offline after installation |
+
+The agent needs write access to the selected directory to install STC or enable default rules.
 
 ## Quick start
 
-The same repository offers two installation routes. The CLI supports terminal checks and CI. The skill lets an agent write, rewrite, and review Chinese.
+Running `stc init` through the CLI installs the skill. The CLI also provides terminal checks. If you only need an agent to write and review Chinese, you can install the skill on its own.
 
 ### Install the CLI with npm
 
@@ -31,12 +38,12 @@ npm install -g @daimonia/stc@latest
 stc init
 ```
 
-`init` installs the skill and its on-demand entry. After the user chooses default use, run `stc init --defaults`. Check a file with `stc check <file>`. For a temporary CLI invocation, use `npx --yes @daimonia/stc@latest init`.
+After installation, you can call STC when needed. See [two ways to use STC](#two-ways-to-use-stc) to enable default rules or request a review. You can also run the CLI temporarily with `npx --yes @daimonia/stc@latest init`.
 
 Paste this prompt into your agent:
 
 ```text
-Install STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Install @daimonia/stc@latest with npm, then run stc init. Read ONBOARDING.md, recommend making STC the default Chinese output rules, and wait for my confirmation. I can also select material for a first review.
+Install STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Install @daimonia/stc@latest with npm, then run stc init. Read ONBOARDING.md in the installed skill directory, recommend making STC the default Chinese output rules, and wait for my confirmation. I can also select material for a first review.
 ```
 
 ### Install only the skill
@@ -54,40 +61,10 @@ You can also download `stc-skill-0.2.2.zip` from [GitHub Releases](https://githu
 Paste this prompt into your agent:
 
 ```text
-Install the STC skill: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Use the skill directory for the current agent. Read ONBOARDING.md, recommend making STC the default Chinese output rules, and wait for my confirmation. Review only material that I select or authorize you to choose.
+Install the STC skill: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Use the skill directory for the current agent. Read ONBOARDING.md in the installed skill directory, recommend making STC the default Chinese output rules, and wait for my confirmation. Review only material that I select or authorize you to choose.
 ```
 
-The skill contains the rules, dictionary, onboarding guide, and check scripts. Its natural and concise output principles apply whenever the agent uses STC. Run a machine check with `node <skill-directory>/tools/cli.mjs check <file>`.
-
-## Default expression
-
-Each use of STC applies these principles:
-
-- Use natural word order and complete sentences. Give the answer or result directly.
-- Remove pleasantries, repetition, empty phrases, and explanations the reader does not need.
-- Preserve facts, numbers, names, negation, permissions, and real uncertainty.
-- Match the requested scope. Deliver full documents and detailed explanations when requested.
-- Write the deliverable from the adopted result. Keep production and review records internally.
-
-These principles are built into the skill and the default configuration. See G14, G15, G20, G21, G22, and the selected profile.
-
-## Task receipts
-
-Chinese task receipts use three sections in this order:
-
-| Section | Content |
-|---|---|
-| 做完了 (Completed) | Completed results, deliverable links, and necessary verification |
-| 需要你 (Your action) | Actions or decisions required from the user |
-| 知会 (For your information) | Information that affects understanding or later use, with no action required |
-
-Write 无 (None) when a section has no items. Put detailed analysis in the deliverable and link to it from the receipt. Keep ordinary answers and deliverable bodies in their own formats. Follow another format when the user requests it. See [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会).
-
-You can tell the agent:
-
-```text
-After completing this task, give me a Chinese STC task receipt. Separate completed results, actions I need to take, and information that requires no action.
-```
+The skill contains the rules, dictionary, onboarding guide, and check scripts. Run a machine check with `node <skill-directory>/tools/cli.mjs check <file>`.
 
 ## Two ways to use STC
 
@@ -101,21 +78,19 @@ Paste this prompt into your agent:
 Install or update STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Enable STC as the default rules for natural, concise, and precise Chinese output. Preserve other project settings and tell me where the rules apply.
 ```
 
-This request authorizes the agent to enable the default rules. Then give the agent a writing task, for example:
+Once STC is the default, give the agent a writing task:
 
 ```text
 Write a project progress report in Chinese from these notes: [paste notes].
 ```
 
-To configure STC manually, follow these steps:
+If you installed through the CLI, you can also enable default rules by running this command in the project root:
 
-Run `stc init` in your project to install the skill, rules, and dictionary. A fresh installation registers the skill for on-demand use.
+```bash
+stc init --defaults
+```
 
-After the user agrees, run `stc init --defaults` to put the core writing rules in the project context. The agent then identifies the writing profile and reads the rules before writing Chinese.
-
-[Onboarding for Agents](ONBOARDING.md) defines the next steps. Running `init` again preserves default rules that are already enabled, including installations from earlier releases.
-
-For a standalone skill, follow [ONBOARDING.md](ONBOARDING.md) with the actual skill path. The default-use prompt above already authorizes configuration.
+For a standalone skill, follow [Onboarding for Agents](ONBOARDING.md) to configure default rules.
 
 ### Way 2: Let the agent review and improve existing text
 
@@ -139,9 +114,40 @@ Choose one Chinese document from this project, explain the choice, and give a re
 
 You can request a review without enabling default output rules.
 
-Tell the agent "Review this document with STC". The agent uses the STC skill to review the material selected by the user or chosen with the user's permission. It explains each problem and gives a proposed change. It edits the material when the user requests that action. You can also run `stc check <file or directory>` yourself. The command finds the problems that a machine can detect, and it shows the rule ID for each problem. It returns exit code 1 when it finds errors, so you can use it in CI.
+Use `stc check <file or directory>` for terminal checks. Each finding includes a rule ID. The command returns exit code 1 when it finds errors, so it can be used in continuous integration (CI). An agent or a person must review questions that need context, such as whether facts have sources.
 
-A machine cannot check all rules, for example whether a fact has a source. For these rules, the agent reviews the text with the skill, or a person reviews it.
+## Default expression
+
+Each use of STC applies these principles:
+
+- Use natural word order and complete sentences. Give the answer or result directly.
+- Remove pleasantries, repetition, empty phrases, and explanations the reader does not need.
+- Preserve facts, numbers, names, negation, permissions, and real uncertainty.
+- Match the requested scope. Deliver full documents and detailed explanations when requested.
+
+These principles are built into the skill and the default configuration. See G14, G15, G20, G21, G22, and the selected profile.
+
+## Task receipts
+
+Chinese task receipts use three sections in this order:
+
+| Section | Content |
+|---|---|
+| 做完了 (Completed) | Completed results, deliverable links, and necessary verification |
+| 需要你 (Your action) | Actions or decisions required from the user |
+| 知会 (For your information) | Information that affects understanding or later use, with no action required |
+
+Write “无” (None) when a section has no items.
+Put detailed analysis in the deliverable and link to it from the receipt.
+Keep ordinary answers and deliverable bodies in their own formats.
+Follow another format when the user requests it.
+See [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会).
+
+You can tell the agent:
+
+```text
+After completing this task, give me a Chinese STC task receipt. Separate completed results, actions I need to take, and information that requires no action.
+```
 
 ## Anti-Echo review
 
@@ -212,12 +218,23 @@ Verify the bundled version with `node <skill-directory>/tools/cli.mjs --version`
 
 Chinese text from language models often has the same problems:
 
-- Filler verbs and buzzwords, such as 进行 (conduct), 赋能 (empower), and 闭环 (closed loop). The sentence gets longer, but the information does not increase.
-- Unclear pronouns, such as 我们 (we) and 你们 (you, plural). When the text is forwarded, the reader does not know who they refer to.
-- Exclusions that the reader does not need, such as 西红柿炒鸡蛋（没有东坡肉） ("stir-fried tomato and egg, with no braised pork"). The reader starts to think about something that is not there.
-- Mixed strength words in rules for agents, such as 应 (should), 尽量 (try to), and 务必 (be sure to). The agent cannot tell which rule is a requirement.
+- Filler verbs and buzzwords, such as “进行” (conduct), “赋能” (empower), and “闭环” (closed loop). The sentence gets longer, but the information does not increase.
+- Unclear pronouns, such as “我们” (we) and “你们” (you, plural). When the text is forwarded, the reader does not know who they refer to.
+- Exclusions that the reader does not need, such as “西红柿炒鸡蛋（没有东坡肉）” ("stir-fried tomato and egg, with no braised pork"). The reader starts to think about something that is not there.
+- Mixed strength words in rules for agents, such as “应” (should), “尽量” (try to), and “务必” (be sure to). The agent cannot tell which rule is a requirement.
 
 English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved words, each with one meaning. It was first released in 1986 for aerospace maintenance documentation. Chinese output needs clear writing rules too. STC is designed for AI agents from the start.
+
+## Who STC helps
+
+Anyone who uses AI for chat or documents can use STC to reduce unnecessary words and make Chinese easier to understand.
+
+STC also supports these tasks:
+
+- AI product and agent teams: system prompts, rule files, and agent output.
+- Product writers and localization teams: buttons, prompts, errors, and explanations.
+- Technical writers: documents and reports.
+- Teams that need shared Chinese writing rules and machine checks.
 
 ## Contents
 
@@ -225,9 +242,11 @@ English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved 
 |---|---|---|
 | Rules | General rules, plus rules for each of four profiles | [`rules/`](rules/) |
 | Dictionary | Recommended words (one meaning each), words to avoid (each with a replacement), and a template for a project term list | [`dictionary/`](dictionary/) |
-| Core rules snippet | About ten lines to paste into AGENTS.md or CLAUDE.md | [`snippets/agents-md.md`](snippets/agents-md.md) |
+| Core rules snippet | Core rules to paste into AGENTS.md or CLAUDE.md | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | Skill | A skill that agents load when they write, rewrite, or review Chinese | [`SKILL.md`](SKILL.md) |
 | CLI | `stc init` installs STC in a project. `stc check` finds the problems that a machine can detect | [`tools/`](tools/) |
+| Onboarding | Default configuration and a first document review | [`ONBOARDING.md`](ONBOARDING.md) |
+| Evaluation tasks | Tasks and expected results for evaluating the skill | [`evals/`](evals/) |
 
 ### Four profiles
 

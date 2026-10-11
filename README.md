@@ -4,11 +4,11 @@
 
 [介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [任务回执](#任务回执) · [更新版本](#更新版本)
 
-STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 agent 工具。默认表达自然、简短、准确，同一个意思只用一个词。任务回执分清完成结果、用户动作和知会。
+STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 Agent 工具。默认表达自然、简短、准确，同一个意思只用一个词。任务结果按“做完了／需要你／知会”三段汇报。
 
 名字里的 Simplified 指写法上的简化，不是简体字。
 
-**English summary.** STC (Simplified Technical Chinese) is a Chinese writing specification for AI. It is for people and for AI agents. It has writing rules, a dictionary, and tools that let agents write and check Chinese text. "Simplified" refers to simplified writing, not to Simplified Chinese characters. STC follows the approach of ASD-STE100 Simplified Technical English. STC is an independent work and contains no text from ASD-STE100. Full English README: [README.en.md](README.en.md).
+**English:** STC helps AI agents write and review clear, consistent Chinese. [Read the English guide](README.en.md).
 
 ## 介绍视频
 
@@ -18,13 +18,20 @@ STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作
 
 ## 环境要求
 
-- 单独 skill 的生成、改写和语义审阅由现有 Agent 执行。规则和词表是纯文本，可直接读取。
-- CLI 和随 skill 提供的机器检查需要 Node.js 18 以上版本。安装 CLI 或运行技能安装器需要 npm；直接下载 skill 包可以手动安装。
-- 自动安装和默认配置需要 Agent 能写入选定目录。机器检查没有第三方运行时依赖，安装后可离线运行。
+Agent 读取规则和词表后，可生成、改写和审阅中文。
+
+| 使用方式 | 环境要求 |
+|---|---|
+| 手动安装 skill（Agent 技能），或直接读取规则 | 能读取文件的 Agent；规则和词表是纯文本 |
+| 安装 CLI（命令行工具） | Node.js 18+ 和 npm |
+| 用 `npx skills` 安装 skill | Node.js 22.20+ 和 npm，见[安装器声明](https://github.com/vercel-labs/skills/blob/main/package.json) |
+| 运行 CLI 或 skill 中的机器检查 | Node.js 18+；安装后可离线运行 |
+
+自动安装和默认配置需要 Agent 能写入选定目录。
 
 ## 快速开始
 
-同一个仓库提供两条安装路径。CLI 适合需要终端检查和 CI 的用户；skill 适合让 Agent 直接生成、改写和审阅中文。
+通过 CLI 运行 `stc init`，会安装 skill，并可使用终端检查命令。只需要 Agent 写作和审阅时，可以单独安装 skill。
 
 ### npm 安装 CLI
 
@@ -33,12 +40,12 @@ npm install -g @daimonia/stc@latest
 stc init
 ```
 
-`init` 安装 skill 和按需入口。确认默认使用后，运行 `stc init --defaults`。检查文件用 `stc check <文件>`。也可以用 `npx --yes @daimonia/stc@latest init` 临时运行。
+安装后可按需调用 STC。设为默认和内容审阅见[两种用法](#两种用法)。也可以用 `npx --yes @daimonia/stc@latest init` 临时运行。
 
 给 Agent 粘贴的安装指令：
 
 ```text
-请在当前项目安装 STC：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。使用 npm 安装 @daimonia/stc@latest，再运行 stc init。装好后读取 ONBOARDING.md，建议设为默认中文输出规则，等我确认；也可以由我指定材料体验一次审阅。
+请在当前项目安装 STC：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。使用 npm 安装 @daimonia/stc@latest，再运行 stc init。装好后读取技能目录中的 ONBOARDING.md，建议设为默认中文输出规则，等我确认；也可以由我指定材料体验一次审阅。
 ```
 
 ### 单独安装 skill
@@ -56,40 +63,10 @@ npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
 给 Agent 粘贴的安装指令：
 
 ```text
-请单独安装 STC skill：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。为当前 Agent 选择合适的技能目录。装好后读取 ONBOARDING.md，建议设为默认中文输出规则，等我确认；审阅材料由我指定或授权挑选。
+请单独安装 STC skill：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese。为当前 Agent 选择合适的技能目录。装好后读取技能目录中的 ONBOARDING.md，建议设为默认中文输出规则，等我确认；审阅材料由我指定或授权挑选。
 ```
 
-skill 包含规则、词表、引导与检查脚本。只装 skill 时，Agent 已能使用内置的自然、简短表达原则。运行机器检查可用 `node <skill目录>/tools/cli.mjs check <文件>`。
-
-## 默认表达
-
-每次使用 STC，都会同时执行这套表达原则：
-
-- 用自然语序和完整句子，直接给出答案或结果。
-- 删除客套、重复、空话和读者不需要的解释。
-- 保留事实、数字、名称、否定词、权限和真实不确定性。
-- 按任务需要展开，完整文稿和详细解释必须满足请求。
-- 成品从采用的结果写起，制作和复核记录放在内部。
-
-自然表达和精简方法已内置于 skill 与默认配置。具体规则见 G14、G15、G20、G21、G22 和场景规则。
-
-## 任务回执
-
-使用 STC 汇报任务结果时，默认按三段组织：
-
-| 段落 | 内容 |
-|---|---|
-| 做完了 | 已完成的结果、交付物和必要的验证结论 |
-| 需要你 | 用户要执行的动作或决定的事项 |
-| 知会 | 不需要用户动作、但影响理解或后续使用的信息 |
-
-空段写“无”。详细分析放在文档中，回执给出摘要和入口。普通问答、成品正文和用户指定的其他格式按各自要求处理。具体规则见 [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会)。
-
-可以直接对 Agent 说：
-
-```text
-完成这个任务后，按 STC 给我任务回执。分清已经做完的结果、需要我处理的事和只需知晓的信息。
-```
+skill 包含规则、词表、引导与检查脚本。运行机器检查可用 `node <skill目录>/tools/cli.mjs check <文件>`。
 
 ## 两种用法
 
@@ -103,21 +80,19 @@ skill 包含规则、词表、引导与检查脚本。只装 skill 时，Agent �
 请在当前项目安装或更新 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese，并设为默认中文输出规则，让表达自然、简短、准确。保留其他项目配置，完成后说明生效范围。
 ```
 
-这段指令已授权设置默认规则。生效后可以直接提出写作任务，例如：
+设为默认后，直接提出写作任务：
 
 ```text
 请根据以下要点写一份项目进展说明：【粘贴要点】
 ```
 
-手动配置时，按以下步骤操作：
+已用 CLI 安装时，也可以在项目根目录运行以下命令，启用默认规则：
 
-在项目里运行 `stc init`，装好 skill、规则和词表。首次安装登记按需使用入口。
+```bash
+stc init --defaults
+```
 
-用户确认后，运行 `stc init --defaults`，将核心规则写入项目上下文。之后 agent 写中文时，先判断场景，再读取规则。
-
-安装后的引导见 [Onboarding for Agents](ONBOARDING.md)。已启用默认规则的项目再次运行 `init` 时，会保留该状态。
-
-单独安装 skill 时，按 [ONBOARDING.md](ONBOARDING.md) 用实际安装路径启用默认规则。只有安装授权时，先等待用户选择；上面的默认使用指令已经包含启用授权。
+单独安装 skill 时，按 [Onboarding for Agents](ONBOARDING.md) 配置默认规则。
 
 ### 用法二：让 agent 审阅并优化已有内容
 
@@ -141,9 +116,36 @@ skill 包含规则、词表、引导与检查脚本。只装 skill 时，Agent �
 
 此用法可按需调用，无须启用默认输出规则。
 
-对 agent 说“按 STC 审一下这份文档”。agent 会用 STC 的 skill 审阅用户指定或授权挑选的材料，给出问题、原因和改法。用户要求修改时，agent 再按授权修改。人也可以自己运行 `stc check <文件或目录>`。这条命令找出机器能判断的问题，每条问题带规则编号。发现错误时返回退出码 1，可以放进 CI。
+终端检查用 `stc check <文件或目录>`，每条问题带规则编号。发现错误时返回退出码 1，可接入 CI（持续集成）。事实出处等需要结合上下文的问题，由 Agent 或人复核。
 
-机器判断不了的规则（比如事实有没有出处），由 agent 按 skill 审查，或由人审稿。不装任何东西也可以直接读 `rules/` 和 `dictionary/`，用来审稿、培训或自己写工具。
+## 默认表达
+
+每次使用 STC，都会同时执行这套表达原则：
+
+- 用自然语序和完整句子，直接给出答案或结果。
+- 删除客套、重复、空话和读者不需要的解释。
+- 保留事实、数字、名称、否定词、权限和真实不确定性。
+- 按任务需要展开，完整文稿和详细解释必须满足请求。
+
+自然表达和精简方法已内置于 skill 与默认配置。具体规则见 G14、G15、G20、G21、G22 和场景规则。
+
+## 任务回执
+
+使用 STC 汇报任务结果时，默认按三段组织：
+
+| 段落 | 内容 |
+|---|---|
+| 做完了 | 已完成的结果、交付物和必要的验证结论 |
+| 需要你 | 用户要执行的动作或决定的事项 |
+| 知会 | 不需要用户动作、但影响理解或后续使用的信息 |
+
+空段写“无”。详细分析放在文档中，回执给出摘要和入口。普通问答、成品正文和用户指定的其他格式按各自要求处理。具体规则见 [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会)。
+
+可以直接对 Agent 说：
+
+```text
+完成这个任务后，按 STC 给我任务回执。分清已经做完的结果、需要我处理的事和只需知晓的信息。
+```
 
 ## Anti-Echo 交付检查
 
@@ -185,7 +187,7 @@ node .claude/skills/stc/tools/cli.mjs --version
 - 每个已安装 STC 的项目都需要运行一次 `stc init`。
 - 安装时用了 `--dir`，更新时须使用相同目录。第二条版本命令也须改为该目录。
 - `--dir` 只改变 skill 的位置；项目配置仍写在当前目录。
-
+- 手动安装或通过技能安装器安装的全局 skill，按原方式更新。
 
 临时运行最新版并刷新当前项目，也可以用：
 
@@ -201,7 +203,7 @@ npx --yes @daimonia/stc@latest init
 npx skills update stc
 ```
 
-全局 skill 使用 `npx skills update stc --global`。下载包装的 skill，下载新包后替换原技能目录。更新时保留项目术语和现有默认配置。
+全局 skill 使用 `npx skills update stc --global`。手动安装的 skill，下载新包后替换原技能目录。更新时保留项目术语和现有默认配置。
 
 给 Agent 粘贴的更新指令：
 
@@ -236,9 +238,11 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 |---|---|---|
 | 规则 | 通用规则，加四个场景各自的规则 | [`rules/`](rules/) |
 | 词表 | 推荐词（一个词一个意思）、不推荐写法（附推荐写法）、项目术语表模板 | [`dictionary/`](dictionary/) |
-| 核心规则片段 | 贴进 AGENTS.md 或 CLAUDE.md 的十来行规则 | [`snippets/agents-md.md`](snippets/agents-md.md) |
+| 核心规则片段 | 可粘贴到 AGENTS.md 或 CLAUDE.md 的核心规则 | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | skill | agent 写、改、审中文时加载的技能包 | [`SKILL.md`](SKILL.md) |
 | 命令行工具 | `stc init` 把 STC 装进项目，`stc check` 找出机器能判断的问题 | [`tools/`](tools/) |
+| 安装引导 | 默认使用的设置方法和首次文档审阅体验 | [`ONBOARDING.md`](ONBOARDING.md) |
+| 测试任务 | 用于评估 skill 的任务和预期结果 | [`evals/`](evals/) |
 
 ### 四个场景
 
@@ -250,18 +254,6 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写“我们”“你们” |
 | for web dev | 网页和应用界面上给用户看的文字 | 不用复数人称和第三人称代词；按钮以动词开头 |
 | for instruction writing | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用“必须、不得、宜、不宜、可、不必、能、不能” |
-
-## 仓库结构
-
-```
-ONBOARDING.md   安装后建议默认使用，提供一次文档审阅体验
-SKILL.md        skill 入口：判断场景，读规则和词表，写、改写、审查
-rules/          规则：通用规则与四个场景
-dictionary/     词表：推荐词、不推荐写法、项目术语表模板
-snippets/       贴进 AGENTS.md / CLAUDE.md 的核心规则
-tools/          命令行工具 stc：init 安装，check 检查
-evals/          skill 的测试任务
-```
 
 ## 词表怎么定
 
