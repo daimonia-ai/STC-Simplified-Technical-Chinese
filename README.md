@@ -51,7 +51,7 @@ npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
 
 可用 `--agent codex`、`--agent claude-code` 或 `--agent hermes-agent` 指定入口，`--global` 安装到个人技能目录。[技能安装器文档](https://github.com/vercel-labs/skills#available-options)说明其他选项。
 
-也可以从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.2.1.zip`，将包里的 `stc/` 放到 Agent 的技能目录。
+也可以从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.2.2.zip`，将包里的 `stc/` 放到 Agent 的技能目录。
 
 给 Agent 粘贴的安装指令：
 
@@ -155,7 +155,7 @@ stc check 文档.md --profile for-document --anti-echo
 
 命令发现未复核的 G20 疑点时返回 1。Agent 必须改写，或结合上下文记录具体保留理由；语义复核还须检查规则未匹配到的内容。[复核文件与 CI 用法](tools/README.md#anti-echo-复核)。
 
-Codex 和 Claude Code 可按需配置 [Stop hook](tools/hooks/README.md)，对回复中的疑点发起一次补审。
+普通聊天在发出回复前按 STC 自查。文档和界面使用上面的检查命令。0.2.2 起停用聊天 Stop 补审；旧安装的迁移方式见 [hook 升级说明](tools/hooks/README.md)。
 
 ## 更新版本
 

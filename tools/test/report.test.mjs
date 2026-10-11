@@ -54,6 +54,14 @@ test('格式和阈值参数错误时停止检查', () => {
   }
 });
 
+test('Anti-Echo candidates request contextual review without inventing missing facts', () => {
+  const result=run(['--profile','for-document','--anti-echo'],'午餐：西红柿炒鸡蛋（没有东坡肉）。');
+  assert.equal(result.status,1);
+  assert.match(result.stdout,/待确认/);
+  assert.match(result.stdout,/结合上下文复核/);
+  assert.doesNotMatch(result.stdout,/下一步：补齐/);
+});
+
 
 test('报告引用的引号和空格反例不污染报告自检', () => {
   for (const input of ['点击「保存」。', '用AI生成。']) {

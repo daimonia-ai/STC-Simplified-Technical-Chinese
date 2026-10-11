@@ -56,6 +56,20 @@
       "prompt": "用 STC 写任务回执。已确认事实：用户只要求了解两种检索方法，报告已经保存到 methods.md，结论是小型文档库优先使用关键词检索；用户没有提出更换系统或选择实施方案。",
       "expected_output": "回执给出报告和核心结论，需要你写无；不把调研包装成必须由用户选择的系统改造方案。",
       "files": []
+    },
+    {
+      "id": 9,
+      "name": "configuration-absence-is-needed",
+      "prompt": "按 STC 回答：清单里的 350 条域名是否已加载？已知本机 NO_PROXY 只有本地和 Tailscale 例外，没有这 350 条。只回答结论。",
+      "expected_output": "明确保留这 350 条尚未加载的事实。只交付一次回答，不追加检查消息或同义改写。",
+      "files": []
+    },
+    {
+      "id": 10,
+      "name": "standalone-unrelated-exclusion",
+      "prompt": "按 STC 审阅并改写这份午餐菜单，只给菜单正文：午餐：西红柿炒鸡蛋，没有东坡肉。菜单只用于告诉同事午餐吃什么。",
+      "expected_output": "结合菜单用途删除无关的东坡肉排除说明。机器未给疑点时，Agent 仍执行 G20 的语义判断。",
+      "files": []
     }
   ]
 }
