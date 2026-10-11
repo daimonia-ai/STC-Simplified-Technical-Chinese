@@ -49,7 +49,7 @@ npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
 
 Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [skill installer options](https://github.com/vercel-labs/skills#available-options).
 
-You can also download `stc-skill-0.2.1.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` directory in your agent's skill directory.
+You can also download `stc-skill-0.2.2.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` directory in your agent's skill directory.
 
 Paste this prompt into your agent:
 
@@ -153,7 +153,7 @@ stc check document.md --profile for-document --anti-echo
 
 The command returns 1 while G20 candidates remain unresolved. The agent must revise them or record a specific reason to keep them in context. It must also review content that patterns do not detect. See [review decisions and CI](tools/README.md#anti-echo-复核).
 
-An optional [Stop hook](tools/hooks/README.md) can request one follow-up review in Codex or Claude Code.
+For ordinary chat, the agent checks its wording before it sends the reply. Documents and UI text use the command above. Version 0.2.2 retires the chat Stop review. See the [hook migration guide](tools/hooks/README.md) for existing installations.
 
 ## Update STC
 

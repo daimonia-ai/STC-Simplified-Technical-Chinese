@@ -67,6 +67,8 @@ export function formatReport(report, { format = 'text', showWarnings = true } = 
       }
     }
   }
-  out.push('', '下一步：补齐标为“【待补】”的事实，再决定采用哪些改法。');
+  out.push('', report.antiEcho?.pending.length
+    ? '先结合上下文复核 Anti-Echo 疑点，再决定采用哪些改法。'
+    : '结合原文决定采用哪些改法。');
   return out.join('\n');
 }

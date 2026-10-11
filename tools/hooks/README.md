@@ -1,35 +1,21 @@
-# Anti-Echo Stop hook
+# 聊天 Stop hook 升级说明
 
-本 hook 检查最后一条中文回复中的 G20 疑点。发现疑点时，请求 Agent 再复核一次。支持 Codex 的 `last_assistant_message` 和 Claude Code 的本地会话记录。
+STC 0.2.2 起，普通聊天在发出回复前自查。自动追加补审已停用。
 
-使用全局 skill 时，命令为：
+`stop.mjs` 保留为旧配置的兼容入口。命令始终返回空结果，允许本轮结束；对话记录不会被读取。文档和界面继续使用 `stc check --anti-echo`，由 Agent 结合上下文处理疑点。
+
+## 升级旧安装
+
+1. 按 [更新版本](../../README.md#更新版本) 刷新实际使用的 skill 目录。
+2. 在 Codex 的 `~/.codex/hooks.json` 或 Claude Code 的 `~/.claude/settings.json` 中，删除命令指向 `stc/tools/hooks/stop.mjs` 的 Stop 项。其他 hook 必须保留。
+
+已更新 skill、但仍保留注册项时，旧命令会执行兼容入口并正常结束。仅更新全局 npm 包时，已复制到项目或个人目录的旧 skill 还须刷新。
+
+## 文档和界面检查
 
 ```bash
-node "$HOME/.agents/skills/stc/tools/hooks/stop.mjs"
+stc check 文档.md --profile for-document --anti-echo
+stc check 界面.tsx --profile for-web-dev --anti-echo
 ```
 
-将下面的 `Stop` 项合并到 Codex 的 `~/.codex/hooks.json`，或 Claude Code 的 `~/.claude/settings.json`。保留已经配置的其他 hook。
-
-```json
-{
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"$HOME/.agents/skills/stc/tools/hooks/stop.mjs\"",
-            "timeout": 5
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-项目内安装时，将命令路径改为实际 skill 目录。Codex 新增 hook 后须通过客户端的 hook 信任确认，配置文件存在不代表已启用。
-
-每轮最多请求一次补审，使用 `stop_hook_active` 防止循环。补审仍由 Agent 判断句子是否必要。文件和网页使用 `stc check --anti-echo` 及对应的成品审阅；本 hook 只检查回复文字。
-
-Codex 的 Stop 机制会发起一次继续执行，不能保证第一版回复尚未显示。接口依据见 [Codex Hooks](https://learn.chatgpt.com/docs/hooks#stop)。
+机器命中仅表示待复核。按 G20 检查全文，保留事实差异和必要边界，删除读者不需要的说明。复核方式见 [检查工具](../README.md#anti-echo-复核)。
