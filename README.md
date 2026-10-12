@@ -2,7 +2,7 @@
 
 中文 | [English](README.en.md)
 
-[介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [两种用法](#两种用法) · [任务回执](#任务回执) · [更新版本](#更新版本)
+[介绍视频](#介绍视频) · [环境要求](#环境要求) · [快速开始](#快速开始) · [网页聊天](#网页聊天直接读取规则) · [两种用法](#两种用法) · [任务回执](#任务回执) · [更新版本](#更新版本)
 
 STC 简明技术性中文是给 AI 用的中文写作规范。项目提供写作规则、词表和 Agent 工具。默认表达自然、简短、准确，同一个意思只用一个词。任务结果按“做完了／需要你／知会”三段汇报。
 
@@ -22,6 +22,7 @@ Agent 读取规则和词表后，可生成、改写和审阅中文。
 
 | 使用方式 | 环境要求 |
 |---|---|
+| 通过链接接入网页聊天 | 能读取网页的聊天 AI；读取失败时可粘贴或上传文本 |
 | 手动安装 skill（Agent 技能），或直接读取规则 | 能读取文件的 Agent；规则和词表是纯文本 |
 | 安装 CLI（命令行工具） | Node.js 18+ 和 npm |
 | 用 `npx skills` 安装 skill | Node.js 22.20+ 和 npm，见[安装器声明](https://github.com/vercel-labs/skills/blob/main/package.json) |
@@ -31,7 +32,9 @@ Agent 读取规则和词表后，可生成、改写和审阅中文。
 
 ## 快速开始
 
-通过 CLI 运行 `stc init`，会安装 skill，并可使用终端检查命令。只需要 Agent 写作和审阅时，可以单独安装 skill。
+STC 提供三种接入方式：CLI、独立 skill、网页链接。
+
+通过 CLI 运行 `stc init`，会安装 skill，并可使用终端检查命令。只需要 Agent 写作和审阅时，可以单独安装 skill。网页聊天可以[直接读取规则](#网页聊天直接读取规则)。
 
 ### npm 安装 CLI
 
@@ -68,13 +71,40 @@ npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
 
 skill 包含规则、词表、引导与检查脚本。运行机器检查可用 `node <skill目录>/tools/cli.mjs check <文件>`。
 
+### 网页聊天：直接读取规则
+
+适用于能读取网页的 ChatGPT、Claude 等聊天 AI，以及云端 Agent。把下面这段话发给 AI：
+
+```text
+请读取并使用 STC：
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+读取后，按页内的 Onboarding for Agents 引导我选择默认使用或审阅。
+```
+
+[网页入口](WEB.md)包含引导、完整规则和词表，由仓库源文件自动生成。AI 读取后，会说明实际生效范围，再引导首次使用。
+
+纯文本链接无法读取时，可以换用 [GitHub 页面](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/WEB.md)。AI 仍无法读取时，再粘贴正文或上传文本。读取未完成时，AI 必须说明缺少的内容。
+
+通过链接使用时，由 AI 按文本规则写作和审阅。机器检查命令需要 Node.js，见[环境要求](#环境要求)。
+
 ## 两种用法
 
 可以只用一种，也可以两种一起用。一起用时，默认输出规则让 agent 一开始就按 STC 写，审阅时再找出漏掉的问题。
 
 ### 用法一：设成 agent 的默认输出规则
 
-把这段话直接贴给 agent：
+网页聊天可以直接发送：
+
+```text
+请读取 STC：
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+在本次对话中默认按 STC 输出中文。
+按任务选择对应场景，完成后说明生效范围。
+```
+
+需要跨对话使用时，让 AI 按平台实际提供的保存功能引导设置。
+
+CLI 或 skill 用户可以发送：
 
 ```text
 请在当前项目安装或更新 STC 简明技术性中文：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese，并设为默认中文输出规则，让表达自然、简短、准确。保留其他项目配置，完成后说明生效范围。
@@ -96,7 +126,16 @@ stc init --defaults
 
 ### 用法二：让 agent 审阅并优化已有内容
 
-安装后，把这段话和待处理文字一起贴给 agent：
+网页聊天可以直接发送：
+
+```text
+请读取 STC：
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
+给出改写稿并简要说明主要改动：【粘贴文字】
+```
+
+已加载规则，或已安装 CLI、skill 时，可以直接发送：
 
 ```text
 请按 STC 审阅并优化以下中文，保留事实、数字、名称和原意，给出改写稿并简要说明主要改动：【粘贴文字】
@@ -213,6 +252,10 @@ npx skills update stc
 
 skill 的检查脚本可用 `node <skill目录>/tools/cli.mjs --version` 核对版本。技能与 npm 从同一份源文件发布。
 
+### 网页链接接入
+
+让 AI 重新读取同一条网页入口链接，即可取得当前规则。已保存到项目资料中的文本，需要同时替换为新版。
+
 ## 为什么做
 
 大模型写中文，常见的问题是写得多、写法散。同一个东西换着叫法，程度词代替数字。“进行优化”“赋能”“闭环”这类词把句子撑长，代词也指代不清。还常加读者不需要的说明，比如“西红柿炒鸡蛋（没有东坡肉）”。读的人要花时间猜，agent 之间传话也会走样。
@@ -242,6 +285,7 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | skill | agent 写、改、审中文时加载的技能包 | [`SKILL.md`](SKILL.md) |
 | 命令行工具 | `stc init` 把 STC 装进项目，`stc check` 找出机器能判断的问题 | [`tools/`](tools/) |
 | 安装引导 | 默认使用的设置方法和首次文档审阅体验 | [`ONBOARDING.md`](ONBOARDING.md) |
+| 网页入口 | 可通过链接读取的引导、完整规则和词表 | [`WEB.md`](WEB.md) |
 | 测试任务 | 用于评估 skill 的任务和预期结果 | [`evals/`](evals/) |
 
 ### 四个场景
