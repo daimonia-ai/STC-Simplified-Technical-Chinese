@@ -1,9 +1,9 @@
-// Both installation routes ship these files from the same source tree.
+// CLI and standalone skill bundles use the same source files.
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const SKILL_FILES = [
-  'SKILL.md', 'ONBOARDING.md', 'README.md', 'README.en.md', 'LICENSE', 'LICENSE-CODE',
+  'SKILL.md', 'ONBOARDING.md', 'WEB.md', 'README.md', 'README.en.md', 'LICENSE', 'LICENSE-CODE',
   'rules', 'dictionary', 'snippets', 'tools/meta.mjs', 'tools/cli.mjs',
   'tools/skill-files.mjs', 'tools/README.md', 'tools/check/src', 'tools/check/data',
   'tools/init/src', 'tools/hooks',

@@ -2,7 +2,7 @@
 
 [中文](README.md) | English
 
-[Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Update STC](#update-stc)
+[Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Web chat](#web-chat-read-the-rules-from-a-link) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Update STC](#update-stc)
 
 STC is a Chinese writing specification for AI. It provides writing rules, a dictionary, and tools for AI agents. Its default output is natural, concise, and precise, with one term for each meaning. Task results use three sections: completed work, user actions, and information for the user.
 
@@ -20,6 +20,7 @@ An agent reads the rules and dictionary to write, rewrite, and review Chinese.
 
 | Use | Requirements |
 |---|---|
+| Use a link in web chat | A chat AI that can read web pages; paste or upload the text if reading fails |
 | Install the skill manually, or read the rules directly | An agent that can read files; the rules and dictionary are plain text |
 | Install the CLI (command-line interface) | Node.js 18+ and npm |
 | Install the skill with `npx skills` | Node.js 22.20+ and npm; see the [installer requirements](https://github.com/vercel-labs/skills/blob/main/package.json) |
@@ -29,7 +30,9 @@ The agent needs write access to the selected directory to install STC or enable 
 
 ## Quick start
 
-Running `stc init` through the CLI installs the skill. The CLI also provides terminal checks. If you only need an agent to write and review Chinese, you can install the skill on its own.
+STC offers three ways to get started: the CLI, the standalone skill, or a web link.
+
+Running `stc init` through the CLI installs the skill. The CLI also provides terminal checks. If you only need an agent to write and review Chinese, you can install the skill on its own. In web chat, you can [read the rules from a link](#web-chat-read-the-rules-from-a-link).
 
 ### Install the CLI with npm
 
@@ -66,13 +69,40 @@ Install the STC skill: https://github.com/daimonia-ai/STC-Simplified-Technical-C
 
 The skill contains the rules, dictionary, onboarding guide, and check scripts. Run a machine check with `node <skill-directory>/tools/cli.mjs check <file>`.
 
+### Web chat: Read the rules from a link
+
+Use this with ChatGPT, Claude, or another chat AI or cloud agent that can read web pages. Send this prompt:
+
+```text
+Read and use STC:
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+Follow the Onboarding for Agents section to help me choose default use or a review.
+```
+
+The [web entry](WEB.md) contains onboarding, the full rules, and the dictionary. It is generated from the repository source files. After reading it, the AI explains where the rules apply and guides the first use.
+
+If the raw-text link fails, use the [GitHub page](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/WEB.md). If the AI still cannot read it, paste or upload the text. The AI must identify missing content when it cannot complete the reading.
+
+With this route, the AI writes and reviews Chinese using the text rules. Machine check commands require Node.js; see [requirements](#requirements).
+
 ## Two ways to use STC
 
 You can use one way or both. When you use both, the default output rules make the agent write in STC from the start, and a review finds the problems that remain.
 
 ### Way 1: Make STC the default output rules of the agent
 
-Paste this prompt into your agent:
+In web chat, send:
+
+```text
+Read STC:
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+Use STC as the default rules for Chinese output in this conversation.
+Select the profile for each task and tell me where the rules apply.
+```
+
+To reuse the rules across conversations, ask the AI to guide you through the settings the platform supports.
+
+For CLI or skill use, send:
 
 ```text
 Install or update STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Enable STC as the default rules for natural, concise, and precise Chinese output. Preserve other project settings and tell me where the rules apply.
@@ -94,7 +124,16 @@ For a standalone skill, follow [Onboarding for Agents](ONBOARDING.md) to configu
 
 ### Way 2: Let the agent review and improve existing text
 
-After installation, paste this prompt and the text into your agent:
+In web chat, send:
+
+```text
+Read STC:
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning.
+Return a revised version and briefly explain the main changes: [paste text].
+```
+
+After the rules are loaded, or with the CLI or skill installed, send:
 
 ```text
 Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning. Return a revised version and briefly explain the main changes: [paste text].
@@ -214,6 +253,10 @@ Update the STC skill with its original installation method. Verify its actual di
 
 Verify the bundled version with `node <skill-directory>/tools/cli.mjs --version`. The skill and npm package are released from the same source files.
 
+### Web link
+
+Ask the AI to read the same web entry link again to get the current rules. Also replace any older text saved in project sources.
+
 ## Why STC
 
 Chinese text from language models often has the same problems:
@@ -246,6 +289,7 @@ STC also supports these tasks:
 | Skill | A skill that agents load when they write, rewrite, or review Chinese | [`SKILL.md`](SKILL.md) |
 | CLI | `stc init` installs STC in a project. `stc check` finds the problems that a machine can detect | [`tools/`](tools/) |
 | Onboarding | Default configuration and a first document review | [`ONBOARDING.md`](ONBOARDING.md) |
+| Web entry | Onboarding, full rules, and the dictionary in one readable page | [`WEB.md`](WEB.md) |
 | Evaluation tasks | Tasks and expected results for evaluating the skill | [`evals/`](evals/) |
 
 ### Four profiles

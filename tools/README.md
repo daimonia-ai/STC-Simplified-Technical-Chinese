@@ -2,6 +2,12 @@
 
 `stc` 有两个命令：`init` 把 STC 装进项目，`check` 按 STC 的规则和词表检查中文文字。运行时不依赖第三方包，需要 Node.js 18 以上版本。
 
+## 生成网页入口
+
+维护规则后，运行 `npm run build:web` 更新根目录的 `WEB.md`。生成源为 `snippets/web-onboarding.md`、`SKILL.md`、`rules/` 和 `dictionary/`。
+
+`npm run check:web` 检查网页入口是否与源文件一致，发现差异时返回 1。`npm test` 包含这项检查。npm 发布和 skill 打包前会重新生成网页入口；中英文 README 与网页入口一同进入发布包。
+
 ## 安装
 
 安装命令行工具，再在项目根目录运行：
