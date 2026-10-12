@@ -2,15 +2,21 @@
 
 [中文](README.md) | English
 
-## Introduction video
+![STC overview: default output rules, content review, and structured task receipts](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview.png)
+
+**STC is an open-source Chinese writing specification for AI.** Its rules and dictionary help AI remove filler and unnecessary explanations, use consistent terms, and produce natural, concise, and precise Chinese.
+
+- **Default output rules**: apply consistent writing rules when generating content. Preserve necessary facts, numbers, and limits.
+- **Review and improve**: check existing content, suggest specific changes, and rewrite it when requested.
+- **Task receipts**: separate completed results, user actions, and necessary information into “做完了 / 需要你 / 知会”.
+
+Use STC for chat replies, documents, product interface copy, and agent instructions. Install it through the command-line interface (CLI), add the skill on its own, or let a web chat AI read the rules.
+
+## Introduction videos
 
 [<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC V0.2 introduction video" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC V0.1.0 introduction video" width="280">](https://youtu.be/XWga_oiD_vs)
 
 [V0.2 introduction (Chinese)](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [V0.1.0 introduction (Chinese)](https://youtu.be/XWga_oiD_vs)
-
-Select a thumbnail to watch on YouTube.
-
-STC is a Chinese writing specification for AI, with rules, a dictionary, and tools. It calls for natural, concise, and precise Chinese, with one term for each meaning. Task receipts separate completed work, user actions, and information for the user.
 
 [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Manual installation and checks](#manual-installation-and-checks) · [Update STC](#update-stc) · [Requirements](#requirements)
 
@@ -29,7 +35,7 @@ Ask me before enabling default rules.
 Review only material I select or authorize you to choose.
 ```
 
-The command-line interface (CLI) installation includes the skill. To install the skill on its own, see [manual installation](#install-only-the-skill).
+The CLI installation includes the skill. To install the skill on its own, see [manual installation](#install-only-the-skill).
 
 <a id="web-chat-read-the-rules-from-a-link"></a>
 
@@ -48,22 +54,20 @@ The [web entry](WEB.md) contains onboarding, the full rules, and the dictionary.
 
 ## Two ways to use STC
 
+After completing [Quick start](#quick-start), use the prompts below.
+
 ### Way 1: Make STC the default output rules of the agent
 
 **Agent:**
 
 ```text
-Install or update STC in this project:
-https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
-Enable it as the default rules for Chinese output.
+Set STC as the default rules for Chinese output in this project.
 Preserve other project settings and tell me where the rules apply.
 ```
 
 **Web chat:**
 
 ```text
-Read STC:
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
 Use STC as the default rules for Chinese output in this conversation.
 Select the profile for each task and tell me where the rules apply.
 ```
@@ -79,20 +83,9 @@ Write a project progress report in Chinese from these notes:
 
 ### Way 2: Let the agent review and improve existing text
 
-**Agent with STC installed:**
+Use the same prompt with an agent or in web chat:
 
 ```text
-Review and improve this Chinese text with STC.
-Preserve the facts, numbers, names, and meaning.
-Return a revised version and briefly explain the main changes:
-[paste text]
-```
-
-**Web chat:**
-
-```text
-Read STC:
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
 Review and improve this Chinese text with STC.
 Preserve the facts, numbers, names, and meaning.
 Return a revised version and briefly explain the main changes:

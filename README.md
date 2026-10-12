@@ -2,15 +2,21 @@
 
 中文 | [English](README.en.md)
 
+![STC 功能总览：默认输出规则、审阅并优化、三段式任务回执](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview.png)
+
+**STC 是给 AI 用的开源中文写作规范。** 针对套话、多余解释和术语混用，STC 提供表达规则与词表，让中文输出自然、简短、准确。
+
+- **默认输出规则**：让 AI 生成内容时遵循统一写法，保留必要的事实、数字和边界。
+- **审阅并优化**：让 AI 检查已有内容，给出具体改法，并按需生成改写稿。
+- **任务回执**：用“做完了／需要你／知会”分清完成结果、用户要处理的事项和必要信息。
+
+适用于对话回复、文档、产品界面文案和 Agent 指令。可通过命令行工具（CLI）安装、单独安装 skill（Agent 技能），或让网页版聊天 AI 读取规则。
+
 ## 介绍视频
 
 [<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC V0.2 介绍视频" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC V0.1.0 介绍视频" width="280">](https://youtu.be/XWga_oiD_vs)
 
 [V0.2 介绍](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [V0.1.0 介绍](https://youtu.be/XWga_oiD_vs)
-
-点击封面在 YouTube 播放。
-
-STC 是给 AI 用的中文写作规范，提供规则、词表和工具。默认表达自然、简短、准确，同一个意思只用一个词。任务结果按“做完了／需要你／知会”三段汇报。
 
 [快速开始](#快速开始) · [两种用法](#两种用法) · [任务回执](#任务回执) · [手动安装与检查](#手动安装与检查) · [更新版本](#更新版本) · [环境要求](#环境要求)
 
@@ -29,7 +35,7 @@ https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
 审阅材料由我指定或授权挑选。
 ```
 
-命令行工具（CLI）安装会同时装入 skill（Agent 技能）。需要单独安装 skill 时，见[手动安装](#单独安装-skill)。
+CLI 安装会同时装入 skill。需要单独安装 skill 时，见[手动安装](#单独安装-skill)。
 
 <a id="网页聊天直接读取规则"></a>
 
@@ -48,23 +54,21 @@ https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/m
 
 ## 两种用法
 
+完成[快速开始](#快速开始)后，使用以下提示词。
+
 ### 用法一：设成 Agent 的默认输出规则
 
 **Agent：**
 
 ```text
-请在当前项目安装或更新 STC：
-https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
-安装后设为默认中文输出规则。
+请将 STC 设为当前项目的默认中文输出规则。
 保留其他项目配置，完成后说明生效范围。
 ```
 
 **网页聊天：**
 
 ```text
-请读取 STC：
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
-在本次对话中默认按 STC 输出中文。
+请在本次对话中默认按 STC 输出中文。
 按任务选择对应场景，完成后说明生效范围。
 ```
 
@@ -78,19 +82,10 @@ https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/m
 
 ### 用法二：让 Agent 审阅并优化已有内容
 
-**已安装 STC 的 Agent：**
+Agent 和网页聊天使用同一段提示词：
 
 ```text
 请按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
-给出改写稿并简要说明主要改动：【粘贴文字】
-```
-
-**网页聊天：**
-
-```text
-请读取 STC：
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
-按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
 给出改写稿并简要说明主要改动：【粘贴文字】
 ```
 
