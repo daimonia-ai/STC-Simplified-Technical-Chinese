@@ -4,9 +4,11 @@
 
 ## 介绍视频
 
-[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC 第二版介绍视频" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC 第一版介绍视频" width="280">](https://youtu.be/XWga_oiD_vs)
+[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC V0.2 介绍视频" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC V0.1.0 介绍视频" width="280">](https://youtu.be/XWga_oiD_vs)
 
-[第二版介绍](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [第一版介绍](https://youtu.be/XWga_oiD_vs)
+[V0.2 介绍](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [V0.1.0 介绍](https://youtu.be/XWga_oiD_vs)
+
+点击封面在 YouTube 播放。
 
 STC 是给 AI 用的中文写作规范，提供规则、词表和工具。默认表达自然、简短、准确，同一个意思只用一个词。任务结果按“做完了／需要你／知会”三段汇报。
 
@@ -18,10 +20,14 @@ STC 是给 AI 用的中文写作规范，提供规则、词表和工具。默认
 
 在 Claude Code、Codex、Hermes 等能安装工具的 Agent 中，发送下面这段话：
 
-> 请在当前项目安装 STC：<https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese>。
-> 使用 npm 安装 `@daimonia/stc@latest`，再运行 `stc init`。
-> 安装后读取技能目录中的 `ONBOARDING.md`。
-> 设置默认规则前先让我确认；审阅材料由我指定或授权挑选。
+```text
+请在当前项目安装 STC：
+https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
+使用 npm 安装 @daimonia/stc@latest，再运行 stc init。
+安装后读取技能目录中的 ONBOARDING.md。
+设置默认规则前先让我确认；
+审阅材料由我指定或授权挑选。
+```
 
 命令行工具（CLI）安装会同时装入 skill（Agent 技能）。需要单独安装 skill 时，见[手动安装](#单独安装-skill)。
 
@@ -31,8 +37,12 @@ STC 是给 AI 用的中文写作规范，提供规则、词表和工具。默认
 
 在能读取外链的 ChatGPT、Claude 等聊天 AI 中，发送：
 
-> 请读取并使用 STC：<https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>。
-> 读取后，按页内的 Onboarding for Agents 引导我选择默认使用或审阅。
+```text
+请读取并使用 STC：
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+读取后，按页内的 Onboarding for Agents 引导，
+让我选择默认使用或审阅。
+```
 
 [网页入口](WEB.md)包含引导、完整规则和词表。纯文本链接无法读取时，换用 [GitHub 页面](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/WEB.md)；仍无法读取时，再粘贴正文或上传文本。
 
@@ -42,36 +52,53 @@ STC 是给 AI 用的中文写作规范，提供规则、词表和工具。默认
 
 **Agent：**
 
-> 请在当前项目安装或更新 STC：<https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese>，并设为默认中文输出规则。
-> 保留其他项目配置，完成后说明生效范围。
+```text
+请在当前项目安装或更新 STC：
+https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
+安装后设为默认中文输出规则。
+保留其他项目配置，完成后说明生效范围。
+```
 
 **网页聊天：**
 
-> 请读取 STC：<https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>。
-> 在本次对话中默认按 STC 输出中文。按任务选择对应场景，完成后说明生效范围。
+```text
+请读取 STC：
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+在本次对话中默认按 STC 输出中文。
+按任务选择对应场景，完成后说明生效范围。
+```
 
 需要跨对话使用时，让 AI 按平台实际提供的保存功能引导设置。
 
-启用后，直接提出写作任务，例如：
+写作示例：
 
-> 请根据以下要点写一份项目进展说明：【粘贴要点】
+```text
+请根据以下要点写一份项目进展说明：【粘贴要点】
+```
 
 ### 用法二：让 Agent 审阅并优化已有内容
 
 **已安装 STC 的 Agent：**
 
-> 请按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
-> 给出改写稿并简要说明主要改动：【粘贴文字】
+```text
+请按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
+给出改写稿并简要说明主要改动：【粘贴文字】
+```
 
 **网页聊天：**
 
-> 请读取 STC：<https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>。
-> 按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
-> 给出改写稿并简要说明主要改动：【粘贴文字】
+```text
+请读取 STC：
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+按 STC 审阅并优化以下中文，保留事实、数字、名称和原意。
+给出改写稿并简要说明主要改动：【粘贴文字】
+```
 
 只需要审阅项目文件时，可以说：
 
-> 请按 STC 审阅【文件路径】，列出主要问题和具体改法，保留源文件。
+```text
+请按 STC 审阅【文件路径】，列出主要问题和具体改法，保留源文件。
+```
 
 审阅可按需调用，无须设为默认。也可以授权 Agent 从当前项目挑选一份文档，体验一次只读审阅。
 
@@ -98,7 +125,10 @@ STC 是给 AI 用的中文写作规范，提供规则、词表和工具。默认
 
 可以直接对 Agent 说：
 
-> 完成这个任务后，按 STC 给我任务回执。分清已经做完的结果、需要我处理的事和只需知晓的信息。
+```text
+完成这个任务后，按 STC 给我任务回执。
+分清已经做完的结果、需要我处理的事和只需知晓的信息。
+```
 
 ## 手动安装与检查
 
@@ -161,8 +191,10 @@ Anti-Echo 要求每句话帮助当前读者理解、判断或操作。疑点由 
 
 让 Agent 更新时，可以发送：
 
-> 请按原来的安装方式更新 STC，刷新当前项目实际引用的 skill 和规则。
-> 保留已启用的默认规则、其他项目配置和项目术语，最后核对实际使用的版本。
+```text
+请按原来的安装方式更新 STC，刷新当前项目实际引用的 skill 和规则。
+保留已启用的默认规则、其他项目配置和项目术语，最后核对实际使用的版本。
+```
 
 ### CLI 安装
 

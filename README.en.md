@@ -4,9 +4,11 @@
 
 ## Introduction video
 
-[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="Second STC introduction video" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="First STC introduction video" width="280">](https://youtu.be/XWga_oiD_vs)
+[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC V0.2 introduction video" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC V0.1.0 introduction video" width="280">](https://youtu.be/XWga_oiD_vs)
 
-[Second introduction (Chinese)](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [First introduction (Chinese)](https://youtu.be/XWga_oiD_vs)
+[V0.2 introduction (Chinese)](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [V0.1.0 introduction (Chinese)](https://youtu.be/XWga_oiD_vs)
+
+Select a thumbnail to watch on YouTube.
 
 STC is a Chinese writing specification for AI, with rules, a dictionary, and tools. It calls for natural, concise, and precise Chinese, with one term for each meaning. Task receipts separate completed work, user actions, and information for the user.
 
@@ -18,10 +20,14 @@ STC is a Chinese writing specification for AI, with rules, a dictionary, and too
 
 In Claude Code, Codex, Hermes, or another agent that can install tools, send:
 
-> Install STC in this project: <https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese>.
-> Install `@daimonia/stc@latest` with npm, then run `stc init`.
-> Read `ONBOARDING.md` in the installed skill directory.
-> Ask me before enabling default rules. Review only material I select or authorize you to choose.
+```text
+Install STC in this project:
+https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
+Install @daimonia/stc@latest with npm, then run stc init.
+Read ONBOARDING.md in the installed skill directory.
+Ask me before enabling default rules.
+Review only material I select or authorize you to choose.
+```
 
 The command-line interface (CLI) installation includes the skill. To install the skill on its own, see [manual installation](#install-only-the-skill).
 
@@ -31,8 +37,12 @@ The command-line interface (CLI) installation includes the skill. To install the
 
 In ChatGPT, Claude, or another chat AI that can read web links, send:
 
-> Read and use STC: <https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>.
-> Follow the Onboarding for Agents section to help me choose default use or a review.
+```text
+Read and use STC:
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+Follow the Onboarding for Agents section to help me choose default use
+or a review.
+```
 
 The [web entry](WEB.md) contains onboarding, the full rules, and the dictionary. If the raw-text link fails, use the [GitHub page](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/WEB.md). If the AI still cannot read it, paste or upload the text.
 
@@ -42,36 +52,60 @@ The [web entry](WEB.md) contains onboarding, the full rules, and the dictionary.
 
 **Agent:**
 
-> Install or update STC in this project: <https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese>. Enable it as the default rules for Chinese output.
-> Preserve other project settings and tell me where the rules apply.
+```text
+Install or update STC in this project:
+https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese
+Enable it as the default rules for Chinese output.
+Preserve other project settings and tell me where the rules apply.
+```
 
 **Web chat:**
 
-> Read STC: <https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>.
-> Use STC as the default rules for Chinese output in this conversation. Select the profile for each task and tell me where the rules apply.
+```text
+Read STC:
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+Use STC as the default rules for Chinese output in this conversation.
+Select the profile for each task and tell me where the rules apply.
+```
 
 To reuse the rules across conversations, ask the AI to guide you through the settings the platform supports.
 
-Once STC is the default, give the agent a writing task, for example:
+Example writing task:
 
-> Write a project progress report in Chinese from these notes: [paste notes].
+```text
+Write a project progress report in Chinese from these notes:
+[paste notes]
+```
 
 ### Way 2: Let the agent review and improve existing text
 
 **Agent with STC installed:**
 
-> Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning.
-> Return a revised version and briefly explain the main changes: [paste text].
+```text
+Review and improve this Chinese text with STC.
+Preserve the facts, numbers, names, and meaning.
+Return a revised version and briefly explain the main changes:
+[paste text]
+```
 
 **Web chat:**
 
-> Read STC: <https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>.
-> Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning.
-> Return a revised version and briefly explain the main changes: [paste text].
+```text
+Read STC:
+https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
+Review and improve this Chinese text with STC.
+Preserve the facts, numbers, names, and meaning.
+Return a revised version and briefly explain the main changes:
+[paste text]
+```
 
 To review a project file without changing it, say:
 
-> Review [file path] with STC and explain the main problems and specific fixes. Keep the source file unchanged.
+```text
+Review [file path] with STC and explain the main problems and specific
+fixes.
+Keep the source file unchanged.
+```
 
 You can request a review without enabling default rules. You can also authorize the agent to choose one document from the current project for a read-only review.
 
@@ -102,7 +136,11 @@ See [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会).
 
 You can tell the agent:
 
-> After completing this task, give me a Chinese STC task receipt. Separate completed results, actions I need to take, and information that requires no action.
+```text
+After completing this task, give me a Chinese STC task receipt.
+Separate completed results, actions I need to take,
+and information that requires no action.
+```
 
 ## Manual installation and checks
 
@@ -165,8 +203,13 @@ For ordinary chat, the agent checks its wording before replying. Version 0.2.2 r
 
 To let the agent update STC, send:
 
-> Update STC with its original installation method. Refresh the skill and rules that this project uses.
-> Preserve enabled default rules, other project settings, and project terms. Verify the versions actually in use.
+```text
+Update STC with its original installation method.
+Refresh the skill and rules that this project uses.
+Preserve enabled default rules, other project settings, and project
+terms.
+Verify the versions actually in use.
+```
 
 ### CLI installation
 
