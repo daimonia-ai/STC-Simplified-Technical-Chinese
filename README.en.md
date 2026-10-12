@@ -2,169 +2,87 @@
 
 [中文](README.md) | English
 
-[Introduction video](#introduction-video) · [Requirements](#requirements) · [Quick start](#quick-start) · [Web chat](#web-chat-read-the-rules-from-a-link) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Update STC](#update-stc)
-
-STC is a Chinese writing specification for AI. It provides writing rules, a dictionary, and tools for AI agents. Its default output is natural, concise, and precise, with one term for each meaning. Task results use three sections: completed work, user actions, and information for the user.
-
-"Simplified" refers to simplified writing, not to Simplified Chinese characters. The rules and dictionary are in Chinese. This page explains how to use STC in English.
-
 ## Introduction video
 
-[![STC introduction video](https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg)](https://youtu.be/XWga_oiD_vs)
+[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="Second STC introduction video" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="First STC introduction video" width="280">](https://youtu.be/XWga_oiD_vs)
 
-[Watch on YouTube (Chinese)](https://youtu.be/XWga_oiD_vs)
+[Second introduction (Chinese)](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [First introduction (Chinese)](https://youtu.be/XWga_oiD_vs)
 
-## Requirements
+STC is a Chinese writing specification for AI, with rules, a dictionary, and tools. It calls for natural, concise, and precise Chinese, with one term for each meaning. Task receipts separate completed work, user actions, and information for the user.
 
-An agent reads the rules and dictionary to write, rewrite, and review Chinese.
-
-| Use | Requirements |
-|---|---|
-| Use a link in web chat | A chat AI that can read web pages; paste or upload the text if reading fails |
-| Install the skill manually, or read the rules directly | An agent that can read files; the rules and dictionary are plain text |
-| Install the CLI (command-line interface) | Node.js 18+ and npm |
-| Install the skill with `npx skills` | Node.js 22.20+ and npm; see the [installer requirements](https://github.com/vercel-labs/skills/blob/main/package.json) |
-| Run machine checks from the CLI or the skill | Node.js 18+; checks work offline after installation |
-
-The agent needs write access to the selected directory to install STC or enable default rules.
+[Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Manual installation and checks](#manual-installation-and-checks) · [Update STC](#update-stc) · [Requirements](#requirements)
 
 ## Quick start
 
-STC offers three ways to get started: the CLI, the standalone skill, or a web link.
+### Use with an agent
 
-Running `stc init` through the CLI installs the skill. The CLI also provides terminal checks. If you only need an agent to write and review Chinese, you can install the skill on its own. In web chat, you can [read the rules from a link](#web-chat-read-the-rules-from-a-link).
+In Claude Code, Codex, Hermes, or another agent that can install tools, send:
 
-### Install the CLI with npm
+> Install STC in this project: <https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese>.
+> Install `@daimonia/stc@latest` with npm, then run `stc init`.
+> Read `ONBOARDING.md` in the installed skill directory.
+> Ask me before enabling default rules. Review only material I select or authorize you to choose.
 
-```bash
-npm install -g @daimonia/stc@latest
-stc init
-```
+The command-line interface (CLI) installation includes the skill. To install the skill on its own, see [manual installation](#install-only-the-skill).
 
-After installation, you can call STC when needed. See [two ways to use STC](#two-ways-to-use-stc) to enable default rules or request a review. You can also run the CLI temporarily with `npx --yes @daimonia/stc@latest init`.
+<a id="web-chat-read-the-rules-from-a-link"></a>
 
-Paste this prompt into your agent:
+### Use in web chat
 
-```text
-Install STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Install @daimonia/stc@latest with npm, then run stc init. Read ONBOARDING.md in the installed skill directory, recommend making STC the default Chinese output rules, and wait for my confirmation. I can also select material for a first review.
-```
+In ChatGPT, Claude, or another chat AI that can read web links, send:
 
-### Install only the skill
+> Read and use STC: <https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>.
+> Follow the Onboarding for Agents section to help me choose default use or a review.
 
-Choose your agent and installation scope when prompted:
-
-```bash
-npx skills add daimonia-ai/STC-Simplified-Technical-Chinese --skill stc
-```
-
-Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [skill installer options](https://github.com/vercel-labs/skills#available-options).
-
-You can also download `stc-skill-0.2.3.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` directory in your agent's skill directory.
-
-Paste this prompt into your agent:
-
-```text
-Install the STC skill: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Use the skill directory for the current agent. Read ONBOARDING.md in the installed skill directory, recommend making STC the default Chinese output rules, and wait for my confirmation. Review only material that I select or authorize you to choose.
-```
-
-The skill contains the rules, dictionary, onboarding guide, and check scripts. Run a machine check with `node <skill-directory>/tools/cli.mjs check <file>`.
-
-### Web chat: Read the rules from a link
-
-Use this with ChatGPT, Claude, or another chat AI or cloud agent that can read web pages. Send this prompt:
-
-```text
-Read and use STC:
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
-Follow the Onboarding for Agents section to help me choose default use or a review.
-```
-
-The [web entry](WEB.md) contains onboarding, the full rules, and the dictionary. It is generated from the repository source files. After reading it, the AI explains where the rules apply and guides the first use.
-
-If the raw-text link fails, use the [GitHub page](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/WEB.md). If the AI still cannot read it, paste or upload the text. The AI must identify missing content when it cannot complete the reading.
-
-With this route, the AI writes and reviews Chinese using the text rules. Machine check commands require Node.js; see [requirements](#requirements).
+The [web entry](WEB.md) contains onboarding, the full rules, and the dictionary. If the raw-text link fails, use the [GitHub page](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/WEB.md). If the AI still cannot read it, paste or upload the text.
 
 ## Two ways to use STC
 
-You can use one way or both. When you use both, the default output rules make the agent write in STC from the start, and a review finds the problems that remain.
-
 ### Way 1: Make STC the default output rules of the agent
 
-In web chat, send:
+**Agent:**
 
-```text
-Read STC:
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
-Use STC as the default rules for Chinese output in this conversation.
-Select the profile for each task and tell me where the rules apply.
-```
+> Install or update STC in this project: <https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese>. Enable it as the default rules for Chinese output.
+> Preserve other project settings and tell me where the rules apply.
+
+**Web chat:**
+
+> Read STC: <https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>.
+> Use STC as the default rules for Chinese output in this conversation. Select the profile for each task and tell me where the rules apply.
 
 To reuse the rules across conversations, ask the AI to guide you through the settings the platform supports.
 
-For CLI or skill use, send:
+Once STC is the default, give the agent a writing task, for example:
 
-```text
-Install or update STC in this project: https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese. Enable STC as the default rules for natural, concise, and precise Chinese output. Preserve other project settings and tell me where the rules apply.
-```
-
-Once STC is the default, give the agent a writing task:
-
-```text
-Write a project progress report in Chinese from these notes: [paste notes].
-```
-
-If you installed through the CLI, you can also enable default rules by running this command in the project root:
-
-```bash
-stc init --defaults
-```
-
-For a standalone skill, follow [Onboarding for Agents](ONBOARDING.md) to configure default rules.
+> Write a project progress report in Chinese from these notes: [paste notes].
 
 ### Way 2: Let the agent review and improve existing text
 
-In web chat, send:
+**Agent with STC installed:**
 
-```text
-Read STC:
-https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md
-Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning.
-Return a revised version and briefly explain the main changes: [paste text].
-```
+> Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning.
+> Return a revised version and briefly explain the main changes: [paste text].
 
-After the rules are loaded, or with the CLI or skill installed, send:
+**Web chat:**
 
-```text
-Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning. Return a revised version and briefly explain the main changes: [paste text].
-```
+> Read STC: <https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/WEB.md>.
+> Review and improve this Chinese text with STC. Preserve the facts, numbers, names, and meaning.
+> Return a revised version and briefly explain the main changes: [paste text].
 
-For a project file, use:
+To review a project file without changing it, say:
 
-```text
-Review [file path] with STC and explain the main problems and specific fixes. Keep the source file unchanged.
-```
+> Review [file path] with STC and explain the main problems and specific fixes. Keep the source file unchanged.
 
-To let the agent choose material for a first review, authorize that selection:
-
-```text
-Choose one Chinese document from this project, explain the choice, and give a read-only STC review with specific suggested changes.
-```
-
-You can request a review without enabling default output rules.
-
-Use `stc check <file or directory>` for terminal checks. Each finding includes a rule ID. The command returns exit code 1 when it finds errors, so it can be used in continuous integration (CI). An agent or a person must review questions that need context, such as whether facts have sources.
+You can request a review without enabling default rules. You can also authorize the agent to choose one document from the current project for a read-only review.
 
 ## Default expression
-
-Each use of STC applies these principles:
 
 - Use natural word order and complete sentences. Give the answer or result directly.
 - Remove pleasantries, repetition, empty phrases, and explanations the reader does not need.
 - Preserve facts, numbers, names, negation, permissions, and real uncertainty.
 - Match the requested scope. Deliver full documents and detailed explanations when requested.
 
-These principles are built into the skill and the default configuration. See G14, G15, G20, G21, G22, and the selected profile.
+See G14, G15, G20, G21, G22, and the [profile rules](rules/README.md).
 
 ## Task receipts
 
@@ -184,35 +102,75 @@ See [C10](rules/for-chat.md#c10-任务回执分清结果用户动作和知会).
 
 You can tell the agent:
 
-```text
-After completing this task, give me a Chinese STC task receipt. Separate completed results, actions I need to take, and information that requires no action.
+> After completing this task, give me a Chinese STC task receipt. Separate completed results, actions I need to take, and information that requires no action.
+
+## Manual installation and checks
+
+Use these commands for manual setup. See [requirements](#requirements) for the Node.js versions.
+
+### Install the CLI with npm
+
+Install the CLI, then initialize STC from the project root:
+
+```bash
+npm install -g @daimonia/stc@latest
+stc init
 ```
 
-## Anti-Echo review
+STC is then available when called. To enable it as the default rules for this project, run:
 
-Anti-Echo requires each sentence to help the current reader understand, decide, or act. Review unnecessary exclusions, production notes, and self-verification. Preserve relevant prices, permissions, and safety boundaries.
+```bash
+stc init --defaults
+```
+
+You can also run the latest CLI temporarily:
+
+```bash
+npx --yes @daimonia/stc@latest init
+```
+
+### Install only the skill
+
+Use the skill installer and choose your agent and scope when prompted:
+
+```bash
+npx skills add \
+  daimonia-ai/STC-Simplified-Technical-Chinese \
+  --skill stc
+```
+
+Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [installer options](https://github.com/vercel-labs/skills#available-options).
+
+To install manually, download `stc-skill-0.2.3.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
+
+### Check a file
 
 ```bash
 stc check document.md --profile for-document --anti-echo
 ```
 
-The command returns 1 while G20 candidates remain unresolved. The agent must revise them or record a specific reason to keep them in context. It must also review content that patterns do not detect. See [review decisions and CI](tools/README.md#anti-echo-复核).
+The command lists problems, suggested changes, and rule IDs. It returns exit code 1 for errors or unresolved Anti-Echo candidates, so it can be used in continuous integration (CI).
 
-For ordinary chat, the agent checks its wording before it sends the reply. Documents and UI text use the command above. Version 0.2.2 retires the chat Stop review. See the [hook migration guide](tools/hooks/README.md) for existing installations.
+An agent or a person reviews facts and meaning in context.
+
+With only the skill installed, use `node <skill-directory>/tools/cli.mjs check <file>`. See the [CLI documentation](tools/README.md) for more options.
+
+<a id="anti-echo-review"></a>
+
+Anti-Echo requires each sentence to help the reader understand, decide, or act. The agent reviews candidates in context, revises them, or records a specific reason to keep them. Preserve relevant prices, permissions, and safety boundaries. See [review decisions and CI](tools/README.md#anti-echo-复核).
+
+For ordinary chat, the agent checks its wording before replying. Version 0.2.2 retires the chat Stop review. See the [hook migration guide](tools/hooks/README.md) for existing installations.
 
 ## Update STC
 
+To let the agent update STC, send:
+
+> Update STC with its original installation method. Refresh the skill and rules that this project uses.
+> Preserve enabled default rules, other project settings, and project terms. Verify the versions actually in use.
+
 ### CLI installation
 
-Update the npm CLI package, then refresh the skill and rules copied into each project.
-
-Paste this prompt into your agent:
-
-```text
-Update the STC npm CLI to the latest version and refresh the STC skill and rules that this project uses. Preserve enabled default rules, other project settings, and project terms. Verify the CLI version and the installed skill version.
-```
-
-To update manually, run these commands from the root of a project that uses STC:
+Run these commands from the root of a project that uses STC:
 
 ```bash
 npm install -g @daimonia/stc@latest
@@ -221,19 +179,12 @@ stc init
 node .claude/skills/stc/tools/cli.mjs --version
 ```
 
-`npm install` updates the CLI on your computer. `stc init` copies the new files into the current project and preserves the existing default mode. The two version commands must return the same version.
+`npm install` updates the CLI on your computer. `stc init` refreshes the skill and rules in the project. The two version commands must return the same version.
 
 - Run `stc init` in each project that has an STC installation.
-- If you installed with `--dir`, use the same directory for the update and the second version command.
+- If you installed with `--dir`, use the same directory for the update and the version check.
 - `--dir` changes only the skill location. Project configuration is still written in the current directory.
-- Update global skills installed manually or through a skill manager with their original installation method. An npm update does not refresh those copies.
-
-You can also run the latest CLI temporarily to refresh the current project:
-
-```bash
-npx --yes @daimonia/stc@latest init
-```
-
+- Update global skills with their original installation method.
 
 ### Standalone skill installation
 
@@ -243,19 +194,25 @@ For a project skill installed by the skill manager, run this in the project root
 npx skills update stc
 ```
 
-For a global skill, use `npx skills update stc --global`. For a downloaded archive, replace the installed skill directory with the new archive contents. Preserve project terms and existing default configuration.
+For a global skill, use `npx skills update stc --global`. For a manual installation, replace the installed skill folder with the new archive contents. Preserve project terms and existing default configuration.
 
-Paste this update prompt into your agent:
-
-```text
-Update the STC skill with its original installation method. Verify its actual directory and version. Preserve default rules, project terms, and other configuration. Check the activation state with the updated ONBOARDING.md.
-```
-
-Verify the bundled version with `node <skill-directory>/tools/cli.mjs --version`. The skill and npm package are released from the same source files.
+Verify the skill version with `node <skill-directory>/tools/cli.mjs --version`. The skill and npm package are released from the same source files.
 
 ### Web link
 
-Ask the AI to read the same web entry link again to get the current rules. Also replace any older text saved in project sources.
+Ask the AI to read the [web entry](WEB.md) again to get the current rules. Also replace any older text saved in project sources.
+
+## Requirements
+
+| Use | Requirements |
+|---|---|
+| Use a link in web chat | A chat AI that can read web pages; paste or upload the text if reading fails |
+| Install the skill manually, or read the rules directly | An agent that can read files; the rules and dictionary are plain text |
+| Install the CLI | Node.js 18+ and npm |
+| Install the skill with `npx skills` | Node.js 22.20+ and npm; see the [installer requirements](https://github.com/vercel-labs/skills/blob/main/package.json) |
+| Run machine checks | Node.js 18+; checks work offline after installation |
+
+To install STC in a project or change its configuration, the agent needs write access to that directory.
 
 ## Why STC
 
@@ -267,6 +224,8 @@ Chinese text from language models often has the same problems:
 - Mixed strength words in rules for agents, such as “应” (should), “尽量” (try to), and “务必” (be sure to). The agent cannot tell which rule is a requirement.
 
 English has ASD-STE100: 53 writing rules and a dictionary of about 900 approved words, each with one meaning. It was first released in 1986 for aerospace maintenance documentation. Chinese output needs clear writing rules too. STC is designed for AI agents from the start.
+
+"Simplified" refers to simplified writing, not to Simplified Chinese characters. The rules and dictionary are in Chinese.
 
 ## Who STC helps
 
