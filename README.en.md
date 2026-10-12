@@ -2,21 +2,37 @@
 
 [中文](README.md) | English
 
-![STC overview: default output rules, content review, and structured task receipts](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview.png)
+![STC benefits: concise replies, less filler, natural phrasing, consistent terms, clear references, preserved meaning, clear interface copy, and task receipts](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview-v2.png)
 
-**STC is an open-source Chinese writing specification for AI.** Its rules and dictionary help AI remove filler and unnecessary explanations, use consistent terms, and produce natural, concise, and precise Chinese.
+**STC is an open-source Chinese writing specification for AI.** It provides writing rules, a dictionary, and checking tools for generating, reviewing, and rewriting Chinese.
 
-- **Default output rules**: apply consistent writing rules when generating content. Preserve necessary facts, numbers, and limits.
-- **Review and improve**: check existing content, suggest specific changes, and rewrite it when requested.
-- **Task receipts**: separate completed results, user actions, and necessary information into “做完了 / 需要你 / 知会”.
+### Main benefits
 
-Use STC for chat replies, documents, product interface copy, and agent instructions. Install it through the command-line interface (CLI), add the skill on its own, or let a web chat AI read the rules.
+| Benefit | What the rules require |
+|---|---|
+| **Shorter output** | Give the answer or result first. Expand as the task requires. |
+| **Less filler** | Remove pleasantries, repeated conclusions, and explanations or exclusions the reader does not need. |
+| **More natural phrasing** | Use familiar words and complete sentences. Remove stock phrases, slogans, and empty modifiers. |
+| **Consistent terms** | Use one term for each meaning. Follow the project term list for product and feature names. |
+| **Clear references** | Name the subject, condition, and action so readers do not have to guess what a pronoun refers to. |
+| **Preserved meaning** | Keep facts, numbers, negation, permissions, and real uncertainty. |
+| **Clearer interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. |
+| **Clearer task receipts** | Separate results, user actions, and necessary information into “做完了 / 需要你 / 知会”. |
+
+### Rules and tools
+
+- **Four profiles**: chat, documents, product interface copy, and agent instructions. Select the rules for the task.
+- **Dictionary and project terms**: recommended words, wording to avoid, and a project term-list template help teams use consistent terms.
+- **Generation and review**: enable default output rules or request a review of existing content.
+- **Three entry methods**: the command-line interface (CLI), a standalone skill, or web chat.
+- **File checks**: the command lists problems it can detect, specific suggestions, and rule IDs. An agent or a person reviews meaning in context.
 
 ## Introduction videos
 
-[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC V0.2 introduction video" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC V0.1.0 introduction video" width="280">](https://youtu.be/XWga_oiD_vs)
-
-[V0.2 introduction (Chinese)](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [V0.1.0 introduction (Chinese)](https://youtu.be/XWga_oiD_vs)
+| V0.2 introduction (Chinese) | V0.1.0 introduction (Chinese) |
+|---|---|
+| <video controls width="360" height="320" src="https://github.com/user-attachments/assets/72d55cce-e840-4121-bf64-1954cb1ad08a"></video> | <video controls width="360" height="320" src="https://github.com/user-attachments/assets/924fcc11-db33-4900-ae43-0f904a8393e7"></video> |
+| [YouTube](https://www.youtube.com/shorts/Wmr1ZwhSiPI) | [YouTube](https://youtu.be/XWga_oiD_vs) |
 
 [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Manual installation and checks](#manual-installation-and-checks) · [Update STC](#update-stc) · [Requirements](#requirements)
 
@@ -308,11 +324,20 @@ STC follows the structure of ASD-STE100: writing rules, a dictionary with define
 
 ASD-STE100 is copyright of ASD (Aerospace, Security and Defence Industries Association of Europe), and "ASD-STE100 Simplified Technical English" is a registered EU trademark of ASD. STC is not an official Chinese version of ASD-STE100. To get the specification, request it from <https://www.asd-ste100.org/>.
 
-## Other references
+## References and acknowledgements
+
+- [Caveman](https://github.com/JuliusBrussee/caveman): a reference for concise expression. STC draws on the Lite approach of removing filler while preserving complete sentences and technical information.
+- **Daimonia humanize**: natural phrasing, specific wording, fact preservation, and read-aloud checks informed STC's default expression rules.
 
 - GB/T 1.1-2020, Directives for standardization, Part 1: Rules for the structure and drafting of standardizing documents (modal verbs in provisions)
 - GB/T 15834-2011, General rules for punctuation
 - GB/T 15835-2011, General rules for writing numerals in publications
+
+## Related open-source projects
+
+- [blader/humanizer](https://github.com/blader/humanizer): identifies and rewrites common AI writing patterns.
+- [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh): a Chinese rewriting skill and checking scripts.
+- [RinStel/cste-zh](https://github.com/RinStel/cste-zh): a Chinese writing skill.
 
 ## License
 

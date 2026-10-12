@@ -2,21 +2,37 @@
 
 中文 | [English](README.en.md)
 
-![STC 功能总览：默认输出规则、审阅并优化、三段式任务回执](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview.png)
+![STC 价值总览：简短表达、删除废话、自然语句、统一术语、清楚指代、保留原意、界面文案和任务回执](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview-v2.png)
 
-**STC 是给 AI 用的开源中文写作规范。** 针对套话、多余解释和术语混用，STC 提供表达规则与词表，让中文输出自然、简短、准确。
+**STC 是给 AI 用的开源中文写作规范。** STC 提供表达规则、词表和检查工具，供 AI 生成、审阅和改写中文。
 
-- **默认输出规则**：让 AI 生成内容时遵循统一写法，保留必要的事实、数字和边界。
-- **审阅并优化**：让 AI 检查已有内容，给出具体改法，并按需生成改写稿。
-- **任务回执**：用“做完了／需要你／知会”分清完成结果、用户要处理的事项和必要信息。
+### 主要亮点
 
-适用于对话回复、文档、产品界面文案和 Agent 指令。可通过命令行工具（CLI）安装、单独安装 skill（Agent 技能），或让网页版聊天 AI 读取规则。
+| 价值 | 具体做法 |
+|---|---|
+| **输出更简短** | 先给答案或结果，按任务需要展开。 |
+| **废话更少** | 删除客套、重复结论和无关解释，包括读者不需要的排除说明。 |
+| **少些 AI 腔** | 用熟悉的词和自然完整的句子，删掉套话、口号和空泛修饰。 |
+| **术语一致** | 同一个意思固定一种叫法，产品名和功能名遵循项目术语表。 |
+| **指代清楚** | 说清对象、条件和动作，避免读者猜“他们”“它”指什么。 |
+| **保留原意** | 保留事实、数字、否定词、权限和真实不确定性。 |
+| **界面更易懂** | 按钮写明动作，提示和报错说清发生了什么、下一步能做什么。 |
+| **回执更清楚** | 按“做完了／需要你／知会”区分结果、用户动作和必要信息。 |
+
+### 规则和工具
+
+- **四类场景**：对话、文档、产品界面、Agent 指令，按任务选择对应规则。
+- **词表和项目术语**：提供推荐词、不推荐写法与术语表模板，统一团队用词。
+- **生成与审阅**：可设为默认输出规则，也可按需审阅并优化已有内容。
+- **三种接入方式**：命令行工具（CLI）、独立 skill（Agent 技能）、网页聊天。
+- **文件检查**：命令列出可自动识别的问题、具体改法和规则编号。上下文含义由 Agent 或人工复核。
 
 ## 介绍视频
 
-[<img src="https://i.ytimg.com/vi/Wmr1ZwhSiPI/hq2.jpg" alt="STC V0.2 介绍视频" width="280">](https://www.youtube.com/shorts/Wmr1ZwhSiPI) [<img src="https://i.ytimg.com/vi/XWga_oiD_vs/hqdefault.jpg" alt="STC V0.1.0 介绍视频" width="280">](https://youtu.be/XWga_oiD_vs)
-
-[V0.2 介绍](https://www.youtube.com/shorts/Wmr1ZwhSiPI) · [V0.1.0 介绍](https://youtu.be/XWga_oiD_vs)
+| V0.2 介绍 | V0.1.0 介绍 |
+|---|---|
+| <video controls width="360" height="320" src="https://github.com/user-attachments/assets/72d55cce-e840-4121-bf64-1954cb1ad08a"></video> | <video controls width="360" height="320" src="https://github.com/user-attachments/assets/924fcc11-db33-4900-ae43-0f904a8393e7"></video> |
+| [YouTube](https://www.youtube.com/shorts/Wmr1ZwhSiPI) | [YouTube](https://youtu.be/XWga_oiD_vs) |
 
 [快速开始](#快速开始) · [两种用法](#两种用法) · [任务回执](#任务回执) · [手动安装与检查](#手动安装与检查) · [更新版本](#更新版本) · [环境要求](#环境要求)
 
@@ -294,19 +310,21 @@ ASD-STE100 的版权归 ASD（Aerospace, Security and Defence Industries Associa
 
 英文写作可以直接使用 ASD-STE100。
 
-## 其他参考
+## 参考与致谢
+
+- [Caveman](https://github.com/JuliusBrussee/caveman)：精简表达的参考。STC 借鉴 Lite 模式中删除冗词、保留完整句子和技术信息的做法。
+- **Daimonia humanize**：自然表达、具体用词、事实保留和朗读检查，已纳入 STC 的默认表达规则。
 
 <!-- stc-disable-next-line -->
 - GB/T 1.1—2020《标准化工作导则 第 1 部分：标准化文件的结构和起草规则》：条款的助动词
 - GB/T 15834—2011《标点符号用法》
 - GB/T 15835—2011《出版物上数字用法》
 
-## 同类项目
+## 相关开源项目
 
+- [blader/humanizer](https://github.com/blader/humanizer)：识别并改写常见的模型写作套话
 - [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh)：中文改写 skill 与检查脚本
 - [RinStel/cste-zh](https://github.com/RinStel/cste-zh)：中文写作 skill
-
-STC 和这两个项目的差别：STC 以词表为核心，并按 for chat、for document、for web dev、for instruction writing 四个场景分别给出规则。
 
 ## 许可
 
