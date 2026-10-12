@@ -212,7 +212,7 @@ Ask the AI to read the [web entry](WEB.md) again to get the current rules. Also 
 | Install the skill with `npx skills` | Node.js 22.20+ and npm; see the [installer requirements](https://github.com/vercel-labs/skills/blob/main/package.json) |
 | Run machine checks | Node.js 18+; checks work offline after installation |
 
-The agent needs write access to the selected directory to install STC or enable default rules.
+To install STC in a project or change its configuration, the agent needs write access to that directory.
 
 ## Why STC
 

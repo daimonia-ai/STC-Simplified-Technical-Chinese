@@ -208,7 +208,7 @@ npx skills update stc
 | 用 `npx skills` 安装 skill | Node.js 22.20+ 和 npm，见[安装器声明](https://github.com/vercel-labs/skills/blob/main/package.json) |
 | 运行机器检查 | Node.js 18+；安装后可离线运行 |
 
-自动安装和默认配置需要 Agent 能写入选定目录。
+安装到项目或写入项目配置时，Agent 需要选定目录的写入权限。
 
 ## 为什么做
 
