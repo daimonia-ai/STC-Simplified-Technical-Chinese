@@ -10,14 +10,14 @@
 
 | Benefit | What the rules require |
 |---|---|
-| **Shorter output** | Give the answer or result first. Expand as the task requires. |
-| **Less filler** | Remove pleasantries, repeated conclusions, and explanations or exclusions the reader does not need. |
-| **More natural phrasing** | Use familiar words and complete sentences. Remove stock phrases, slogans, and empty modifiers. |
-| **Consistent terms** | Use one term for each meaning. Follow the project term list for product and feature names. |
-| **Clear references** | Name the subject, condition, and action so readers do not have to guess what a pronoun refers to. |
-| **Preserved meaning** | Keep facts, numbers, negation, permissions, and real uncertainty. |
-| **Clearer interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. |
-| **Clearer task receipts** | Separate results, user actions, and necessary information into “做完了 / 需要你 / 知会”. |
+| ✂️ **Shorter output** | Give the answer or result first. Expand as the task requires. |
+| 🧹 **Less filler** | Remove pleasantries, repeated conclusions, and explanations or exclusions the reader does not need. |
+| 💬 **More natural phrasing** | Use familiar words and complete sentences. Remove stock phrases, slogans, and empty modifiers. |
+| 📚 **Consistent terms** | Use one term for each meaning. Follow the project term list for product and feature names. |
+| 🎯 **Clear references** | Name the subject, condition, and action so readers do not have to guess what a pronoun refers to. |
+| 🛡️ **Preserved meaning** | Keep facts, numbers, negation, permissions, and real uncertainty. |
+| 🖥️ **Clearer interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. |
+| 📋 **Clearer task receipts** | Separate results, user actions, and necessary information into “做完了 / 需要你 / 知会”. |
 
 ### Rules and tools
 
