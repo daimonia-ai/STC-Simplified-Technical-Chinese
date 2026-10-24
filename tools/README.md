@@ -80,6 +80,7 @@ STC 配置写在项目的 AGENTS.md 和 CLAUDE.md 中。两个文件都不存在
 ```bash
 stc check README.md docs/
 stc check src/pages/Settings.tsx
+stc check src/locales/zh-CN.json --profile for-web-dev
 stc check AGENTS.md --profile for-instruction-writing
 echo "本周我们进行了大量优化。" | stc check --profile for-document
 ```
@@ -95,9 +96,11 @@ echo "本周我们进行了大量优化。" | stc check --profile for-document
 | `--anti-echo` | 未复核的 G20 疑点会使检查返回 1 |
 | `--review-decisions <文件>` | 读取与原文绑定的保留理由，与 `--anti-echo` 一起用 |
 
-给目录时，逐层检查其中的 Markdown、文本和代码文件，跳过以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录。
+给目录时，逐层检查其中的 Markdown、文本、JSON 和代码文件。以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录会跳过。
 
 不指定场景时，按文件判断：AGENTS.md、CLAUDE.md、SKILL.md 用 for instruction writing；代码文件（`.ts`、`.tsx`、`.js`、`.jsx`、`.vue`、`.html` 等）用 for web dev，只检查字符串和 JSX 里的文字；其余文件用 for document。
+
+JSON 文件只检查字符串值，字段名和文件格式保持原样。JSON 默认按文档检查；界面翻译文件必须指定 `--profile for-web-dev`。格式无效时，命令返回 2，先修复 JSON 格式再审阅文字。
 
 ### 报告怎么读
 

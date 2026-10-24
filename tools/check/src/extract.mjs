@@ -188,6 +188,43 @@ export function segmentsFromCode(text, { includeEnglish = false } = {}) {
   return segments;
 }
 
+/** JSON values are prose; keys and delimiter quotes belong to the file format. */
+export function segmentsFromJson(text) {
+  JSON.parse(text);
+  const segments = [];
+  let line = 1;
+  let col = 1;
+  let cursor = 0;
+  for (const match of text.matchAll(/"(?:\\[\s\S]|[^"\\])*"/g)) {
+    for (; cursor < match.index; cursor += 1) {
+      if (text[cursor] === '\n') { line += 1; col = 1; }
+      else col += 1;
+    }
+    const token = match[0];
+    const end = match.index + token.length;
+    if (!/^\s*:/.test(text.slice(end))) {
+      const value = JSON.parse(token);
+      if (CJK.test(value)) {
+        const sourceOffsets = [];
+        for (let i = 1; i < token.length - 1;) {
+          sourceOffsets.push(i - 1);
+          i += token[i] === '\\' ? (token[i + 1] === 'u' ? 6 : 2) : 1;
+        }
+        sourceOffsets.push(token.length - 2);
+        segments.push({ line, col: col + 1, text: value, sourceOffsets });
+      }
+    }
+    // Valid JSON strings cannot contain literal newlines.
+    cursor = end;
+    col += token.length;
+  }
+  return segments;
+}
+
+export function isJsonFile(path) {
+  return /\.json$/i.test(path);
+}
+
 export function isCodeFile(path) {
   return /\.(tsx?|jsx?|mjs|cjs|vue|svelte|astro|html?)$/i.test(path);
 }

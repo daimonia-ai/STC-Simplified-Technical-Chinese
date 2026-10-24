@@ -1,7 +1,7 @@
 // Checks text segments against STC rules and the avoid list.
 import { readFileSync } from 'node:fs';
 import { issueAdvice } from './advice.mjs';
-import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.mjs';
+import { segmentsFromCode, segmentsFromJson, segmentsFromMarkdown, isCodeFile, isJsonFile } from './extract.mjs';
 import { antiEchoCandidates } from './anti-echo.mjs';
 import { uiPronounIssues } from './ui-pronouns.mjs';
 
@@ -67,10 +67,14 @@ export function detectProfile(path) {
 }
 
 export function segmentsFor(path, text) {
+  if (isJsonFile(path)) return segmentsFromJson(text);
   return isCodeFile(path) ? segmentsFromCode(text) : segmentsFromMarkdown(text);
 }
 
 function locate(segment, index) {
+  if (segment.sourceOffsets?.[index] !== undefined) {
+    return { line: segment.line, col: segment.col + segment.sourceOffsets[index] };
+  }
   const before = segment.text.slice(0, index);
   const newlines = before.split('\n').length - 1;
   if (newlines === 0) return { line: segment.line, col: segment.col + index };
