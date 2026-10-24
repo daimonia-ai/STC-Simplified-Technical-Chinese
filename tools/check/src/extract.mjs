@@ -90,6 +90,7 @@ export function segmentsFromMarkdown(text, { includeEnglish = false } = {}) {
       const segment = { line: i + 1, col: 1, text: line };
       const quotationText = line.split('').map((ch, col) => quotationLines[i][col] !== raw[col] ? ' ' : ch).join('');
       if (quotationText !== line) segment.quotationText = quotationText;
+      if (/^ {0,3}#{1,6}(?:\s|$)/.test(raw)) segment.markdownHeading = true;
       segments.push(segment);
     }
   });

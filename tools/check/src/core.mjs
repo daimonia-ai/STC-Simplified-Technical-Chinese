@@ -108,9 +108,16 @@ export function lintSegments(segments, profile, dictionary) {
     for (const { entry, patterns, soft } of entries) {
       const rule = entry.type === '人称代词' ? (profile === 'for-web-dev' ? 'W1' : 'D1') : TYPE_RULE[entry.type] ?? 'G3';
       for (const pattern of patterns) {
-        scan(segment, pattern, (m) =>
-          add(segment, m.index, rule, soft ? 'warning' : 'error', `${entry.type}：${entry.why}。推荐写法：${entry.use}`, m[0], entry),
-        );
+        scan(segment, pattern, (m) => {
+          // A document heading can name a plan or evaluation without claiming an improvement.
+          const topicHeading = profile === 'for-document' && segment.markdownHeading && rule === 'G5'
+            && /^(优化|提升|改善)$/.test(m[0])
+            && /^(评估|计划|方案|指南|手册)(?:[ \t]+#+)?[ \t]*$/.test(segment.text.slice(m.index + m[0].length))
+            && !/(已|正在|显著|大幅|明显|全面|彻底|有效|成功|自动|持续|不断|进一步|如何|怎样|怎么)/.test(segment.text.slice(0, m.index));
+          if (!topicHeading) {
+            add(segment, m.index, rule, soft ? 'warning' : 'error', `${entry.type}：${entry.why}。推荐写法：${entry.use}`, m[0], entry);
+          }
+        });
       }
     }
 
