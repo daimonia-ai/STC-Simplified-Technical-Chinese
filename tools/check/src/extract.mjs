@@ -6,7 +6,7 @@ const DISABLE = 'stc-disable-next-line';
 const mask = (s) => ' '.repeat(s.length);
 
 /** Markdown and plain text: skip code, URLs, comments, and STC's own bad examples (lines with ✗). */
-export function segmentsFromMarkdown(text) {
+export function segmentsFromMarkdown(text, { includeEnglish = false } = {}) {
   const segments = [];
   let fence = null;
   let inComment = false;
@@ -43,13 +43,13 @@ export function segmentsFromMarkdown(text) {
       .replace(/`[^`]*`/g, mask)
       .replace(/https?:\/\/\S+/g, mask)
       .replace(/\]\([^)]*\)/g, (s) => ']' + mask(s.slice(1)));
-    if (CJK.test(line)) segments.push({ line: i + 1, col: 1, text: line });
+    if (CJK.test(line) || (includeEnglish && line.trim())) segments.push({ line: i + 1, col: 1, text: line });
   });
   return segments;
 }
 
 /** Code files: keep string literals and JSX text that contain Chinese; skip comments. */
-export function segmentsFromCode(text) {
+export function segmentsFromCode(text, { includeEnglish = false } = {}) {
   const segments = [];
   let line = 1;
   let col = 1;
@@ -65,7 +65,7 @@ export function segmentsFromCode(text) {
     }
   };
   const push = (startLine, startCol, value) => {
-    if (CJK.test(value) && startLine !== disabledLine) segments.push({ line: startLine, col: startCol, text: value });
+    if ((CJK.test(value) || (includeEnglish && value.trim())) && startLine !== disabledLine) segments.push({ line: startLine, col: startCol, text: value });
   };
 
   while (i < text.length) {
@@ -129,7 +129,7 @@ export function segmentsFromCode(text) {
       let j = i + 1;
       while (j < text.length && !'<{};'.includes(text[j])) j += 1;
       const value = text.slice(i + 1, j);
-      if (CJK.test(value) && text[j] === '<') {
+      if ((CJK.test(value) || (includeEnglish && value.trim())) && text[j] === '<') {
         push(startLine, startCol, value);
       }
     }

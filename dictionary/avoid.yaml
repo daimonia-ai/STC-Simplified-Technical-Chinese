@@ -26,7 +26,7 @@
   examples:
     - before: 我们会在三个工作日内回复。
       after: 客服团队会在 3 个工作日内回复。
-  profiles: [for-web-dev, for-document]
+  profiles: [for-document]
 
 - avoid: 建议 / 最好 / 尽量
   type: 强度词

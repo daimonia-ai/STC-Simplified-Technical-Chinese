@@ -41,7 +41,6 @@
       }
     ],
     "profiles": [
-      "for-web-dev",
       "for-document"
     ]
   },

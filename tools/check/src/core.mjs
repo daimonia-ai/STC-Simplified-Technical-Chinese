@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { issueAdvice } from './advice.mjs';
 import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.mjs';
 import { antiEchoCandidates } from './anti-echo.mjs';
+import { uiPronounIssues } from './ui-pronouns.mjs';
 
 export const PROFILES = ['for-chat', 'for-document', 'for-web-dev', 'for-instruction-writing'];
 
@@ -115,7 +116,7 @@ export function lintSegments(segments, profile, dictionary) {
 
     if (profile === 'for-web-dev') {
       scan(segment, /他们|她们|它们|咱们|(?<!其)[他她它](?!们)/g, (m) =>
-        add(segment, m.index, 'W1', 'error', '界面文字不得使用复数人称代词和第三人称代词，要写名称', m[0]),
+        add(segment, m.index, 'W1', 'error', '界面文字不得使用“你们、他们、她们、它们、咱们、他、她、它”，要写名称', m[0]),
       );
       if (/您/.test(segment.text)) usesNin = true;
       if (/你(?!们)/.test(segment.text)) usesNi = true;
@@ -159,7 +160,7 @@ export function lintSegments(segments, profile, dictionary) {
   }
 
   if (usesNi && usesNin) {
-    issues.push({ line: segments[0]?.line ?? 1, col: 1, rule: 'W2', level: 'warning', message: '“你”和“您”必须二选一，全站统一', match: '你 / 您' });
+    issues.push({ line: segments[0]?.line ?? 1, col: 1, rule: 'W2', level: 'warning', message: '读者统一称“你”，不得与“您”混用', match: '你 / 您' });
   }
 
   return issues.sort((a, b) => a.line - b.line || a.col - b.col);
@@ -168,7 +169,9 @@ export function lintSegments(segments, profile, dictionary) {
 export function lintText(text, { path = 'stdin.md', profile, dictionary = loadDictionary() } = {}) {
   const chosen = profile ?? detectProfile(path);
   const lines = text.split(/\r?\n/);
-  const issues = lintSegments(segmentsFor(path, text), chosen, dictionary).map((issue) => ({
+  const findings = lintSegments(segmentsFor(path, text), chosen, dictionary);
+  if (chosen === 'for-web-dev') findings.push(...uiPronounIssues(text, path));
+  const issues = findings.sort((a, b) => a.line - b.line || a.col - b.col).map((issue) => ({
     ...issueAdvice(issue.rule, issue.message, undefined, issue.match), ...issue, context: lines[issue.line - 1] ?? '',
   }));
   return { profile: chosen, issues };

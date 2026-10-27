@@ -311,7 +311,7 @@ Before you write, identify the type of text. Then apply the general rules and th
 |---|---|---|
 | for chat | An agent replies to a person in a conversation | "I" and "you" are allowed. The first sentence answers the question |
 | for document | Text for people to read: reports, proposals, manuals, code comments, commit messages | Use names as subjects, not "we" or "you" |
-| for web dev | Text that users see in a web page or an app | No plural or third-person pronouns. Buttons start with a verb |
+| for web dev | Text that users see in a web page or an app | Address readers as “你” (you); “我 / 我们” (I / we) refer to the publisher (W2). Use one reader perspective within each UI unit (W10). Buttons start with a verb |
 | for instruction writing | Rules for agents: system prompts, AGENTS.md, skills | Strength words are limited to four fixed pairs (must/must not, should/should not, may/need not, can/cannot) |
 
 ## How the dictionary is ordered
