@@ -56,6 +56,20 @@ test('HTML units stop at their parent, nested cards, and the next sibling headin
   assert.deepEqual(pronouns(html), []);
 });
 
+test('headingless cards and dialogs keep buttons and descriptions in the same unit', () => {
+  for (const tag of ['section', 'article', 'dialog', 'div']) {
+    const html = `<${tag}><div><button>我来确认</button></div><p>请检查你的订单</p></${tag}>`;
+    assert.deepEqual(pronouns(html).map((issue) => issue.rule), ['W10']);
+    assert.deepEqual(pronouns(html.replace('我来确认', '确认')), []);
+  }
+});
+
+test('separate headingless cards do not share a reader perspective', () => {
+  const html = '<main><section><button>我来确认</button></section>'
+    + '<section><p>请检查你的订单</p></section></main>';
+  assert.deepEqual(pronouns(html), []);
+});
+
 test('inline markup, nested description elements, and encoded text retain source positions', () => {
   const html = '<section>\r\n  <h2>我<strong>的</strong>订单</h2>\r\n  <div><p>&#20320;的订单</p></div>\r\n</section>';
   const [first, mixed] = pronouns(html);

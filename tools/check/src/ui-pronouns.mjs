@@ -2,6 +2,8 @@
 import { isCodeFile, segmentsFromCode, segmentsFromMarkdown } from './extract.mjs';
 
 const HEADING = /^h[1-6]$/;
+const REGION = new Set(['section', 'article', 'aside', 'nav', 'form', 'dialog', 'li', 'td', 'th']);
+const WRAPPER = new Set(['html', 'body', 'main', 'div']);
 const BLOCK = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'section', 'article', 'aside', 'main', 'header', 'footer', 'nav', 'form', 'dialog', 'li', 'ul', 'ol', 'table', 'tr', 'td', 'th', 'button', 'br', 'hr']);
 const OMIT = new Set(['script', 'style', 'pre', 'code', 'q', 'blockquote']);
 const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
@@ -43,20 +45,33 @@ function htmlUnits(text) {
     return BLOCK.has(node.tag) ? [boundary, ...contents, boundary] : contents;
   };
   const hasHeading = (node) => HEADING.test(node.tag) || node.children?.some(hasHeading);
+  const hasRegion = (node) => REGION.has(node.tag) || node.children?.some(hasRegion);
   const units = [];
   const visit = (node) => {
     if (!node.children || OMIT.has(node.tag)) return;
+    // A headingless card or dialog still has a reader perspective. Nested
+    // semantic regions remain separate; plain layout wrappers stay together.
+    if (node.tag && !['html', 'body', 'main'].includes(node.tag)
+      && !hasHeading(node) && !node.children.some(hasRegion)) {
+      units.push(collect(node));
+      return;
+    }
     let current;
     for (const child of node.children) {
       if (HEADING.test(child.tag)) {
         current = collect(child);
         units.push(current);
-      } else if (hasHeading(child)) {
-        // A nested card starts a separate unit, even when it follows a heading.
+      } else if (hasHeading(child) || hasRegion(child)) {
+        // A nested card starts a separate unit, even without a heading.
         current = undefined;
         visit(child);
       } else if (current) {
         current.push(...collect(child));
+      } else if (WRAPPER.has(child.tag)) {
+        visit(child);
+      } else if (child.text?.trim() || child.children) {
+        current = collect(child);
+        units.push(current);
       }
     }
   };
