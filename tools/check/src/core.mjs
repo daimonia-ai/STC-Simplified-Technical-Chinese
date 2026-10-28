@@ -144,6 +144,7 @@ export function lintSegments(segments, profile, dictionary) {
     );
     scan(original, new RegExp(`"[^"\\n]*[${CJK}][^"\\n]*"`, 'g'), (m) =>
       add(segment, m.index, 'G17', 'warning', '中文里的引号宜使用全角双引号“”', m[0]),
+      original.quotationText ?? original.text,
     );
     scan(original, new RegExp(`[${CJK}][A-Za-z0-9]|[A-Za-z0-9][${CJK}]`, 'g'), (m) =>
       add(segment, m.index, 'G19', 'warning', '中文与英文、数字之间宜空一格', m[0]),

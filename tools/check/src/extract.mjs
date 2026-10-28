@@ -5,9 +5,52 @@ const DISABLE = 'stc-disable-next-line';
 
 const mask = (s) => ' '.repeat(s.length);
 
+function markdownQuotationLines(text) {
+  const syntaxQuotes = new Set();
+  // Metadata delimiters are source syntax; the text inside them still needs review.
+  const header = text.match(/^\uFEFF?---[ \t]*\r?\n([\s\S]*?)\r?\n(?:---|\.\.\.)[ \t]*(?:\r?\n|$)/);
+  if (header) {
+    const start = header[0].indexOf('\n') + 1;
+    let blockIndent = null;
+    for (const row of header[1].matchAll(/([^\r\n]*)(?:\r?\n|$)/g)) {
+      const raw = row[1];
+      const indent = raw.match(/^[ \t]*/)[0].length;
+      if (blockIndent !== null) {
+        if (!raw.trim() || indent > blockIndent) continue;
+        blockIndent = null;
+      }
+      if (/^[ \t]*[\w.-]+:[ \t]*[|>][+-]?[1-9]?[+-]?[ \t]*(?:#.*)?$/.test(raw)) {
+        blockIndent = indent;
+        continue;
+      }
+      const scalar = raw.match(/^([ \t]*[\w.-]+:[ \t]*)("(?:\\[^\r\n]|[^"\\\r\n])*"|'(?:''|[^'\r\n])*')[ \t]*(?:#[^\r\n]*)?$/);
+      if (!scalar) continue;
+      const first = start + row.index + scalar[1].length;
+      syntaxQuotes.add(first);
+      syntaxQuotes.add(first + scalar[2].length - 1);
+    }
+  }
+
+  // A quoted attribute may contain > or span lines. Only its outer quotes are syntax.
+  const tags = /<[A-Za-z][\w:-]*(?:\s+(?:[^\s<>"'=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?))*\s*\/?>/g;
+  const attributes = /(\s+[^\s<>"'=]+\s*=\s*)(["'])([\s\S]*?)\2/g;
+  for (const tag of text.matchAll(tags)) {
+    if (header && tag.index < header[0].length) continue;
+    for (const attribute of tag[0].matchAll(attributes)) {
+      const first = tag.index + attribute.index + attribute[1].length;
+      syntaxQuotes.add(first);
+      syntaxQuotes.add(first + attribute[3].length + 1);
+    }
+  }
+  const chars = text.split('');
+  for (const offset of syntaxQuotes) chars[offset] = ' ';
+  return chars.join('').split(/\r?\n/);
+}
+
 /** Markdown and plain text: skip code, URLs, comments, and STC's own bad examples (lines with ✗). */
 export function segmentsFromMarkdown(text, { includeEnglish = false } = {}) {
   const segments = [];
+  const quotationLines = markdownQuotationLines(text);
   let fence = null;
   let inComment = false;
   let skipNext = false;
@@ -43,7 +86,12 @@ export function segmentsFromMarkdown(text, { includeEnglish = false } = {}) {
       .replace(/`[^`]*`/g, mask)
       .replace(/https?:\/\/\S+/g, mask)
       .replace(/\]\([^)]*\)/g, (s) => ']' + mask(s.slice(1)));
-    if (CJK.test(line) || (includeEnglish && line.trim())) segments.push({ line: i + 1, col: 1, text: line });
+    if (CJK.test(line) || (includeEnglish && line.trim())) {
+      const segment = { line: i + 1, col: 1, text: line };
+      const quotationText = line.split('').map((ch, col) => quotationLines[i][col] !== raw[col] ? ' ' : ch).join('');
+      if (quotationText !== line) segment.quotationText = quotationText;
+      segments.push(segment);
+    }
   });
   return segments;
 }
