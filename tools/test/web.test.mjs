@@ -29,6 +29,7 @@ test('web entry is current and includes every rule and complete dictionary data'
   }
   assert.doesNotMatch(web, /\]\((?:\.\.?\/|rules\/|dictionary\/)/);
   assert.match(web, /\]\(#recommended-words\)/);
+  assert.match(web, /\[`rules\/web-dev-reference\.md`\]\(#for-web-dev\)/);
   assert.ok(web.trimEnd().endsWith('`STC_WEB_END`'));
 });
 

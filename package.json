@@ -27,8 +27,8 @@
   ],
   "scripts": {
     "build:data": "node tools/check/scripts/build-data.mjs",
-    "build:web": "node tools/build-web.mjs",
-    "check:web": "node tools/build-web.mjs --check",
+    "build:web": "node tools/build-ui-reference.mjs && node tools/build-web.mjs",
+    "check:web": "node tools/build-ui-reference.mjs --check && node tools/build-web.mjs --check",
     "build:skill": "npm run build:web && node tools/build-skill.mjs",
     "test": "npm run check:web && node --test tools/test/*.test.mjs",
     "prepublishOnly": "npm run build:data && npm run build:web && npm test"

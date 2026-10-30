@@ -23,6 +23,7 @@ const SOURCES = [
   ['dictionary/terms.example.yaml', 'project-terms', '项目术语表模板'],
 ];
 const anchors = new Map([['SKILL.md', 'core-workflow'], ...SOURCES.map(([file, id]) => [file, id])]);
+anchors.set('rules/web-dev-reference.md', 'for-web-dev');
 
 function section(text, title, level = 2) {
   const heading = `${'#'.repeat(level)} ${title}\n`;

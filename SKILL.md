@@ -32,7 +32,7 @@ description: >
 |---|---|
 | 简化、润色或概括已有中文 | `rules/rewrite.md`；先判断是否需要取舍信息，界面和回执还需读取各自场景 |
 | 技术报告、说明、手册 | `rules/for-document.md` 中适用的条目 |
-| 网页与应用界面文案（含内部后台），以及对客方案、分享页 | `rules/for-web-dev.md`；动作词和提示级别查 `dictionary/recommended.yaml` |
+| 网页与应用界面文案（含内部后台），以及对客方案、分享页 | [`rules/web-dev-reference.md`](rules/web-dev-reference.md)，包含界面规则、动作词和提示级别词表 |
 | 写给 agent 执行的指令 | `rules/for-all.md`、`rules/for-instruction-writing.md` |
 | 汇报任务完成情况 | `rules/for-chat.md` 的 C10；普通问答和成品正文保持自身结构 |
 | 用户要求按完整规范逐条检查，或指定某条规则 | 读取指定规则；完整检查读取 `rules/for-all.md`、对应场景和该场景的词表 |
