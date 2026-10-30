@@ -25,6 +25,31 @@ test('UI reference preserves every rule and the complete original dictionary', (
   assert.match(read(root, 'SKILL.md'), /`rules\/web-dev-reference\.md`/);
 });
 
+test('UI reference includes the canonical G20 dependency without unrelated general rules', () => {
+  const general = read(root, 'rules/for-all.md');
+  const start = general.indexOf('### G20 ');
+  const end = general.indexOf('\n### ', start + 1);
+  const section = general.slice(start, end < 0 ? undefined : end).trim();
+  const output = renderUiReference(root);
+  assert.ok(section.length > 100);
+  assert.ok(output.includes(section));
+  assert.doesNotMatch(output, /^### G(?:19|21) /m);
+});
+
+test('G20 edits invalidate the reference and a missing dependency cannot overwrite it', (t) => {
+  const dir = fixture(t);
+  writeUiReference(dir);
+  const path = join(dir, 'rules/for-all.md');
+  const original = read(dir, 'rules/for-all.md');
+  writeFileSync(path, original.replace('### G20 ', '### G20 Changed '));
+  assert.throws(() => writeUiReference(dir, { check: true }), /out of date/);
+  writeUiReference(dir);
+  const before = read(dir, 'rules/web-dev-reference.md');
+  writeFileSync(path, original.replace('### G20 ', '### G99 '));
+  assert.throws(() => writeUiReference(dir), /Missing G20/);
+  assert.equal(read(dir, 'rules/web-dev-reference.md'), before);
+});
+
 test('rule or dictionary edits invalidate the bundle until it is rebuilt', (t) => {
   const dir = fixture(t);
   writeUiReference(dir);
