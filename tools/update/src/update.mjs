@@ -52,6 +52,18 @@ export function skillVersion(dir) {
   return readFileSync(meta, 'utf8').match(/VERSION = '([^']+)'/)?.[1] ?? null;
 }
 
+// Returns the version of the package installed in dir, or null when dir does not hold STC.
+function packageVersion(dir) {
+  const file = dir && join(dir, 'package.json');
+  if (!file || !existsSync(file)) return null;
+  try {
+    const pkg = JSON.parse(readFileSync(file, 'utf8'));
+    return pkg.name === PACKAGE ? pkg.version : null;
+  } catch {
+    return null;
+  }
+}
+
 const npmDefault = (args) => spawnSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', args, {
   encoding: 'utf8', timeout: 120000, shell: process.platform === 'win32',
 });
@@ -139,7 +151,7 @@ function describeSkill(plan, { dryRun, tilde }) {
 // Returns the exit code: 0 done, 1 failed or (with --check) outdated, 2 bad arguments.
 export function runUpdate(argv, {
   cwd = process.cwd(), home = homedir(), root = ROOT, npm = npmDefault,
-  reexec = (args) => spawnSync(process.execPath, [join(root, 'tools/cli.mjs'), 'update', ...args], { stdio: 'inherit' }).status ?? 1,
+  reexec = (args, cliRoot) => spawnSync(process.execPath, [join(cliRoot, 'tools/cli.mjs'), 'update', ...args], { stdio: 'inherit' }).status ?? 1,
   log = console.log, error = console.error,
 } = {}) {
   const opts = { check: false, dryRun: false, cli: true, skills: [] };
@@ -182,26 +194,33 @@ export function runUpdate(argv, {
       const rootRun = npm(['root', '-g']);
       const globalRoot = rootRun.status === 0 && existsSync(rootRun.stdout.trim()) ? realpathSync(rootRun.stdout.trim()) : '';
       const isGlobal = Boolean(globalRoot) && realpathSync(root).startsWith(globalRoot + sep);
+      // The global command is checked even when this run started from npx or a project copy.
+      const globalDir = isGlobal ? root : globalRoot ? join(globalRoot, ...PACKAGE.split('/')) : '';
+      const globalVersion = isGlobal ? VERSION : packageVersion(globalDir);
       if (!latest) {
         log(`命令行：${VERSION}。查不到 npm 上的最新版本，按当前版本刷新 skill。`);
-      } else if (compareVersions(latest, VERSION) <= 0) {
-        log(`命令行：已是 ${VERSION}。`);
-      } else if (!isGlobal) {
+      } else if (globalVersion && compareVersions(latest, globalVersion) > 0) {
+        outdated = true;
+        if (readOnly) {
+          log(`命令行：全局安装的 ${globalVersion} → ${latest}${opts.dryRun ? '，将用 npm 更新' : '，可以更新'}。`);
+        } else {
+          const install = npm(['install', '-g', `${PACKAGE}@${latest}`]);
+          if (install.status !== 0) {
+            error(`命令行更新失败：${(install.stderr || install.stdout || '').trim().split('\n').pop()}`);
+            return 1;
+          }
+          log(`命令行：全局安装的 ${globalVersion} → ${latest}，已更新。`);
+          // When this run is older than the installed package, let the new version refresh the skills.
+          if (compareVersions(latest, VERSION) > 0) {
+            const rest = opts.skills.flatMap((dir) => ['--skills', dir]);
+            return reexec(['--no-cli', ...rest], globalDir);
+          }
+        }
+      } else if (compareVersions(latest, VERSION) > 0) {
         outdated = true;
         log(`命令行：当前程序 ${VERSION} 不是全局安装，npm 上有 ${latest}。运行 npx --yes ${PACKAGE}@latest update 可用新版完成更新。`);
-      } else if (readOnly) {
-        outdated = true;
-        log(`命令行：${VERSION} → ${latest}${opts.dryRun ? '，将用 npm 更新' : '，可以更新'}。`);
       } else {
-        const install = npm(['install', '-g', `${PACKAGE}@${latest}`]);
-        if (install.status !== 0) {
-          error(`命令行更新失败：${(install.stderr || install.stdout || '').trim().split('\n').pop()}`);
-          return 1;
-        }
-        log(`命令行：${VERSION} → ${latest}，已更新。`);
-        // The installed package now holds the new files; let the new version refresh the skills.
-        const rest = opts.skills.flatMap((dir) => ['--skills', dir]);
-        return reexec(['--no-cli', ...rest]);
+        log(`命令行：已是 ${VERSION}。`);
       }
     }
 
