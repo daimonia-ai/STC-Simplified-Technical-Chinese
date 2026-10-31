@@ -121,10 +121,47 @@ test('a global CLI with a newer npm version is installed, then the new version r
   assert.equal(code, 0);
   assert.ok(calls.includes('install -g @daimonia/stc@9.9.9'));
   assert.deepEqual(reexecs, [['--no-cli', '--skills', 'vendor/stc']]);
-  assert.match(out, new RegExp(`命令行：${VERSION.replaceAll('.', '\\.')} → 9\\.9\\.9，已更新`));
+  assert.match(out, new RegExp(`命令行：全局安装的 ${VERSION.replaceAll('.', '\\.')} → 9\\.9\\.9，已更新`));
 
   const failed = fakeNpm({ latest: '9.9.9', globalRoot: dirname(realpathSync(root)), installStatus: 1 });
   assert.equal(update([], { home: tmp(), cwd: tmp(), npm: failed.npm, reexec: () => 0 }).code, 1);
+});
+
+test('a run from npx also updates an older global command, then refreshes skills itself', () => {
+  // A global install of an older version, next to the latest version running from npx.
+  const globalRoot = tmp();
+  const installed = (version) => {
+    mkdirSync(join(globalRoot, '@daimonia/stc'), { recursive: true });
+    writeFileSync(join(globalRoot, '@daimonia/stc/package.json'), JSON.stringify({ name: '@daimonia/stc', version }));
+  };
+  installed('0.3.1');
+  const home = tmp();
+  makeSkill(join(home, '.agents/skills/stc'), '0.3.1');
+
+  const check = fakeNpm({ globalRoot });
+  const checked = update(['--check'], { home, cwd: tmp(), npm: check.npm });
+  assert.equal(checked.code, 1);
+  assert.match(checked.out, new RegExp(`命令行：全局安装的 0\\.3\\.1 → ${VERSION.replaceAll('.', '\\.')}，可以更新`));
+  assert.ok(!check.calls.some((c) => c.startsWith('install')));
+
+  const run = fakeNpm({ globalRoot });
+  const { code, out } = update([], { home, cwd: tmp(), npm: run.npm, reexec: () => assert.fail('must not re-run') });
+  assert.equal(code, 0);
+  assert.ok(run.calls.includes(`install -g @daimonia/stc@${VERSION}`));
+  assert.match(out, new RegExp(`命令行：全局安装的 0\\.3\\.1 → ${VERSION.replaceAll('.', '\\.')}，已更新`));
+  assert.equal(skillVersion(join(home, '.agents/skills/stc')), VERSION);
+
+  installed(VERSION);
+  const current = fakeNpm({ globalRoot });
+  assert.match(update([], { home, cwd: tmp(), npm: current.npm }).out, new RegExp(`命令行：已是 ${VERSION.replaceAll('.', '\\.')}`));
+  assert.ok(!current.calls.some((c) => c.startsWith('install')));
+
+  // An npx run older than npm's latest hands the skills to the newly installed global version.
+  installed('0.3.1');
+  const roots = [];
+  const older = update([], { home, cwd: tmp(), npm: fakeNpm({ latest: '9.9.9', globalRoot }).npm, reexec: (args, cliRoot) => { roots.push(cliRoot); return 0; } });
+  assert.equal(older.code, 0);
+  assert.deepEqual(roots, [join(globalRoot, '@daimonia/stc')]);
 });
 
 test('a non-global CLI does not install, and an unreachable registry still refreshes skills', () => {
