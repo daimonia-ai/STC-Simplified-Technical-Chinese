@@ -20,6 +20,7 @@
     "tools/check/src/",
     "tools/check/data/",
     "tools/init/src/",
+    "tools/update/src/",
     "LICENSE",
     "LICENSE-CODE",
     "tools/README.md",

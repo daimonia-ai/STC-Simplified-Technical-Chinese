@@ -100,7 +100,19 @@ export function planInit({ cwd = process.cwd(), dir = DEFAULT_DIR, defaults = fa
   return { skillPath, sameAsSource, files, rules, defaultEnabled };
 }
 
-function describeFiles({ skillPath, sameAsSource, files }) {
+// Writes the files that planInit marked as new or changed.
+export function applyInit(plan) {
+  for (const f of plan.files) {
+    if (f.status === 'unchanged') continue;
+    mkdirSync(dirname(f.to), { recursive: true });
+    writeFileSync(f.to, f.data);
+  }
+  for (const r of plan.rules) {
+    if (r.status !== 'unchanged') writeFileSync(r.path, r.after);
+  }
+}
+
+export function describeFiles({ skillPath, sameAsSource, files }) {
   if (sameAsSource) return `skill 文件就在 ${skillPath}/，不用复制。`;
   const count = (s) => files.filter((f) => f.status === s).length;
   const parts = [];
@@ -147,14 +159,7 @@ export function runInit(argv, { cwd = process.cwd(), command = CMD, log = consol
       for (const r of plan.rules) log(`  ${describeRule(r, plan.defaultEnabled)}`);
       return 0;
     }
-    for (const f of plan.files) {
-      if (f.status === 'unchanged') continue;
-      mkdirSync(dirname(f.to), { recursive: true });
-      writeFileSync(f.to, f.data);
-    }
-    for (const r of plan.rules) {
-      if (r.status !== 'unchanged') writeFileSync(r.path, r.after);
-    }
+    applyInit(plan);
     log(`STC 已装好。\n${describeFiles(plan)}`);
     for (const r of plan.rules) log(describeRule(r, plan.defaultEnabled));
     const dirOption = opts.dir === DEFAULT_DIR ? '' : ` --dir ${JSON.stringify(opts.dir)}`;

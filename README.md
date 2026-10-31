@@ -180,30 +180,31 @@ Anti-Echo 要求每句话帮助当前读者理解、判断或操作。疑点由 
 
 ## 更新版本
 
+在装过 STC 的项目根目录运行：
+
+```bash
+stc update
+```
+
+`stc update` 依次完成三件事：
+
+- 全局安装的 `stc` 命令有新版本时，用 npm 更新。
+- 更新个人目录里的全局 skill：`~/.agents`、`~/.claude`、`~/.codex`、`~/.hermes` 下的 `skills/stc`。旧目录移到 `~/.stc-backups/`；目录里不属于 STC 的文件会复制到新目录。
+- 刷新当前项目里的 skill，沿用安装时的目录，保留已启用的默认规则。
+
+每个装过 STC 的项目都要运行一次。只核对版本、不修改时，加 `--check`；其他位置的 skill 用 `--skills <目录>` 指定。
+
+0.3.1 及更早的版本没有 `update` 命令，第一次更新时运行：
+
+```bash
+npx --yes @daimonia/stc@latest update
+```
+
 让 Agent 更新时，可以发送：
 
 ```text
-请按原来的安装方式更新 STC，刷新当前项目实际引用的 skill 和规则。
-保留已启用的默认规则、其他项目配置和项目术语，最后核对实际使用的版本。
+请运行 stc update 更新 STC，最后核对实际使用的版本。
 ```
-
-### CLI 安装
-
-在已安装 STC 的项目根目录运行：
-
-```bash
-npm install -g @daimonia/stc@latest
-stc --version
-stc init
-node .claude/skills/stc/tools/cli.mjs --version
-```
-
-`npm install` 更新本机 CLI，`stc init` 刷新项目中的 skill 和规则。两条版本命令的结果须一致。
-
-- 每个已安装 STC 的项目都需要运行一次 `stc init`。
-- 安装时用了 `--dir`，更新时须使用相同目录，并修改版本检查命令中的路径。
-- `--dir` 只改变 skill 的位置；项目配置仍写在当前目录。
-- 全局 skill 按原安装方式更新。
 
 ### 单独 skill 安装
 
@@ -213,7 +214,7 @@ node .claude/skills/stc/tools/cli.mjs --version
 npx skills update stc
 ```
 
-全局 skill 使用 `npx skills update stc --global`。手动安装的 skill，下载新包后替换原技能目录。更新时保留项目术语和现有默认配置。
+全局 skill 使用 `npx skills update stc --global`。手动安装的 skill，用 `stc update --skills <skill目录>` 更新。
 
 用 `node <skill目录>/tools/cli.mjs --version` 核对 skill 版本。skill 和 npm 包从同一份源文件发布。
 
@@ -262,7 +263,7 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | 词表 | 推荐词（一个词一个意思）、不推荐写法（附推荐写法）、项目术语表模板 | [`dictionary/`](dictionary/) |
 | 核心规则片段 | 可粘贴到 AGENTS.md 或 CLAUDE.md 的核心规则 | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | skill | agent 写、改、审中文时加载的技能包 | [`SKILL.md`](SKILL.md) |
-| 命令行工具 | `stc init` 把 STC 装进项目，`stc check` 找出机器能判断的问题 | [`tools/`](tools/) |
+| 命令行工具 | `stc init` 把 STC 装进项目，`stc check` 找出机器能判断的问题，`stc update` 更新到最新版本 | [`tools/`](tools/) |
 | 安装引导 | 默认使用的设置方法和首次文档审阅体验 | [`ONBOARDING.md`](ONBOARDING.md) |
 | 网页入口 | 可通过链接读取的引导、完整规则和词表 | [`WEB.md`](WEB.md) |
 | 测试任务 | 用于评估 skill 的任务和预期结果 | [`evals/`](evals/) |
