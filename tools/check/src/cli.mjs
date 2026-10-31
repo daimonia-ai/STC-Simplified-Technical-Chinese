@@ -3,17 +3,17 @@ import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from 'node
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { lintText, loadDictionary, PROFILES } from './core.mjs';
-import { isCodeFile } from './extract.mjs';
+import { isCodeFile, isJsonFile } from './extract.mjs';
 import { formatReport } from './report.mjs';
 import { reviewAntiEcho } from './anti-echo.mjs';
 
 // Directories skipped when walking a directory: dependencies, build output, and names that start with ".".
 const SKIP_DIRS = new Set(['node_modules', 'dist', 'build', 'out', 'coverage', 'vendor', 'target']);
-const isTextFile = (path) => /\.(md|mdx|markdown|txt)$/i.test(path) || isCodeFile(path);
+const isTextFile = (path) => /\.(md|mdx|markdown|txt)$/i.test(path) || isCodeFile(path) || isJsonFile(path);
 
 export const checkHelp = (usage) => `用法：${usage} [选项] <文件或目录...>
   不给路径时读标准输入。
-  给目录时，逐层检查其中的 Markdown、文本和代码文件，
+  给目录时，逐层检查其中的 Markdown、文本、JSON 和代码文件，
   跳过以“.”开头的目录和 node_modules、dist、build 等目录。
 
 选项：
@@ -75,7 +75,7 @@ function collectFiles(dir, out) {
   return out;
 }
 
-// Returns the exit code: 0 passed, 1 more errors than --max-errors, 2 bad arguments or paths.
+// Returns 0 for a pass, 1 for blocking findings, or 2 for invalid arguments, paths or JSON syntax.
 export function runCheck(argv, { usage = 'stc check' } = {}) {
   const opts = parseArgs(argv);
   if (opts.help) {
@@ -122,7 +122,17 @@ export function runCheck(argv, { usage = 'stc check' } = {}) {
   let warnings = 0;
   const report = [];
   for (const { path, text } of inputs) {
-    const { profile, issues } = lintText(text, { path, profile: opts.profile, dictionary });
+    let checked;
+    try {
+      checked = lintText(text, { path, profile: opts.profile, dictionary });
+    } catch (error) {
+      if (isJsonFile(path) && error instanceof SyntaxError) {
+        console.error('JSON 格式无效：' + path + '。请先修复文件格式。');
+        return 2;
+      }
+      throw error;
+    }
+    const { profile, issues } = checked;
     const shown = opts.warnings ? issues : issues.filter((x) => x.level === 'error' || (opts.antiEcho && x.rule === 'G20'));
     errors += issues.filter((x) => x.level === 'error').length;
     warnings += issues.filter((x) => x.level === 'warning').length;

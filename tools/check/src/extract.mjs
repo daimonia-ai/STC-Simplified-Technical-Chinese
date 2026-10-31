@@ -5,9 +5,52 @@ const DISABLE = 'stc-disable-next-line';
 
 const mask = (s) => ' '.repeat(s.length);
 
+function markdownQuotationLines(text) {
+  const syntaxQuotes = new Set();
+  // Metadata delimiters are source syntax; the text inside them still needs review.
+  const header = text.match(/^\uFEFF?---[ \t]*\r?\n([\s\S]*?)\r?\n(?:---|\.\.\.)[ \t]*(?:\r?\n|$)/);
+  if (header) {
+    const start = header[0].indexOf('\n') + 1;
+    let blockIndent = null;
+    for (const row of header[1].matchAll(/([^\r\n]*)(?:\r?\n|$)/g)) {
+      const raw = row[1];
+      const indent = raw.match(/^[ \t]*/)[0].length;
+      if (blockIndent !== null) {
+        if (!raw.trim() || indent > blockIndent) continue;
+        blockIndent = null;
+      }
+      if (/^[ \t]*[\w.-]+:[ \t]*[|>][+-]?[1-9]?[+-]?[ \t]*(?:#.*)?$/.test(raw)) {
+        blockIndent = indent;
+        continue;
+      }
+      const scalar = raw.match(/^([ \t]*[\w.-]+:[ \t]*)("(?:\\[^\r\n]|[^"\\\r\n])*"|'(?:''|[^'\r\n])*')[ \t]*(?:#[^\r\n]*)?$/);
+      if (!scalar) continue;
+      const first = start + row.index + scalar[1].length;
+      syntaxQuotes.add(first);
+      syntaxQuotes.add(first + scalar[2].length - 1);
+    }
+  }
+
+  // A quoted attribute may contain > or span lines. Only its outer quotes are syntax.
+  const tags = /<[A-Za-z][\w:-]*(?:\s+(?:[^\s<>"'=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?))*\s*\/?>/g;
+  const attributes = /(\s+[^\s<>"'=]+\s*=\s*)(["'])([\s\S]*?)\2/g;
+  for (const tag of text.matchAll(tags)) {
+    if (header && tag.index < header[0].length) continue;
+    for (const attribute of tag[0].matchAll(attributes)) {
+      const first = tag.index + attribute.index + attribute[1].length;
+      syntaxQuotes.add(first);
+      syntaxQuotes.add(first + attribute[3].length + 1);
+    }
+  }
+  const chars = text.split('');
+  for (const offset of syntaxQuotes) chars[offset] = ' ';
+  return chars.join('').split(/\r?\n/);
+}
+
 /** Markdown and plain text: skip code, URLs, comments, and STC's own bad examples (lines with ✗). */
-export function segmentsFromMarkdown(text) {
+export function segmentsFromMarkdown(text, { includeEnglish = false } = {}) {
   const segments = [];
+  const quotationLines = markdownQuotationLines(text);
   let fence = null;
   let inComment = false;
   let skipNext = false;
@@ -43,13 +86,19 @@ export function segmentsFromMarkdown(text) {
       .replace(/`[^`]*`/g, mask)
       .replace(/https?:\/\/\S+/g, mask)
       .replace(/\]\([^)]*\)/g, (s) => ']' + mask(s.slice(1)));
-    if (CJK.test(line)) segments.push({ line: i + 1, col: 1, text: line });
+    if (CJK.test(line) || (includeEnglish && line.trim())) {
+      const segment = { line: i + 1, col: 1, text: line };
+      const quotationText = line.split('').map((ch, col) => quotationLines[i][col] !== raw[col] ? ' ' : ch).join('');
+      if (quotationText !== line) segment.quotationText = quotationText;
+      if (/^ {0,3}#{1,6}(?:\s|$)/.test(raw)) segment.markdownHeading = true;
+      segments.push(segment);
+    }
   });
   return segments;
 }
 
 /** Code files: keep string literals and JSX text that contain Chinese; skip comments. */
-export function segmentsFromCode(text) {
+export function segmentsFromCode(text, { includeEnglish = false } = {}) {
   const segments = [];
   let line = 1;
   let col = 1;
@@ -65,7 +114,7 @@ export function segmentsFromCode(text) {
     }
   };
   const push = (startLine, startCol, value) => {
-    if (CJK.test(value) && startLine !== disabledLine) segments.push({ line: startLine, col: startCol, text: value });
+    if ((CJK.test(value) || (includeEnglish && value.trim())) && startLine !== disabledLine) segments.push({ line: startLine, col: startCol, text: value });
   };
 
   while (i < text.length) {
@@ -129,7 +178,7 @@ export function segmentsFromCode(text) {
       let j = i + 1;
       while (j < text.length && !'<{};'.includes(text[j])) j += 1;
       const value = text.slice(i + 1, j);
-      if (CJK.test(value) && text[j] === '<') {
+      if ((CJK.test(value) || (includeEnglish && value.trim())) && text[j] === '<') {
         push(startLine, startCol, value);
       }
     }
@@ -137,6 +186,43 @@ export function segmentsFromCode(text) {
     i += 1;
   }
   return segments;
+}
+
+/** JSON values are prose; keys and delimiter quotes belong to the file format. */
+export function segmentsFromJson(text) {
+  JSON.parse(text);
+  const segments = [];
+  let line = 1;
+  let col = 1;
+  let cursor = 0;
+  for (const match of text.matchAll(/"(?:\\[\s\S]|[^"\\])*"/g)) {
+    for (; cursor < match.index; cursor += 1) {
+      if (text[cursor] === '\n') { line += 1; col = 1; }
+      else col += 1;
+    }
+    const token = match[0];
+    const end = match.index + token.length;
+    if (!/^\s*:/.test(text.slice(end))) {
+      const value = JSON.parse(token);
+      if (CJK.test(value)) {
+        const sourceOffsets = [];
+        for (let i = 1; i < token.length - 1;) {
+          sourceOffsets.push(i - 1);
+          i += token[i] === '\\' ? (token[i + 1] === 'u' ? 6 : 2) : 1;
+        }
+        sourceOffsets.push(token.length - 2);
+        segments.push({ line, col: col + 1, text: value, sourceOffsets });
+      }
+    }
+    // Valid JSON strings cannot contain literal newlines.
+    cursor = end;
+    col += token.length;
+  }
+  return segments;
+}
+
+export function isJsonFile(path) {
+  return /\.json$/i.test(path);
 }
 
 export function isCodeFile(path) {

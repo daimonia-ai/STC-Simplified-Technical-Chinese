@@ -80,6 +80,7 @@ STC 配置写在项目的 AGENTS.md 和 CLAUDE.md 中。两个文件都不存在
 ```bash
 stc check README.md docs/
 stc check src/pages/Settings.tsx
+stc check src/locales/zh-CN.json --profile for-web-dev
 stc check AGENTS.md --profile for-instruction-writing
 echo "本周我们进行了大量优化。" | stc check --profile for-document
 ```
@@ -95,9 +96,11 @@ echo "本周我们进行了大量优化。" | stc check --profile for-document
 | `--anti-echo` | 未复核的 G20 疑点会使检查返回 1 |
 | `--review-decisions <文件>` | 读取与原文绑定的保留理由，与 `--anti-echo` 一起用 |
 
-给目录时，逐层检查其中的 Markdown、文本和代码文件，跳过以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录。
+给目录时，逐层检查其中的 Markdown、文本、JSON 和代码文件。以“.”开头的目录和 `node_modules`、`dist`、`build` 等目录会跳过。
 
 不指定场景时，按文件判断：AGENTS.md、CLAUDE.md、SKILL.md 用 for instruction writing；代码文件（`.ts`、`.tsx`、`.js`、`.jsx`、`.vue`、`.html` 等）用 for web dev，只检查字符串和 JSX 里的文字；其余文件用 for document。
+
+JSON 文件只检查字符串值，字段名和文件格式保持原样。JSON 默认按文档检查；界面翻译文件必须指定 `--profile for-web-dev`。格式无效时，命令返回 2，先修复 JSON 格式再审阅文字。
 
 ### 报告怎么读
 
@@ -159,10 +162,21 @@ stc check 指定文档.md --anti-echo --review-decisions 审阅决定.json
 | G20 | 排除说明、自证，以及界面中的制作标签 | 待复核；`--anti-echo` 阻止未处理项通过 |
 | C3 | 对话里的感叹号 | 错误 |
 | D1 | 文档里的“他、她、它” | 错误 |
-| W1 | 界面文字里的复数人称代词和第三人称代词 | 错误 |
-| W2 | “你”和“您”混用 | 警告 |
+| W1 | 界面中的“你们、他们、她们、它们、咱们、大家、他、她、它” | 错误 |
+| W2 | 引号外的“我的 / my”；“你”和“您”混用 | 前者为需修改；后者为待确认 |
+| W10 | 同一处界面同时出现“我 / 我的”和“你 / 你的 / 您”，或 my 和 your | 需修改 |
 | I1 | 规则文件里的非标准强度词 | 错误 |
 | I2 | “必须”与“尽量、避免”这类词连用 | 错误 |
+
+W10 按文字所在位置分组：
+
+- HTML 取标题及同一父元素内后续的兄弟元素。遇到下一标题或独立区域时分组。
+- 无标题的卡片和弹窗按容器分组。嵌套的 `section`、`article`、`dialog` 等区域单独检查。
+- Markdown 取标题及其后的段落，遇到下一标题时分组。
+
+普通聊天不执行 W2、W10。
+
+W2、W10 保留带引号的用户原话。HTML 的 `q`、`blockquote` 同样按引用处理；脚本、样式、代码示例和标签属性不参与这两项检查。
 
 以下内容不检查：
 

@@ -29,6 +29,7 @@ test('web entry is current and includes every rule and complete dictionary data'
   }
   assert.doesNotMatch(web, /\]\((?:\.\.?\/|rules\/|dictionary\/)/);
   assert.match(web, /\]\(#recommended-words\)/);
+  assert.match(web, /\[`rules\/web-dev-reference\.md`\]\(#for-web-dev\)/);
   assert.ok(web.trimEnd().endsWith('`STC_WEB_END`'));
 });
 
@@ -64,4 +65,19 @@ test('missing source files or workflow sections stop generation before an incomp
   rmSync(join(dir, 'dictionary/avoid.yaml'));
   assert.throws(() => writeWeb(dir), /ENOENT/);
   assert.equal(read(join(dir, 'WEB.md')), before);
+});
+
+test('web readers receive task routing and the complete linked rewrite workflow', (t) => {
+  const dir = fixture(t);
+  const skill = join(dir, 'SKILL.md');
+  const marker = 'Task routing fixture must be visible to browser readers.';
+  writeFileSync(skill, read(skill).replace('## 第二步：读规则和词表\n', `## 第二步：读规则和词表\n\n${marker}\n`));
+  writeWeb(dir);
+  const web = read(join(dir, 'WEB.md'));
+  assert.ok(web.includes(marker));
+  assert.match(web, /\]\(#rewrite\)/);
+  assert.match(web, /<a id="rewrite"><\/a>/);
+  assert.match(web, /\]\(#core-workflow\)/);
+  const rewrite = read(join(dir, 'rules/rewrite.md')).split('\n').filter((line) => line && !line.startsWith('#'));
+  for (const line of rewrite) assert.ok(web.includes(line), line);
 });

@@ -16,12 +16,14 @@ const SOURCES = [
   ['rules/for-document.md', 'for-document', '文档场景'],
   ['rules/for-web-dev.md', 'for-web-dev', '界面场景'],
   ['rules/for-instruction-writing.md', 'for-instruction-writing', '规则编写场景'],
+  ['rules/rewrite.md', 'rewrite', '简化改写流程'],
   ['dictionary/README.md', 'dictionary-guide', '词表说明'],
   ['dictionary/avoid.yaml', 'avoid-words', '不推荐写法词表'],
   ['dictionary/recommended.yaml', 'recommended-words', '推荐词表'],
   ['dictionary/terms.example.yaml', 'project-terms', '项目术语表模板'],
 ];
-const anchors = new Map(SOURCES.map(([file, id]) => [file, id]));
+const anchors = new Map([['SKILL.md', 'core-workflow'], ...SOURCES.map(([file, id]) => [file, id])]);
+anchors.set('rules/web-dev-reference.md', 'for-web-dev');
 
 function section(text, title, level = 2) {
   const heading = `${'#'.repeat(level)} ${title}\n`;
@@ -69,8 +71,13 @@ export function renderWeb(root = ROOT) {
     markdown(guide, 'snippets/web-onboarding.md').replace(/^# /, '## '),
     '## 规则与词表目录',
     links,
+    '<a id="core-workflow"></a>',
     '## 默认表达方式',
     markdown(section(skill, '默认表达方式'), 'SKILL.md'),
+    '## 交付要求',
+    markdown(section(skill, '第一步：确定交付要求'), 'SKILL.md'),
+    '## 按任务读取规则',
+    markdown(section(skill, '第二步：读规则和词表'), 'SKILL.md'),
     '## 写作与审阅流程',
     markdown(section(skill, '第三步：按用法处理'), 'SKILL.md'),
     '## 语义复核',

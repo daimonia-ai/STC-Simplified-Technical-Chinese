@@ -1,6 +1,6 @@
 {
   "name": "@daimonia/stc",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "STC 简明技术性中文：给 AI 用的中文写作规范。Simplified Technical Chinese: writing rules, a dictionary, and a CLI that help AI agents write and check Chinese text.",
   "type": "module",
   "bin": {
@@ -27,8 +27,8 @@
   ],
   "scripts": {
     "build:data": "node tools/check/scripts/build-data.mjs",
-    "build:web": "node tools/build-web.mjs",
-    "check:web": "node tools/build-web.mjs --check",
+    "build:web": "node tools/build-ui-reference.mjs && node tools/build-web.mjs",
+    "check:web": "node tools/build-ui-reference.mjs --check && node tools/build-web.mjs --check",
     "build:skill": "npm run build:web && node tools/build-skill.mjs",
     "test": "npm run check:web && node --test tools/test/*.test.mjs",
     "prepublishOnly": "npm run build:data && npm run build:web && npm test"

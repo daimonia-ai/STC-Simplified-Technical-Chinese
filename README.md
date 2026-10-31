@@ -178,7 +178,7 @@ npx skills add \
 
 可用 `--agent codex`、`--agent claude-code` 或 `--agent hermes-agent` 指定 Agent，`--global` 安装到个人技能目录。其他选项见[安装器文档](https://github.com/vercel-labs/skills#available-options)。
 
-手动安装时，从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.2.3.zip`，将包里的 `stc/` 放到 Agent 的技能目录。默认规则的配置方法见 [Onboarding for Agents](ONBOARDING.md)。
+手动安装时，从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.3.0.zip`，将包里的 `stc/` 放到 Agent 的技能目录。默认规则的配置方法见 [Onboarding for Agents](ONBOARDING.md)。
 
 ### 检查文件
 
@@ -294,8 +294,8 @@ STC 给中文补上这一套，从一开始就按 AI agent 能直接使用来设
 | 场景 | 写的是什么 | 和其他场景的主要区别 |
 |---|---|---|
 | for chat | agent 在对话里回复人 | 可以用“我”“你”；第一句回答问题 |
-| for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称，不写“我们”“你们” |
-| for web dev | 网页和应用界面上给用户看的文字 | 不用复数人称和第三人称代词；按钮以动词开头 |
+| for document | 给人读的文字：报告、方案、手册、代码注释、提交说明 | 主语写名称；面向客户的方案文案按 W2 写人称 |
+| for web dev | 网页和应用界面上给用户看的文字 | “你”指读者，“我”“我们”指产品方（W2）；同一处界面统一称呼读者（W10）；按钮以动词开头 |
 | for instruction writing | 写给 agent 执行的规则：系统提示词、AGENTS.md、skill | 要求的强度只用“必须、不得、宜、不宜、可、不必、能、不能” |
 
 ## 词表怎么定

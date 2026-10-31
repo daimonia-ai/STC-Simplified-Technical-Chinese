@@ -1,8 +1,9 @@
 // Checks text segments against STC rules and the avoid list.
 import { readFileSync } from 'node:fs';
 import { issueAdvice } from './advice.mjs';
-import { segmentsFromCode, segmentsFromMarkdown, isCodeFile } from './extract.mjs';
+import { segmentsFromCode, segmentsFromJson, segmentsFromMarkdown, isCodeFile, isJsonFile } from './extract.mjs';
 import { antiEchoCandidates } from './anti-echo.mjs';
+import { uiPronounIssues } from './ui-pronouns.mjs';
 
 export const PROFILES = ['for-chat', 'for-document', 'for-web-dev', 'for-instruction-writing'];
 
@@ -66,10 +67,14 @@ export function detectProfile(path) {
 }
 
 export function segmentsFor(path, text) {
+  if (isJsonFile(path)) return segmentsFromJson(text);
   return isCodeFile(path) ? segmentsFromCode(text) : segmentsFromMarkdown(text);
 }
 
 function locate(segment, index) {
+  if (segment.sourceOffsets?.[index] !== undefined) {
+    return { line: segment.line, col: segment.col + segment.sourceOffsets[index] };
+  }
   const before = segment.text.slice(0, index);
   const newlines = before.split('\n').length - 1;
   if (newlines === 0) return { line: segment.line, col: segment.col + index };
@@ -107,15 +112,22 @@ export function lintSegments(segments, profile, dictionary) {
     for (const { entry, patterns, soft } of entries) {
       const rule = entry.type === '人称代词' ? (profile === 'for-web-dev' ? 'W1' : 'D1') : TYPE_RULE[entry.type] ?? 'G3';
       for (const pattern of patterns) {
-        scan(segment, pattern, (m) =>
-          add(segment, m.index, rule, soft ? 'warning' : 'error', `${entry.type}：${entry.why}。推荐写法：${entry.use}`, m[0], entry),
-        );
+        scan(segment, pattern, (m) => {
+          // A document heading can name a plan or evaluation without claiming an improvement.
+          const topicHeading = profile === 'for-document' && segment.markdownHeading && rule === 'G5'
+            && /^(优化|提升|改善)$/.test(m[0])
+            && /^(评估|计划|方案|指南|手册)(?:[ \t]+#+)?[ \t]*$/.test(segment.text.slice(m.index + m[0].length))
+            && !/(已|正在|显著|大幅|明显|全面|彻底|有效|成功|自动|持续|不断|进一步|如何|怎样|怎么)/.test(segment.text.slice(0, m.index));
+          if (!topicHeading) {
+            add(segment, m.index, rule, soft ? 'warning' : 'error', `${entry.type}：${entry.why}。推荐写法：${entry.use}`, m[0], entry);
+          }
+        });
       }
     }
 
     if (profile === 'for-web-dev') {
       scan(segment, /他们|她们|它们|咱们|(?<!其)[他她它](?!们)/g, (m) =>
-        add(segment, m.index, 'W1', 'error', '界面文字不得使用复数人称代词和第三人称代词，要写名称', m[0]),
+        add(segment, m.index, 'W1', 'error', '界面文字不得使用“你们、他们、她们、它们、咱们、他、她、它”，要写名称', m[0]),
       );
       if (/您/.test(segment.text)) usesNin = true;
       if (/你(?!们)/.test(segment.text)) usesNi = true;
@@ -143,6 +155,7 @@ export function lintSegments(segments, profile, dictionary) {
     );
     scan(original, new RegExp(`"[^"\\n]*[${CJK}][^"\\n]*"`, 'g'), (m) =>
       add(segment, m.index, 'G17', 'warning', '中文里的引号宜使用全角双引号“”', m[0]),
+      original.quotationText ?? original.text,
     );
     scan(original, new RegExp(`[${CJK}][A-Za-z0-9]|[A-Za-z0-9][${CJK}]`, 'g'), (m) =>
       add(segment, m.index, 'G19', 'warning', '中文与英文、数字之间宜空一格', m[0]),
@@ -159,7 +172,7 @@ export function lintSegments(segments, profile, dictionary) {
   }
 
   if (usesNi && usesNin) {
-    issues.push({ line: segments[0]?.line ?? 1, col: 1, rule: 'W2', level: 'warning', message: '“你”和“您”必须二选一，全站统一', match: '你 / 您' });
+    issues.push({ line: segments[0]?.line ?? 1, col: 1, rule: 'W2', level: 'warning', message: '读者统一称“你”，不得与“您”混用', match: '你 / 您' });
   }
 
   return issues.sort((a, b) => a.line - b.line || a.col - b.col);
@@ -168,7 +181,9 @@ export function lintSegments(segments, profile, dictionary) {
 export function lintText(text, { path = 'stdin.md', profile, dictionary = loadDictionary() } = {}) {
   const chosen = profile ?? detectProfile(path);
   const lines = text.split(/\r?\n/);
-  const issues = lintSegments(segmentsFor(path, text), chosen, dictionary).map((issue) => ({
+  const findings = lintSegments(segmentsFor(path, text), chosen, dictionary);
+  if (chosen === 'for-web-dev') findings.push(...uiPronounIssues(text, path));
+  const issues = findings.sort((a, b) => a.line - b.line || a.col - b.col).map((issue) => ({
     ...issueAdvice(issue.rule, issue.message, undefined, issue.match), ...issue, context: lines[issue.line - 1] ?? '',
   }));
   return { profile: chosen, issues };

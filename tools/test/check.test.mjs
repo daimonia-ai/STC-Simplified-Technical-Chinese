@@ -18,7 +18,7 @@ test('“进行中”不算虚动词', () => {
 });
 
 test('界面文字里的复数人称和第三人称代词报错', () => {
-  const code = "toast('账号已停用，请联系我们');\nconst tip = '当前账号没有它的查看权限';";
+  const code = "toast('账号已停用，请联系你们');\nconst tip = '当前账号没有它的查看权限';";
   const found = rules(code, { path: 'App.tsx' });
   assert.equal(found.filter((r) => r === 'W1').length, 2);
 });

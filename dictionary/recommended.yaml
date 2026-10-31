@@ -1,5 +1,7 @@
 # STC 推荐词
 # 每个词只有一个意思。同组的近义词各自成条，写明区别。格式见 README.md。
+# 描述现有系统时，先按项目事实确定行为，再选词。
+# 输入用词可能不符合本表；不得据词义或例句推断未说明的行为。
 
 # 去掉对象
 
@@ -17,26 +19,26 @@
   meaning: 把对象从一组对象里拿出来，对象本身还在
   not_same_as:
     删除: 对象被永久去掉
-  example: 从项目里移除成员后，这名成员的账号仍然存在。
+  example: 从收藏夹中移除这份报告。
   profiles: [for-web-dev, for-document]
 
 - word: 清空
   pos: 动词
   meaning: 去掉一个容器里的全部内容，容器本身保留
   not_same_as:
-    删除: 连容器一起去掉
-  example: 清空回收站后，回收站里的文件不能恢复。
+    删除: 目标是容器时，把容器一起去掉
+  example: 清空输入框。
   profiles: [for-web-dev, for-document]
 
 # 保存与交出
 
 - word: 保存
   pos: 动词
-  meaning: 把当前内容存下来，之后可以继续修改
+  meaning: 把当前内容存下来
   not_same_as:
     提交: 把内容交给他人或系统处理
     发布: 让内容对目标读者可见
-  example: 保存草稿后，可以随时回来继续编辑。
+  example: 保存这份草稿。
   profiles: [for-web-dev]
 
 - word: 提交
@@ -45,7 +47,7 @@
   not_same_as:
     保存: 内容只是存下来，还没有交出去
     发布: 内容已经对目标读者可见
-  example: 提交后，审核人会在 1 个工作日内处理。
+  example: 提交这份申请。
   profiles: [for-web-dev]
 
 - word: 发布
@@ -53,7 +55,7 @@
   meaning: 让内容对目标读者可见
   not_same_as:
     提交: 内容交出去了，但还不一定可见
-  example: 发布后，所有访客都能看到这篇文章。
+  example: 发布这篇文章。
   profiles: [for-web-dev]
 
 # 停止与恢复
@@ -64,7 +66,7 @@
   not_same_as:
     撤销: 把已经完成的操作恢复到操作前
     关闭: 让窗口或面板消失，不影响数据
-  example: 取消上传后，已传的部分不会保留。
+  example: 取消这次上传。
   profiles: [for-web-dev]
 
 - word: 撤销
@@ -72,7 +74,7 @@
   meaning: 把已经完成的操作恢复到操作前的状态
   not_same_as:
     取消: 操作还没有完成
-  example: 撤销后，刚才删除的文字会恢复。
+  example: 撤销刚才的格式修改。
   profiles: [for-web-dev]
 
 - word: 关闭
@@ -80,7 +82,7 @@
   meaning: 让窗口、面板、弹窗或文件不再显示，数据不变
   not_same_as:
     停用: 让一项功能或账号暂停生效
-  example: 关闭弹窗不会丢失已填写的内容。
+  example: 关闭“设置”窗口。
   profiles: [for-web-dev]
 
 - word: 打开
@@ -98,7 +100,7 @@
   meaning: 让一项功能或一个账号开始生效
   not_same_as:
     打开: 让窗口、页面或文件显示出来
-  example: 启用两步验证后，登录时需要输入短信验证码。
+  example: 启用自动备份。
   profiles: [for-web-dev]
 
 - word: 停用
