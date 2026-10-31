@@ -4,35 +4,26 @@
 
 ![STC benefits: concise replies, less filler, natural phrasing, consistent terms, clear references, preserved meaning, clear interface copy, and task receipts](https://raw.githubusercontent.com/daimonia-ai/STC-Simplified-Technical-Chinese/main/assets/stc-overview-v2.png)
 
-**STC is an open-source Chinese writing specification for AI.** It provides writing rules, a dictionary, and checking tools for generating, reviewing, and rewriting Chinese.
+**STC is an open-source Chinese writing specification for AI.** It provides writing rules, a dictionary, and checking tools for generating, reviewing, and rewriting Chinese. Use it through the command-line interface (CLI), a standalone skill, or a web link.
 
-### Main benefits
+### What STC does
 
-| Benefit | What the rules require |
+| Area | What the rules require |
 |---|---|
-| ✂️ **Shorter output** | Give the answer or result first. Expand as the task requires. |
-| 🧹 **Less filler** | Remove pleasantries, repeated conclusions, and explanations or exclusions the reader does not need. |
-| 💬 **More natural phrasing** | Use familiar words and complete sentences. Remove stock phrases, slogans, and empty modifiers. |
-| 📚 **Consistent terms** | Use one term for each meaning. Follow the project term list for product and feature names. |
-| 🎯 **Clear references** | Name the subject, condition, and action so readers do not have to guess what a pronoun refers to. |
-| 🛡️ **Preserved meaning** | Keep facts, numbers, negation, permissions, and real uncertainty. |
-| 🖥️ **Clearer interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. |
-| 📋 **Clearer task receipts** | Separate results, user actions, and necessary information into “做完了 / 需要你 / 知会”. |
-
-### Rules and tools
-
-- **Four profiles**: chat, documents, product interface copy, and agent instructions. Select the rules for the task.
-- **Dictionary and project terms**: recommended words, wording to avoid, and a project term-list template help teams use consistent terms.
-- **Generation and review**: enable default output rules or request a review of existing content.
-- **Three entry methods**: the command-line interface (CLI), a standalone skill, or web chat.
-- **File checks**: the command lists problems it can detect, specific suggestions, and rule IDs. An agent or a person reviews meaning in context.
+| 📏 **User requirements** | The count, length, format, and required content that the user specifies take priority over the default style. |
+| ✂️ **Length** | Give the answer or result first. Expand as the task requires. |
+| 🧹 **Unnecessary content** | Remove pleasantries, repeated conclusions, and explanations or exclusions the reader does not need. |
+| 💬 **Words and sentences** | Use familiar words and complete sentences. Remove stock phrases, slogans, and empty modifiers. |
+| 📚 **Terms** | Use one name for each object and action. Follow the project term list for product and feature names. |
+| 🎯 **References** | Name the subject, condition, and action so readers do not have to guess what a pronoun refers to. |
+| 🛡️ **Meaning** | Keep facts, numbers, negation, permissions, and real uncertainty. |
+| 🖥️ **Interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. Address the reader as “你” (you). |
+| 📋 **Task receipts** | Separate results, user actions, and necessary information into “做完了 / 需要你 / 知会”. |
 
 ## Introduction videos
 
-| V0.2 introduction (Chinese) | V0.1.0 introduction (Chinese) |
-|---|---|
-| <video controls width="360" height="320" src="https://github.com/user-attachments/assets/72d55cce-e840-4121-bf64-1954cb1ad08a"></video> | <video controls width="360" height="320" src="https://github.com/user-attachments/assets/924fcc11-db33-4900-ae43-0f904a8393e7"></video> |
-| [YouTube](https://www.youtube.com/shorts/Wmr1ZwhSiPI) | [YouTube](https://youtu.be/XWga_oiD_vs) |
+- [V0.2 introduction, in Chinese (YouTube)](https://www.youtube.com/shorts/Wmr1ZwhSiPI)
+- [V0.1.0 introduction, in Chinese (YouTube)](https://youtu.be/XWga_oiD_vs)
 
 [Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Manual installation and checks](#manual-installation-and-checks) · [Update STC](#update-stc) · [Requirements](#requirements)
 
@@ -97,12 +88,12 @@ Write a project progress report in Chinese from these notes:
 [paste notes]
 ```
 
-### Way 2: Let the agent review and improve existing text
+### Way 2: Let the agent review and rewrite existing text
 
 Use the same prompt with an agent or in web chat:
 
 ```text
-Review and improve this Chinese text with STC.
+Review and rewrite this Chinese text with STC.
 Preserve the facts, numbers, names, and meaning.
 Return a revised version and briefly explain the main changes:
 [paste text]
@@ -117,15 +108,6 @@ Keep the source file unchanged.
 ```
 
 You can request a review without enabling default rules. You can also authorize the agent to choose one document from the current project for a read-only review.
-
-## Default expression
-
-- Use natural word order and complete sentences. Give the answer or result directly.
-- Remove pleasantries, repetition, empty phrases, and explanations the reader does not need.
-- Preserve facts, numbers, names, negation, permissions, and real uncertainty.
-- Match the requested scope. Deliver full documents and detailed explanations when requested.
-
-See G14, G15, G20, G21, G22, and the [profile rules](rules/README.md).
 
 ## Task receipts
 
@@ -188,7 +170,7 @@ npx skills add \
 
 Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [installer options](https://github.com/vercel-labs/skills#available-options).
 
-To install manually, download `stc-skill-0.3.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
+To install manually, download `stc-skill-0.3.1.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
 
 ### Check a file
 
@@ -205,8 +187,6 @@ With only the skill installed, use `node <skill-directory>/tools/cli.mjs check <
 <a id="anti-echo-review"></a>
 
 Anti-Echo requires each sentence to help the reader understand, decide, or act. The agent reviews candidates in context, revises them, or records a specific reason to keep them. Preserve relevant prices, permissions, and safety boundaries. See [review decisions and CI](tools/README.md#anti-echo-复核).
-
-For ordinary chat, the agent checks its wording before replying. Version 0.2.2 retires the chat Stop review. See the [hook migration guide](tools/hooks/README.md) for existing installations.
 
 ## Update STC
 
@@ -294,7 +274,7 @@ STC also supports these tasks:
 
 | Part | What it contains | Location |
 |---|---|---|
-| Rules | General rules, plus rules for each of four profiles | [`rules/`](rules/) |
+| Rules | General rules, rules for each of four profiles, rewrite rules, and the bundled interface reference | [`rules/`](rules/) |
 | Dictionary | Recommended words (one meaning each), words to avoid (each with a replacement), and a template for a project term list | [`dictionary/`](dictionary/) |
 | Core rules snippet | Core rules to paste into AGENTS.md or CLAUDE.md | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | Skill | A skill that agents load when they write, rewrite, or review Chinese | [`SKILL.md`](SKILL.md) |
@@ -305,7 +285,7 @@ STC also supports these tasks:
 
 ### Four profiles
 
-Before you write, identify the type of text. Then apply the general rules and the rules of that profile.
+The rules are divided into four profiles by reader and purpose, plus a set of general rules. The skill reads the rules that each task type needs. For interface copy, it reads the bundled interface reference, which contains the interface rules and the dictionary.
 
 | Profile | Text type | Main difference |
 |---|---|---|
@@ -333,7 +313,7 @@ ASD-STE100 is copyright of ASD (Aerospace, Security and Defence Industries Assoc
 - GB/T 15834-2011, General rules for punctuation
 - GB/T 15835-2011, General rules for writing numerals in publications
 
-## Related open-source projects
+## Similar open-source projects
 
 - [blader/humanizer](https://github.com/blader/humanizer): identifies and rewrites common AI writing patterns.
 - [lemonhall/asd-ste100-skill-zh](https://github.com/lemonhall/asd-ste100-skill-zh): a Chinese rewriting skill and checking scripts.
