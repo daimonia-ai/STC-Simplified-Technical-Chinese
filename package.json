@@ -1,6 +1,6 @@
 {
   "name": "@daimonia/stc",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "STC 简明技术性中文：给 AI 用的中文写作规范。Simplified Technical Chinese: writing rules, a dictionary, and a CLI that help AI agents write and check Chinese text.",
   "type": "module",
   "bin": {
@@ -20,6 +20,7 @@
     "tools/check/src/",
     "tools/check/data/",
     "tools/init/src/",
+    "tools/update/src/",
     "LICENSE",
     "LICENSE-CODE",
     "tools/README.md",

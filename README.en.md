@@ -170,7 +170,7 @@ npx skills add \
 
 Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [installer options](https://github.com/vercel-labs/skills#available-options).
 
-To install manually, download `stc-skill-0.3.1.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
+To install manually, download `stc-skill-0.4.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
 
 ### Check a file
 
@@ -190,33 +190,31 @@ Anti-Echo requires each sentence to help the reader understand, decide, or act. 
 
 ## Update STC
 
+Run this command from the root of a project that uses STC:
+
+```bash
+stc update
+```
+
+`stc update` does three things in this order:
+
+- If npm has a newer version of the global `stc` command, it updates the command with npm.
+- It updates the global skills in your home directory: `skills/stc` under `~/.agents`, `~/.claude`, `~/.codex`, and `~/.hermes`. Old folders move to `~/.stc-backups/`. Files that STC does not ship are copied to the new folder.
+- It refreshes the skill of the current project in its original directory and keeps enabled default rules.
+
+Run it once in each project that uses STC. Add `--check` to compare versions without changes. Use `--skills <directory>` for a skill in another location.
+
+Version 0.3.1 and earlier do not have the `update` command. For the first update, run:
+
+```bash
+npx --yes @daimonia/stc@latest update
+```
+
 To let the agent update STC, send:
 
 ```text
-Update STC with its original installation method.
-Refresh the skill and rules that this project uses.
-Preserve enabled default rules, other project settings, and project
-terms.
-Verify the versions actually in use.
+Run stc update to update STC, then verify the versions actually in use.
 ```
-
-### CLI installation
-
-Run these commands from the root of a project that uses STC:
-
-```bash
-npm install -g @daimonia/stc@latest
-stc --version
-stc init
-node .claude/skills/stc/tools/cli.mjs --version
-```
-
-`npm install` updates the CLI on your computer. `stc init` refreshes the skill and rules in the project. The two version commands must return the same version.
-
-- Run `stc init` in each project that has an STC installation.
-- If you installed with `--dir`, use the same directory for the update and the version check.
-- `--dir` changes only the skill location. Project configuration is still written in the current directory.
-- Update global skills with their original installation method.
 
 ### Standalone skill installation
 
@@ -226,7 +224,7 @@ For a project skill installed by the skill manager, run this in the project root
 npx skills update stc
 ```
 
-For a global skill, use `npx skills update stc --global`. For a manual installation, replace the installed skill folder with the new archive contents. Preserve project terms and existing default configuration.
+For a global skill, use `npx skills update stc --global`. For a manual installation, run `stc update --skills <skill-directory>`.
 
 Verify the skill version with `node <skill-directory>/tools/cli.mjs --version`. The skill and npm package are released from the same source files.
 
@@ -278,7 +276,7 @@ STC also supports these tasks:
 | Dictionary | Recommended words (one meaning each), words to avoid (each with a replacement), and a template for a project term list | [`dictionary/`](dictionary/) |
 | Core rules snippet | Core rules to paste into AGENTS.md or CLAUDE.md | [`snippets/agents-md.md`](snippets/agents-md.md) |
 | Skill | A skill that agents load when they write, rewrite, or review Chinese | [`SKILL.md`](SKILL.md) |
-| CLI | `stc init` installs STC in a project. `stc check` finds the problems that a machine can detect | [`tools/`](tools/) |
+| CLI | `stc init` installs STC in a project. `stc check` finds the problems that a machine can detect. `stc update` updates STC to the latest version | [`tools/`](tools/) |
 | Onboarding | Default configuration and a first document review | [`ONBOARDING.md`](ONBOARDING.md) |
 | Web entry | Onboarding, full rules, and the dictionary in one readable page | [`WEB.md`](WEB.md) |
 | Evaluation tasks | Tasks and expected results for evaluating the skill | [`evals/`](evals/) |

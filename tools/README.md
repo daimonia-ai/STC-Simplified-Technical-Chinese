@@ -1,6 +1,6 @@
 # 命令行工具 stc
 
-`stc` 有两个命令：`init` 把 STC 装进项目，`check` 按 STC 的规则和词表检查中文文字。运行时不依赖第三方包，需要 Node.js 18 以上版本。
+`stc` 有三个命令：`init` 把 STC 装进项目，`check` 按 STC 的规则和词表检查中文文字，`update` 更新命令行、全局 skill 和项目里的 skill。运行时不依赖第三方包，需要 Node.js 18 以上版本。
 
 ## 生成网页入口
 
@@ -41,17 +41,23 @@ node <skill目录>/tools/cli.mjs init --dir <skill目录> --defaults
 在已安装 STC 的项目根目录运行：
 
 ```bash
-npm install -g @daimonia/stc@latest
-stc --version
-stc init
-node .claude/skills/stc/tools/cli.mjs --version
+stc update
 ```
 
-第一条命令更新本机 CLI。`init` 刷新当前项目的 skill 和规则，并保留默认使用状态。每个项目须分别刷新，两条版本命令的结果须一致。
+`update` 按顺序处理三处：
 
-自定义安装目录时，须继续使用原来的 `--dir <目录>`。核对 skill 版本时，也须改为实际路径。`--dir` 只改变 skill 的位置，项目配置仍写在当前目录。
+1. 全局安装的命令：npm 上有新版本时，运行 `npm install -g @daimonia/stc@<新版本>`，再由新版本完成后两步。用 npx 或项目内安装运行时，不更新全局命令，并提示改用 `npx --yes @daimonia/stc@latest update`。查不到 npm 上的版本时，按当前版本继续。
+2. 全局 skill：`~/.agents/skills/stc`、`~/.claude/skills/stc`、`~/.codex/skills/stc`、`~/.hermes/skills/stc`。文件与当前版本不同时，先在同一位置写好新目录，再把旧目录移到 `~/.stc-backups/stc-<旧版本>-<时间>/`。旧目录里不属于 STC 的文件会复制到新目录。链接、不是 STC 的目录和版本更新的目录不改动。
+3. 当前项目：按 AGENTS.md 或 CLAUDE.md 里 STC 段落记录的路径刷新 skill，沿用 `--dir` 的目录和已启用的默认规则。
 
-全局 skill 若由手动安装或技能管理器安装，须沿用原方式更新。给 agent 的更新提示词见 [README](../README.md#更新版本)。
+| 选项 | 作用 |
+|---|---|
+| `--check` | 只核对版本，不修改。有需要更新的内容时返回 1 |
+| `--dry-run` | 列出要做的修改，不写入 |
+| `--skills <目录>` | 另外更新一个 skill 目录，可重复使用 |
+| `--no-cli` | 不更新全局命令 |
+
+每个项目须分别运行。用 `npx skills` 安装的 skill，按原方式更新。给 agent 的更新提示词见 [README](../README.md#更新版本)。
 
 0.2.2 起停用聊天 Stop 补审。旧安装的迁移方法见 [hook 升级说明](hooks/README.md)。
 
