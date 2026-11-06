@@ -2,10 +2,13 @@
 
 [中文](README.md) | English
 
-**The available tests do not establish a stable advantage over a short “natural, concise, accurate” instruction.**
-The full historical rules scored lower in the initial general-writing pilot. A later simplification candidate showed some gains but did not meet its predefined acceptance conditions.
+**This report documents sampled comparisons of historical STC revisions on Chinese writing, constraint following, and sentence simplification.**
 
-This is a project-run evaluation on subsets of public datasets, with adverse results included. No complete benchmark dataset was evaluated. Scores belong to the specific tested revisions; they are not scores for the current v0.4.1 release.
+The initial pilot injected the full STC 0.2.3 rules at once and covered 60 writing and constraint-following tasks. A later experiment tested a separate rewrite candidate on 40 Chinese sentences. Both included a short “natural, concise, accurate” instruction as a control.
+
+On these tested configurations and samples, the full-rules revision scored lower in general writing. The later rewrite candidate did not meet its predefined acceptance conditions and did not establish a stable advantage over the brief instruction.
+
+The sections below provide methods, individual outputs, judgments, and limitations for inspection. These are project-run evaluations on subsets of public datasets. No complete benchmark dataset was evaluated, and v0.4.1 was not tested.
 
 ## Coverage
 

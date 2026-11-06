@@ -135,7 +135,7 @@ and information that requires no action.
 
 ## Evaluation and limitations
 
-Historical results are available for a 60-task, three-arm pilot and a 40-sentence simplification experiment. They do not establish a stable advantage over a brief instruction; the initial full-rules revision scored lower in general writing. Results are tied to their tested revisions, with methods, outputs, judgments, and an offline verification script.
+The report covers a 60-task pilot using the full STC 0.2.3 rules and a 40-sentence comparison using an experimental rewrite candidate. These tested configurations did not establish a stable advantage over a brief instruction. Results are tied to their revisions and tasks, with methods, outputs, judgments, and an offline verification script.
 
 [Read the evaluation report and data](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/benchmarks/README.en.md)
 
