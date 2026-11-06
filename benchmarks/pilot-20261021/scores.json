@@ -1,0 +1,2480 @@
+[
+  {
+    "id": "cf_125",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 696
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 734
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 751
+      }
+    }
+  },
+  {
+    "id": "cf_144",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 945
+      },
+      "brief": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 938
+      },
+      "stc": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 938
+      }
+    }
+  },
+  {
+    "id": "cf_146",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 62
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 62
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 62
+      }
+    }
+  },
+  {
+    "id": "cf_148",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 32
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 28
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 22
+      }
+    }
+  },
+  {
+    "id": "cf_170",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 199
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 212
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 249
+      }
+    }
+  },
+  {
+    "id": "cf_183",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 0.75,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 595
+      },
+      "brief": {
+        "CSR": 0.25,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "answer_chars": 554
+      },
+      "stc": {
+        "CSR": 0.75,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 607
+      }
+    }
+  },
+  {
+    "id": "cf_201",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1
+        ],
+        "answer_chars": 1
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1
+        ],
+        "answer_chars": 1
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1
+        ],
+        "answer_chars": 1
+      }
+    }
+  },
+  {
+    "id": "cf_256",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 62
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 62
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 62
+      }
+    }
+  },
+  {
+    "id": "cf_276",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.5,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "answer_chars": 19
+      },
+      "brief": {
+        "CSR": 0.5,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "answer_chars": 19
+      },
+      "stc": {
+        "CSR": 0.5,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "answer_chars": 19
+      }
+    }
+  },
+  {
+    "id": "cf_292",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 50
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 41
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 19
+      }
+    }
+  },
+  {
+    "id": "cf_335",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 271
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 226
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 306
+      }
+    }
+  },
+  {
+    "id": "cf_341",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 538
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 517
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 540
+      }
+    }
+  },
+  {
+    "id": "cf_508",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.33,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          0
+        ],
+        "answer_chars": 33
+      },
+      "brief": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 36
+      },
+      "stc": {
+        "CSR": 0.33,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          0
+        ],
+        "answer_chars": 47
+      }
+    }
+  },
+  {
+    "id": "cf_558",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.8,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 1038
+      },
+      "brief": {
+        "CSR": 0.8,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 702
+      },
+      "stc": {
+        "CSR": 0.8,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 689
+      }
+    }
+  },
+  {
+    "id": "cf_586",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.5,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "answer_chars": 498
+      },
+      "brief": {
+        "CSR": 0.75,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 377
+      },
+      "stc": {
+        "CSR": 0.5,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "answer_chars": 519
+      }
+    }
+  },
+  {
+    "id": "cf_702",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 148
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 157
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 158
+      }
+    }
+  },
+  {
+    "id": "cf_703",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 573
+      },
+      "brief": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 467
+      },
+      "stc": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 661
+      }
+    }
+  },
+  {
+    "id": "cf_729",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.75,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 127
+      },
+      "brief": {
+        "CSR": 0.75,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 102
+      },
+      "stc": {
+        "CSR": 0.75,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 130
+      }
+    }
+  },
+  {
+    "id": "cf_748",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 101
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 92
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 89
+      }
+    }
+  },
+  {
+    "id": "cf_77",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1818
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1338
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1521
+      }
+    }
+  },
+  {
+    "id": "cf_792",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 307
+      },
+      "brief": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          1,
+          1
+        ],
+        "answer_chars": 307
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 308
+      }
+    }
+  },
+  {
+    "id": "cf_8",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.6,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          1,
+          0
+        ],
+        "answer_chars": 1092
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1088
+      },
+      "stc": {
+        "CSR": 0,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "answer_chars": 125
+      }
+    }
+  },
+  {
+    "id": "cf_80",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 331
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 272
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 223
+      }
+    }
+  },
+  {
+    "id": "cf_82",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 3688
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 2851
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 3143
+      }
+    }
+  },
+  {
+    "id": "cf_83",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 0.83,
+        "ISR": 0,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 863
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 784
+      },
+      "stc": {
+        "CSR": 0.17,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "answer_chars": 102
+      }
+    }
+  },
+  {
+    "id": "cf_846",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 110
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 111
+      },
+      "stc": {
+        "CSR": 0.67,
+        "ISR": 0,
+        "PSR": 0,
+        "constraint_scores": [
+          1,
+          1,
+          0
+        ],
+        "answer_chars": 75
+      }
+    }
+  },
+  {
+    "id": "cf_853",
+    "benchmark": "cfbench",
+    "stratum": "hard",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 94
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 93
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 94
+      }
+    }
+  },
+  {
+    "id": "cf_941",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 299
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 289
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 422
+      }
+    }
+  },
+  {
+    "id": "cf_965",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 765
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 738
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 604
+      }
+    }
+  },
+  {
+    "id": "cf_998",
+    "benchmark": "cfbench",
+    "stratum": "easy",
+    "arms": {
+      "baseline": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1713
+      },
+      "brief": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1118
+      },
+      "stc": {
+        "CSR": 1,
+        "ISR": 1,
+        "PSR": 1,
+        "constraint_scores": [
+          1,
+          1,
+          1
+        ],
+        "answer_chars": 1617
+      }
+    }
+  },
+  {
+    "id": "wb_1",
+    "benchmark": "writingbench_zh",
+    "stratum": "Academic & Engineering",
+    "arms": {
+      "baseline": {
+        "score": 7.8,
+        "criterion_scores": [
+          8,
+          6,
+          7,
+          9,
+          9
+        ],
+        "answer_chars": 3935
+      },
+      "brief": {
+        "score": 7.4,
+        "criterion_scores": [
+          7,
+          5,
+          7,
+          9,
+          9
+        ],
+        "answer_chars": 3809
+      },
+      "stc": {
+        "score": 7,
+        "criterion_scores": [
+          7,
+          5,
+          6,
+          9,
+          8
+        ],
+        "answer_chars": 4291
+      }
+    }
+  },
+  {
+    "id": "wb_158",
+    "benchmark": "writingbench_zh",
+    "stratum": "Politics & Law",
+    "arms": {
+      "baseline": {
+        "score": 8.8,
+        "criterion_scores": [
+          9,
+          9,
+          10,
+          8,
+          8
+        ],
+        "answer_chars": 3247
+      },
+      "brief": {
+        "score": 9,
+        "criterion_scores": [
+          10,
+          9,
+          10,
+          9,
+          7
+        ],
+        "answer_chars": 3041
+      },
+      "stc": {
+        "score": 8.4,
+        "criterion_scores": [
+          9,
+          9,
+          9,
+          8,
+          7
+        ],
+        "answer_chars": 3443
+      }
+    }
+  },
+  {
+    "id": "wb_193",
+    "benchmark": "writingbench_zh",
+    "stratum": "Literature & Arts",
+    "arms": {
+      "baseline": {
+        "score": 6,
+        "criterion_scores": [
+          8,
+          9,
+          6,
+          4,
+          3
+        ],
+        "answer_chars": 1177
+      },
+      "brief": {
+        "score": 6,
+        "criterion_scores": [
+          8,
+          9,
+          5,
+          4,
+          4
+        ],
+        "answer_chars": 1137
+      },
+      "stc": {
+        "score": 5.4,
+        "criterion_scores": [
+          7,
+          8,
+          5,
+          4,
+          3
+        ],
+        "answer_chars": 1140
+      }
+    }
+  },
+  {
+    "id": "wb_207",
+    "benchmark": "writingbench_zh",
+    "stratum": "Literature & Arts",
+    "arms": {
+      "baseline": {
+        "score": 7.8,
+        "criterion_scores": [
+          8,
+          8,
+          7,
+          8,
+          8
+        ],
+        "answer_chars": 1280
+      },
+      "brief": {
+        "score": 7.8,
+        "criterion_scores": [
+          8,
+          8,
+          7,
+          8,
+          8
+        ],
+        "answer_chars": 1165
+      },
+      "stc": {
+        "score": 7.4,
+        "criterion_scores": [
+          8,
+          7,
+          6,
+          8,
+          8
+        ],
+        "answer_chars": 1135
+      }
+    }
+  },
+  {
+    "id": "wb_214",
+    "benchmark": "writingbench_zh",
+    "stratum": "Education",
+    "arms": {
+      "baseline": {
+        "score": 8,
+        "criterion_scores": [
+          9,
+          9,
+          8,
+          7,
+          7
+        ],
+        "answer_chars": 4204
+      },
+      "brief": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          9,
+          8,
+          8,
+          7
+        ],
+        "answer_chars": 4633
+      },
+      "stc": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          9,
+          8,
+          8,
+          7
+        ],
+        "answer_chars": 5395
+      }
+    }
+  },
+  {
+    "id": "wb_215",
+    "benchmark": "writingbench_zh",
+    "stratum": "Education",
+    "arms": {
+      "baseline": {
+        "score": 7.6,
+        "criterion_scores": [
+          9,
+          9,
+          8,
+          6,
+          6
+        ],
+        "answer_chars": 3014
+      },
+      "brief": {
+        "score": 7.4,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          6,
+          6
+        ],
+        "answer_chars": 2642
+      },
+      "stc": {
+        "score": 7.4,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          7,
+          5
+        ],
+        "answer_chars": 3385
+      }
+    }
+  },
+  {
+    "id": "wb_271",
+    "benchmark": "writingbench_zh",
+    "stratum": "Academic & Engineering",
+    "arms": {
+      "baseline": {
+        "score": 6.6,
+        "criterion_scores": [
+          8,
+          8,
+          6,
+          6,
+          5
+        ],
+        "answer_chars": 9315
+      },
+      "brief": {
+        "score": 6.4,
+        "criterion_scores": [
+          8,
+          8,
+          6,
+          6,
+          4
+        ],
+        "answer_chars": 9994
+      },
+      "stc": {
+        "score": 6,
+        "criterion_scores": [
+          8,
+          8,
+          5,
+          5,
+          4
+        ],
+        "answer_chars": 9501
+      }
+    }
+  },
+  {
+    "id": "wb_345",
+    "benchmark": "writingbench_zh",
+    "stratum": "Politics & Law",
+    "arms": {
+      "baseline": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          7,
+          7
+        ],
+        "answer_chars": 3529
+      },
+      "brief": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          7,
+          7
+        ],
+        "answer_chars": 3159
+      },
+      "stc": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          7,
+          7
+        ],
+        "answer_chars": 4317
+      }
+    }
+  },
+  {
+    "id": "wb_351",
+    "benchmark": "writingbench_zh",
+    "stratum": "Politics & Law",
+    "arms": {
+      "baseline": {
+        "score": 5.8,
+        "criterion_scores": [
+          6,
+          5,
+          6,
+          6,
+          6
+        ],
+        "answer_chars": 1079
+      },
+      "brief": {
+        "score": 6,
+        "criterion_scores": [
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "answer_chars": 1079
+      },
+      "stc": {
+        "score": 6,
+        "criterion_scores": [
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "answer_chars": 1135
+      }
+    }
+  },
+  {
+    "id": "wb_364",
+    "benchmark": "writingbench_zh",
+    "stratum": "Literature & Arts",
+    "arms": {
+      "baseline": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          8,
+          6,
+          8,
+          8
+        ],
+        "answer_chars": 3522
+      },
+      "brief": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          8,
+          6,
+          8,
+          8
+        ],
+        "answer_chars": 3602
+      },
+      "stc": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          8,
+          6,
+          8,
+          8
+        ],
+        "answer_chars": 3614
+      }
+    }
+  },
+  {
+    "id": "wb_399",
+    "benchmark": "writingbench_zh",
+    "stratum": "Education",
+    "arms": {
+      "baseline": {
+        "score": 8,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          7,
+          8
+        ],
+        "answer_chars": 2876
+      },
+      "brief": {
+        "score": 8,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          7,
+          8
+        ],
+        "answer_chars": 2843
+      },
+      "stc": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          7,
+          9
+        ],
+        "answer_chars": 3300
+      }
+    }
+  },
+  {
+    "id": "wb_446",
+    "benchmark": "writingbench_zh",
+    "stratum": "Advertising & Marketing",
+    "arms": {
+      "baseline": {
+        "score": 6.8,
+        "criterion_scores": [
+          8,
+          6,
+          8,
+          5,
+          7
+        ],
+        "answer_chars": 2214
+      },
+      "brief": {
+        "score": 7,
+        "criterion_scores": [
+          8,
+          6,
+          8,
+          5,
+          8
+        ],
+        "answer_chars": 1832
+      },
+      "stc": {
+        "score": 6.2,
+        "criterion_scores": [
+          7,
+          5,
+          8,
+          4,
+          7
+        ],
+        "answer_chars": 2019
+      }
+    }
+  },
+  {
+    "id": "wb_456",
+    "benchmark": "writingbench_zh",
+    "stratum": "Advertising & Marketing",
+    "arms": {
+      "baseline": {
+        "score": 6,
+        "criterion_scores": [
+          4,
+          7,
+          3,
+          7,
+          9
+        ],
+        "answer_chars": 2075
+      },
+      "brief": {
+        "score": 6.2,
+        "criterion_scores": [
+          4,
+          8,
+          3,
+          7,
+          9
+        ],
+        "answer_chars": 2186
+      },
+      "stc": {
+        "score": 5.4,
+        "criterion_scores": [
+          4,
+          6,
+          3,
+          6,
+          8
+        ],
+        "answer_chars": 2122
+      }
+    }
+  },
+  {
+    "id": "wb_457",
+    "benchmark": "writingbench_zh",
+    "stratum": "Advertising & Marketing",
+    "arms": {
+      "baseline": {
+        "score": 7.8,
+        "criterion_scores": [
+          9,
+          7,
+          8,
+          8,
+          7
+        ],
+        "answer_chars": 2174
+      },
+      "brief": {
+        "score": 7.8,
+        "criterion_scores": [
+          9,
+          7,
+          7,
+          8,
+          8
+        ],
+        "answer_chars": 2175
+      },
+      "stc": {
+        "score": 7.6,
+        "criterion_scores": [
+          8,
+          7,
+          8,
+          8,
+          7
+        ],
+        "answer_chars": 2268
+      }
+    }
+  },
+  {
+    "id": "wb_545",
+    "benchmark": "writingbench_zh",
+    "stratum": "Education",
+    "arms": {
+      "baseline": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 3088
+      },
+      "brief": {
+        "score": 8.8,
+        "criterion_scores": [
+          10,
+          9,
+          9,
+          8,
+          8
+        ],
+        "answer_chars": 3495
+      },
+      "stc": {
+        "score": 7.8,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          6,
+          8
+        ],
+        "answer_chars": 3494
+      }
+    }
+  },
+  {
+    "id": "wb_554",
+    "benchmark": "writingbench_zh",
+    "stratum": "Academic & Engineering",
+    "arms": {
+      "baseline": {
+        "score": 6,
+        "criterion_scores": [
+          7,
+          6,
+          4,
+          6,
+          7
+        ],
+        "answer_chars": 357
+      },
+      "brief": {
+        "score": 6,
+        "criterion_scores": [
+          7,
+          6,
+          4,
+          6,
+          7
+        ],
+        "answer_chars": 352
+      },
+      "stc": {
+        "score": 5.6,
+        "criterion_scores": [
+          6,
+          5,
+          4,
+          6,
+          7
+        ],
+        "answer_chars": 403
+      }
+    }
+  },
+  {
+    "id": "wb_559",
+    "benchmark": "writingbench_zh",
+    "stratum": "Academic & Engineering",
+    "arms": {
+      "baseline": {
+        "score": 8.2,
+        "criterion_scores": [
+          8,
+          9,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 5173
+      },
+      "brief": {
+        "score": 8.4,
+        "criterion_scores": [
+          8,
+          9,
+          9,
+          8,
+          8
+        ],
+        "answer_chars": 5160
+      },
+      "stc": {
+        "score": 8.4,
+        "criterion_scores": [
+          8,
+          9,
+          9,
+          8,
+          8
+        ],
+        "answer_chars": 5344
+      }
+    }
+  },
+  {
+    "id": "wb_574",
+    "benchmark": "writingbench_zh",
+    "stratum": "Finance & Business",
+    "arms": {
+      "baseline": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 6966
+      },
+      "brief": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 6688
+      },
+      "stc": {
+        "score": 8,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          8,
+          7
+        ],
+        "answer_chars": 6718
+      }
+    }
+  },
+  {
+    "id": "wb_623",
+    "benchmark": "writingbench_zh",
+    "stratum": "Finance & Business",
+    "arms": {
+      "baseline": {
+        "score": 6.8,
+        "criterion_scores": [
+          8,
+          7,
+          5,
+          7,
+          7
+        ],
+        "answer_chars": 7493
+      },
+      "brief": {
+        "score": 7,
+        "criterion_scores": [
+          8,
+          7,
+          6,
+          7,
+          7
+        ],
+        "answer_chars": 7441
+      },
+      "stc": {
+        "score": 6.2,
+        "criterion_scores": [
+          7,
+          6,
+          5,
+          7,
+          6
+        ],
+        "answer_chars": 8249
+      }
+    }
+  },
+  {
+    "id": "wb_639",
+    "benchmark": "writingbench_zh",
+    "stratum": "Literature & Arts",
+    "arms": {
+      "baseline": {
+        "score": 9.2,
+        "criterion_scores": [
+          9,
+          10,
+          9,
+          9,
+          9
+        ],
+        "answer_chars": 5330
+      },
+      "brief": {
+        "score": 9,
+        "criterion_scores": [
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "answer_chars": 5772
+      },
+      "stc": {
+        "score": 9,
+        "criterion_scores": [
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "answer_chars": 5828
+      }
+    }
+  },
+  {
+    "id": "wb_642",
+    "benchmark": "writingbench_zh",
+    "stratum": "Education",
+    "arms": {
+      "baseline": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 7338
+      },
+      "brief": {
+        "score": 8,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 7175
+      },
+      "stc": {
+        "score": 8.2,
+        "criterion_scores": [
+          9,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 6543
+      }
+    }
+  },
+  {
+    "id": "wb_660",
+    "benchmark": "writingbench_zh",
+    "stratum": "Finance & Business",
+    "arms": {
+      "baseline": {
+        "score": 6.8,
+        "criterion_scores": [
+          8,
+          8,
+          6,
+          6,
+          6
+        ],
+        "answer_chars": 10668
+      },
+      "brief": {
+        "score": 6,
+        "criterion_scores": [
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "answer_chars": 8958
+      },
+      "stc": {
+        "score": 6,
+        "criterion_scores": [
+          6,
+          7,
+          6,
+          5,
+          6
+        ],
+        "answer_chars": 10188
+      }
+    }
+  },
+  {
+    "id": "wb_73",
+    "benchmark": "writingbench_zh",
+    "stratum": "Finance & Business",
+    "arms": {
+      "baseline": {
+        "score": 5.4,
+        "criterion_scores": [
+          8,
+          4,
+          6,
+          5,
+          4
+        ],
+        "answer_chars": 7967
+      },
+      "brief": {
+        "score": 6.2,
+        "criterion_scores": [
+          8,
+          6,
+          6,
+          6,
+          5
+        ],
+        "answer_chars": 7876
+      },
+      "stc": {
+        "score": 5,
+        "criterion_scores": [
+          8,
+          4,
+          6,
+          4,
+          3
+        ],
+        "answer_chars": 8452
+      }
+    }
+  },
+  {
+    "id": "wb_742",
+    "benchmark": "writingbench_zh",
+    "stratum": "Literature & Arts",
+    "arms": {
+      "baseline": {
+        "score": 5.2,
+        "criterion_scores": [
+          7,
+          7,
+          2,
+          8,
+          2
+        ],
+        "answer_chars": 18085
+      },
+      "brief": {
+        "score": 4.8,
+        "criterion_scores": [
+          7,
+          6,
+          2,
+          7,
+          2
+        ],
+        "answer_chars": 10383
+      },
+      "stc": {
+        "score": 5.4,
+        "criterion_scores": [
+          7,
+          7,
+          3,
+          8,
+          2
+        ],
+        "answer_chars": 16409
+      }
+    }
+  },
+  {
+    "id": "wb_760",
+    "benchmark": "writingbench_zh",
+    "stratum": "Advertising & Marketing",
+    "arms": {
+      "baseline": {
+        "score": 4.4,
+        "criterion_scores": [
+          4,
+          3,
+          3,
+          4,
+          8
+        ],
+        "answer_chars": 2102
+      },
+      "brief": {
+        "score": 4,
+        "criterion_scores": [
+          4,
+          2,
+          3,
+          4,
+          7
+        ],
+        "answer_chars": 1912
+      },
+      "stc": {
+        "score": 3.6,
+        "criterion_scores": [
+          3,
+          2,
+          3,
+          4,
+          6
+        ],
+        "answer_chars": 1945
+      }
+    }
+  },
+  {
+    "id": "wb_790",
+    "benchmark": "writingbench_zh",
+    "stratum": "Politics & Law",
+    "arms": {
+      "baseline": {
+        "score": 8,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 6305
+      },
+      "brief": {
+        "score": 8.2,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          8,
+          9
+        ],
+        "answer_chars": 6000
+      },
+      "stc": {
+        "score": 8,
+        "criterion_scores": [
+          7,
+          8,
+          8,
+          8,
+          9
+        ],
+        "answer_chars": 7944
+      }
+    }
+  },
+  {
+    "id": "wb_815",
+    "benchmark": "writingbench_zh",
+    "stratum": "Advertising & Marketing",
+    "arms": {
+      "baseline": {
+        "score": 6.8,
+        "criterion_scores": [
+          7,
+          8,
+          8,
+          5,
+          6
+        ],
+        "answer_chars": 394
+      },
+      "brief": {
+        "score": 7.2,
+        "criterion_scores": [
+          7,
+          8,
+          8,
+          5,
+          8
+        ],
+        "answer_chars": 321
+      },
+      "stc": {
+        "score": 5.6,
+        "criterion_scores": [
+          6,
+          7,
+          7,
+          4,
+          4
+        ],
+        "answer_chars": 319
+      }
+    }
+  },
+  {
+    "id": "wb_836",
+    "benchmark": "writingbench_zh",
+    "stratum": "Finance & Business",
+    "arms": {
+      "baseline": {
+        "score": 8.2,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          9,
+          8
+        ],
+        "answer_chars": 2988
+      },
+      "brief": {
+        "score": 8.2,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          9,
+          8
+        ],
+        "answer_chars": 3184
+      },
+      "stc": {
+        "score": 8.2,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          9,
+          8
+        ],
+        "answer_chars": 3401
+      }
+    }
+  },
+  {
+    "id": "wb_895",
+    "benchmark": "writingbench_zh",
+    "stratum": "Academic & Engineering",
+    "arms": {
+      "baseline": {
+        "score": 7.8,
+        "criterion_scores": [
+          8,
+          9,
+          6,
+          8,
+          8
+        ],
+        "answer_chars": 4099
+      },
+      "brief": {
+        "score": 8,
+        "criterion_scores": [
+          8,
+          10,
+          6,
+          8,
+          8
+        ],
+        "answer_chars": 4286
+      },
+      "stc": {
+        "score": 5.4,
+        "criterion_scores": [
+          6,
+          6,
+          3,
+          6,
+          6
+        ],
+        "answer_chars": 4688
+      }
+    }
+  },
+  {
+    "id": "wb_922",
+    "benchmark": "writingbench_zh",
+    "stratum": "Politics & Law",
+    "arms": {
+      "baseline": {
+        "score": 8.2,
+        "criterion_scores": [
+          8,
+          9,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 5004
+      },
+      "brief": {
+        "score": 8,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 4017
+      },
+      "stc": {
+        "score": 8,
+        "criterion_scores": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "answer_chars": 4985
+      }
+    }
+  }
+]

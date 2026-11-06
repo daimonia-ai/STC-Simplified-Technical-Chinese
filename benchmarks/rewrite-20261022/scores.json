@@ -1,0 +1,522 @@
+[
+  {
+    "id": "mcts_test_8",
+    "arms": {
+      "brief": {
+        "char_sari": 44.405222879582176,
+        "chars": 39
+      },
+      "rewrite_examples": {
+        "char_sari": 44.405222879582176,
+        "chars": 39
+      }
+    }
+  },
+  {
+    "id": "mcts_test_12",
+    "arms": {
+      "brief": {
+        "char_sari": 50.45557892444813,
+        "chars": 46
+      },
+      "rewrite_examples": {
+        "char_sari": 47.53586004804548,
+        "chars": 47
+      }
+    }
+  },
+  {
+    "id": "mcts_test_17",
+    "arms": {
+      "brief": {
+        "char_sari": 41.45430684862389,
+        "chars": 71
+      },
+      "rewrite_examples": {
+        "char_sari": 40.4014684931183,
+        "chars": 71
+      }
+    }
+  },
+  {
+    "id": "mcts_test_18",
+    "arms": {
+      "brief": {
+        "char_sari": 52.11839005000286,
+        "chars": 48
+      },
+      "rewrite_examples": {
+        "char_sari": 52.581555482914055,
+        "chars": 46
+      }
+    }
+  },
+  {
+    "id": "mcts_test_24",
+    "arms": {
+      "brief": {
+        "char_sari": 53.80642048496945,
+        "chars": 47
+      },
+      "rewrite_examples": {
+        "char_sari": 54.269835978700634,
+        "chars": 47
+      }
+    }
+  },
+  {
+    "id": "mcts_test_29",
+    "arms": {
+      "brief": {
+        "char_sari": 51.00520780326444,
+        "chars": 61
+      },
+      "rewrite_examples": {
+        "char_sari": 50.78104698826933,
+        "chars": 63
+      }
+    }
+  },
+  {
+    "id": "mcts_test_30",
+    "arms": {
+      "brief": {
+        "char_sari": 46.67046181357358,
+        "chars": 69
+      },
+      "rewrite_examples": {
+        "char_sari": 45.00808173744555,
+        "chars": 69
+      }
+    }
+  },
+  {
+    "id": "mcts_test_33",
+    "arms": {
+      "brief": {
+        "char_sari": 54.38713794332968,
+        "chars": 57
+      },
+      "rewrite_examples": {
+        "char_sari": 43.755543158818156,
+        "chars": 57
+      }
+    }
+  },
+  {
+    "id": "mcts_test_51",
+    "arms": {
+      "brief": {
+        "char_sari": 38.82667663351518,
+        "chars": 43
+      },
+      "rewrite_examples": {
+        "char_sari": 41.599617158355294,
+        "chars": 44
+      }
+    }
+  },
+  {
+    "id": "mcts_test_52",
+    "arms": {
+      "brief": {
+        "char_sari": 51.91345737237904,
+        "chars": 57
+      },
+      "rewrite_examples": {
+        "char_sari": 46.37919128309572,
+        "chars": 63
+      }
+    }
+  },
+  {
+    "id": "mcts_test_61",
+    "arms": {
+      "brief": {
+        "char_sari": 45.50257971804136,
+        "chars": 40
+      },
+      "rewrite_examples": {
+        "char_sari": 48.58231636660964,
+        "chars": 47
+      }
+    }
+  },
+  {
+    "id": "mcts_test_78",
+    "arms": {
+      "brief": {
+        "char_sari": 44.236440022503864,
+        "chars": 32
+      },
+      "rewrite_examples": {
+        "char_sari": 56.80821957152642,
+        "chars": 38
+      }
+    }
+  },
+  {
+    "id": "mcts_test_89",
+    "arms": {
+      "brief": {
+        "char_sari": 43.674227084385286,
+        "chars": 45
+      },
+      "rewrite_examples": {
+        "char_sari": 47.1680300709026,
+        "chars": 41
+      }
+    }
+  },
+  {
+    "id": "mcts_test_99",
+    "arms": {
+      "brief": {
+        "char_sari": 49.53783494114108,
+        "chars": 43
+      },
+      "rewrite_examples": {
+        "char_sari": 58.42469682174456,
+        "chars": 42
+      }
+    }
+  },
+  {
+    "id": "mcts_test_106",
+    "arms": {
+      "brief": {
+        "char_sari": 48.48985439899206,
+        "chars": 53
+      },
+      "rewrite_examples": {
+        "char_sari": 42.788794451195805,
+        "chars": 50
+      }
+    }
+  },
+  {
+    "id": "mcts_test_114",
+    "arms": {
+      "brief": {
+        "char_sari": 48.98894834177044,
+        "chars": 70
+      },
+      "rewrite_examples": {
+        "char_sari": 50.24204079357111,
+        "chars": 66
+      }
+    }
+  },
+  {
+    "id": "mcts_test_122",
+    "arms": {
+      "brief": {
+        "char_sari": 41.44634927090762,
+        "chars": 40
+      },
+      "rewrite_examples": {
+        "char_sari": 52.19769580309547,
+        "chars": 42
+      }
+    }
+  },
+  {
+    "id": "mcts_test_123",
+    "arms": {
+      "brief": {
+        "char_sari": 34.836944078109624,
+        "chars": 48
+      },
+      "rewrite_examples": {
+        "char_sari": 41.959220752349275,
+        "chars": 52
+      }
+    }
+  },
+  {
+    "id": "mcts_test_129",
+    "arms": {
+      "brief": {
+        "char_sari": 47.39680343977377,
+        "chars": 85
+      },
+      "rewrite_examples": {
+        "char_sari": 47.85008456716129,
+        "chars": 82
+      }
+    }
+  },
+  {
+    "id": "mcts_test_144",
+    "arms": {
+      "brief": {
+        "char_sari": 59.248864768264866,
+        "chars": 58
+      },
+      "rewrite_examples": {
+        "char_sari": 62.70857556604423,
+        "chars": 52
+      }
+    }
+  },
+  {
+    "id": "mcts_test_157",
+    "arms": {
+      "brief": {
+        "char_sari": 46.92254555185761,
+        "chars": 39
+      },
+      "rewrite_examples": {
+        "char_sari": 39.423353503234814,
+        "chars": 43
+      }
+    }
+  },
+  {
+    "id": "mcts_test_158",
+    "arms": {
+      "brief": {
+        "char_sari": 55.18249734501388,
+        "chars": 49
+      },
+      "rewrite_examples": {
+        "char_sari": 52.30274786416844,
+        "chars": 51
+      }
+    }
+  },
+  {
+    "id": "mcts_test_160",
+    "arms": {
+      "brief": {
+        "char_sari": 54.830467476197775,
+        "chars": 50
+      },
+      "rewrite_examples": {
+        "char_sari": 54.14077594339781,
+        "chars": 53
+      }
+    }
+  },
+  {
+    "id": "mcts_test_167",
+    "arms": {
+      "brief": {
+        "char_sari": 40.25857258114918,
+        "chars": 47
+      },
+      "rewrite_examples": {
+        "char_sari": 48.73265272469205,
+        "chars": 48
+      }
+    }
+  },
+  {
+    "id": "mcts_test_169",
+    "arms": {
+      "brief": {
+        "char_sari": 55.723493728548945,
+        "chars": 29
+      },
+      "rewrite_examples": {
+        "char_sari": 56.986463444263144,
+        "chars": 30
+      }
+    }
+  },
+  {
+    "id": "mcts_test_199",
+    "arms": {
+      "brief": {
+        "char_sari": 41.04824227645916,
+        "chars": 38
+      },
+      "rewrite_examples": {
+        "char_sari": 50.515437359226425,
+        "chars": 40
+      }
+    }
+  },
+  {
+    "id": "mcts_test_204",
+    "arms": {
+      "brief": {
+        "char_sari": 37.6868573386085,
+        "chars": 72
+      },
+      "rewrite_examples": {
+        "char_sari": 41.09047907570095,
+        "chars": 68
+      }
+    }
+  },
+  {
+    "id": "mcts_test_237",
+    "arms": {
+      "brief": {
+        "char_sari": 46.45124860852483,
+        "chars": 84
+      },
+      "rewrite_examples": {
+        "char_sari": 49.32628183052663,
+        "chars": 82
+      }
+    }
+  },
+  {
+    "id": "mcts_test_260",
+    "arms": {
+      "brief": {
+        "char_sari": 53.76254889091323,
+        "chars": 53
+      },
+      "rewrite_examples": {
+        "char_sari": 50.75143320901275,
+        "chars": 52
+      }
+    }
+  },
+  {
+    "id": "mcts_test_262",
+    "arms": {
+      "brief": {
+        "char_sari": 45.06316576472109,
+        "chars": 64
+      },
+      "rewrite_examples": {
+        "char_sari": 41.431243500824614,
+        "chars": 64
+      }
+    }
+  },
+  {
+    "id": "mcts_test_268",
+    "arms": {
+      "brief": {
+        "char_sari": 42.45137983804925,
+        "chars": 55
+      },
+      "rewrite_examples": {
+        "char_sari": 39.846352762522145,
+        "chars": 59
+      }
+    }
+  },
+  {
+    "id": "mcts_test_271",
+    "arms": {
+      "brief": {
+        "char_sari": 40.727340255013544,
+        "chars": 53
+      },
+      "rewrite_examples": {
+        "char_sari": 43.04199451813007,
+        "chars": 53
+      }
+    }
+  },
+  {
+    "id": "mcts_test_275",
+    "arms": {
+      "brief": {
+        "char_sari": 44.820131960370105,
+        "chars": 62
+      },
+      "rewrite_examples": {
+        "char_sari": 44.08596540905272,
+        "chars": 61
+      }
+    }
+  },
+  {
+    "id": "mcts_test_282",
+    "arms": {
+      "brief": {
+        "char_sari": 42.361525266703055,
+        "chars": 93
+      },
+      "rewrite_examples": {
+        "char_sari": 46.33950806391171,
+        "chars": 93
+      }
+    }
+  },
+  {
+    "id": "mcts_test_293",
+    "arms": {
+      "brief": {
+        "char_sari": 41.823964576188644,
+        "chars": 88
+      },
+      "rewrite_examples": {
+        "char_sari": 41.820671123830806,
+        "chars": 91
+      }
+    }
+  },
+  {
+    "id": "mcts_test_295",
+    "arms": {
+      "brief": {
+        "char_sari": 41.06903860406761,
+        "chars": 64
+      },
+      "rewrite_examples": {
+        "char_sari": 56.250952097782346,
+        "chars": 58
+      }
+    }
+  },
+  {
+    "id": "mcts_test_309",
+    "arms": {
+      "brief": {
+        "char_sari": 41.93997314528454,
+        "chars": 42
+      },
+      "rewrite_examples": {
+        "char_sari": 44.38921724298251,
+        "chars": 43
+      }
+    }
+  },
+  {
+    "id": "mcts_test_324",
+    "arms": {
+      "brief": {
+        "char_sari": 50.123198493556075,
+        "chars": 52
+      },
+      "rewrite_examples": {
+        "char_sari": 43.55050858287106,
+        "chars": 50
+      }
+    }
+  },
+  {
+    "id": "mcts_test_332",
+    "arms": {
+      "brief": {
+        "char_sari": 44.10292320444185,
+        "chars": 46
+      },
+      "rewrite_examples": {
+        "char_sari": 40.75666172672757,
+        "chars": 42
+      }
+    }
+  },
+  {
+    "id": "mcts_test_356",
+    "arms": {
+      "brief": {
+        "char_sari": 42.64188944018355,
+        "chars": 40
+      },
+      "rewrite_examples": {
+        "char_sari": 50.20560766181327,
+        "chars": 40
+      }
+    }
+  }
+]

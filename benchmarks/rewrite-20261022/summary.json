@@ -1,0 +1,20 @@
+{
+  "metric": "mean sentence SARI, Unicode-character tokenization, EASSE macro n-gram computation, five references",
+  "paper_difference": "Paper tokenizes with Stanford CoreNLP; these absolute scores are not paper-leaderboard scores.",
+  "n": 40,
+  "means": {
+    "brief": 46.43481777908577,
+    "rewrite_examples": 47.760885140430425
+  },
+  "paired_difference": 1.3260673613446534,
+  "paired_bootstrap_95": [
+    -0.37167628693675037,
+    3.0935756492895856
+  ],
+  "easse_source_sha256": "e554cddeb9a3b75a2d7d69d64b5cb0ff4c11c968b5e94bb89c814a32a30b71ff",
+  "sensitivity_corpus_sari": {
+    "brief": 47.530154146921554,
+    "rewrite_examples": 48.62321339519493
+  },
+  "replication_gate_passed": false
+}

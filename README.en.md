@@ -25,7 +25,7 @@
 - [V0.2 introduction, in Chinese (YouTube)](https://www.youtube.com/shorts/Wmr1ZwhSiPI)
 - [V0.1.0 introduction, in Chinese (YouTube)](https://youtu.be/XWga_oiD_vs)
 
-[Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Manual installation and checks](#manual-installation-and-checks) · [Update STC](#update-stc) · [Requirements](#requirements)
+[Quick start](#quick-start) · [Two ways to use STC](#two-ways-to-use-stc) · [Task receipts](#task-receipts) · [Evaluation](#evaluation-and-limitations) · [Manual installation and checks](#manual-installation-and-checks) · [Update STC](#update-stc) · [Requirements](#requirements)
 
 ## Quick start
 
@@ -132,6 +132,12 @@ After completing this task, give me a Chinese STC task receipt.
 Separate completed results, actions I need to take,
 and information that requires no action.
 ```
+
+## Evaluation and limitations
+
+Historical results are available for a 60-task, three-arm pilot and a 40-sentence simplification experiment. They do not establish a stable advantage over a brief instruction; the initial full-rules revision scored lower in general writing. Results are tied to their tested revisions, with methods, outputs, judgments, and an offline verification script.
+
+[Read the evaluation report and data](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/blob/main/benchmarks/README.en.md)
 
 ## Manual installation and checks
 

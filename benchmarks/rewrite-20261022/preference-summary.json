@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "n_pairs": 40,
+  "model_calls": 8,
+  "votes_across_both_orders": {
+    "tie": 51,
+    "rewrite_examples": 22,
+    "brief": 7
+  },
+  "positions": {
+    "tie": 51,
+    "B": 17,
+    "A": 12
+  },
+  "stable_outcomes": {
+    "tie": 22,
+    "rewrite_examples": 9,
+    "order_inconsistent": 7,
+    "brief": 2
+  },
+  "order_consistency": 0.825,
+  "conservative_net_preference": 0.175,
+  "bootstrap_95": [
+    0.025,
+    0.325
+  ],
+  "exploratory_gate_passed": false
+}

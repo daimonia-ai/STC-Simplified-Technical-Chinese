@@ -1,0 +1,718 @@
+[
+  {
+    "id": "cf_125",
+    "benchmark": "cfbench",
+    "source_id": 125,
+    "stratum": "hard",
+    "prompt_sha256": "4583842cb972b79b6746e6be74b931c03d6e8bf876423dfc500dfebd65dbfe2f",
+    "original_record_sha256": "305d01eb4afdace39e81a7d5a68f8934c0f7cf62c394f21bb02f3a0a6d6045cd",
+    "criteria_count": 6,
+    "priorities": [
+      "主需",
+      "主需",
+      "主需",
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_144",
+    "benchmark": "cfbench",
+    "source_id": 144,
+    "stratum": "easy",
+    "prompt_sha256": "5c6abf1acb5196fb4978ca1df924be46c4be2bbe48c64e3aab2f4f997d9543e7",
+    "original_record_sha256": "a0ecfcb4287884d6a4b9467405e4f9ee1f37956c1a8ebb23707d1d03f9ab7f7d",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_146",
+    "benchmark": "cfbench",
+    "source_id": 146,
+    "stratum": "hard",
+    "prompt_sha256": "397a96f6aa28d6cc9b7dbacf582de29b1560b08345a529e297dcb8038fa106e4",
+    "original_record_sha256": "3c634d9ae65aff959b3d994bfd67954454be842066f548ce4c22bd619334e2a2",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "主需",
+      "主需"
+    ]
+  },
+  {
+    "id": "cf_148",
+    "benchmark": "cfbench",
+    "source_id": 148,
+    "stratum": "easy",
+    "prompt_sha256": "59dbe591e94ed84aa455b0ff6edfaca6928631dabf05b02008cd3372fc10edba",
+    "original_record_sha256": "7ffc2a4d7a0032bfae1e6c4dfbac5124b50a2a80c3862d320a9013fb259d671f",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_170",
+    "benchmark": "cfbench",
+    "source_id": 170,
+    "stratum": "easy",
+    "prompt_sha256": "6a6702d956e3bafe2329221bdb8bf12b3862a102743f2c0e7e56bd5decea66ce",
+    "original_record_sha256": "7c21a84824d7258a94b8dae815c6642934c2cefa60456d0ef8d88602c2c03702",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_183",
+    "benchmark": "cfbench",
+    "source_id": 183,
+    "stratum": "easy",
+    "prompt_sha256": "531d56c584f75a54605f094151a4f26752f00ec88efff5143c13c5b7ce5239a1",
+    "original_record_sha256": "47fabd7ed3317a08275054333748c0a3bd98876956b09d2dcdbb75367a336c2b",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "主需",
+      "主需",
+      "主需"
+    ]
+  },
+  {
+    "id": "cf_201",
+    "benchmark": "cfbench",
+    "source_id": 201,
+    "stratum": "easy",
+    "prompt_sha256": "0bd68c1f37e1cb3e7528f7f1e59717a3ecb521bb14c016f7ade1274489b4bc34",
+    "original_record_sha256": "3eec914c1d59cd75f0df55df102299fa6100394dc78eee971b05682afdacdc28",
+    "criteria_count": 2,
+    "priorities": [
+      "主需",
+      "主需"
+    ]
+  },
+  {
+    "id": "cf_256",
+    "benchmark": "cfbench",
+    "source_id": 256,
+    "stratum": "hard",
+    "prompt_sha256": "1b3454946afb18fd48ed687a19de4da3be5749d0932aa8a79f1ceaa744dc1ebb",
+    "original_record_sha256": "ff322f2d840a6ffcc094329c81a1d5cf1241062e0e5504336cb5ea608be79025",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "主需",
+      "主需",
+      "主需"
+    ]
+  },
+  {
+    "id": "cf_276",
+    "benchmark": "cfbench",
+    "source_id": 276,
+    "stratum": "hard",
+    "prompt_sha256": "706094abaa5ddc382a2446b309188f8d7b8e5f8758e026c306df2830e95f642d",
+    "original_record_sha256": "8680e77bc09053e2084f14bd73770042caf21090784712e8bf78a46b873713d7",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "次需",
+      "主需",
+      "主需"
+    ]
+  },
+  {
+    "id": "cf_292",
+    "benchmark": "cfbench",
+    "source_id": 292,
+    "stratum": "easy",
+    "prompt_sha256": "d7819e005e04921f962ff81ea8ac6ac283cd45e163dffd86a9fd93bc7393756a",
+    "original_record_sha256": "1d896a2d38bdcaa47e0e58776ea970a8237ed5e782dd90b6deb577ab84943e14",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需",
+      "主需"
+    ]
+  },
+  {
+    "id": "cf_335",
+    "benchmark": "cfbench",
+    "source_id": 335,
+    "stratum": "hard",
+    "prompt_sha256": "f00c13cfe5382943163bb73f272f0ace5bc8d921e9ab7b72daefc392ff280877",
+    "original_record_sha256": "64df1c008ed6e4b05e2b1b657b10d16a5172785367e782efaf60cf2237c0377c",
+    "criteria_count": 5,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_341",
+    "benchmark": "cfbench",
+    "source_id": 341,
+    "stratum": "hard",
+    "prompt_sha256": "61b62993edd0fb2abb2dc9aecb16779aeb6287505872d9ae2a520a1086526e61",
+    "original_record_sha256": "a2b810578e87c1bf7d62e7766c4f00874d103a1a1d8d59c19a4bbb828e2a3a21",
+    "criteria_count": 5,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_508",
+    "benchmark": "cfbench",
+    "source_id": 508,
+    "stratum": "hard",
+    "prompt_sha256": "788c7d3ac448218c9c2b074a2dba5032f550be9f0715f3707fb6b2416e6b0b6d",
+    "original_record_sha256": "370e04e7cf7605bbc0b675eed953498dd9f26ec23d9665c9401dd2c6158ee1f2",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_558",
+    "benchmark": "cfbench",
+    "source_id": 558,
+    "stratum": "hard",
+    "prompt_sha256": "414555aae0f208df54ba891c8e4fae6fb6248bbfc932b1eb07b47709368bf214",
+    "original_record_sha256": "efd2f98c4be6b6dde9c266281d799933377c5330fd89a25758f382cdb335eb85",
+    "criteria_count": 5,
+    "priorities": [
+      "主需",
+      "主需",
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_586",
+    "benchmark": "cfbench",
+    "source_id": 586,
+    "stratum": "hard",
+    "prompt_sha256": "189df32b89e3b162ec27ac757b41261eb1847a2faed727691f3bc691ae2175f6",
+    "original_record_sha256": "5c8937dc77e06a7ba4739e44866a4d43d918e2cb5e453db2f857e6de0a77fe48",
+    "criteria_count": 4,
+    "priorities": [
+      "次需",
+      "主需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_702",
+    "benchmark": "cfbench",
+    "source_id": 702,
+    "stratum": "easy",
+    "prompt_sha256": "42e3a19d66f2111d59aa589d9f231eeead6a7f5a38df19e1b3a3b04282602464",
+    "original_record_sha256": "2a772bd34ddc47b0971d09c3f4802830847838bc6bddbc9f9af118d6c6d5fe5c",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_703",
+    "benchmark": "cfbench",
+    "source_id": 703,
+    "stratum": "hard",
+    "prompt_sha256": "76a82c92d525a7c00443f450b8d817e58b38b05a33998ed60daef71025da4557",
+    "original_record_sha256": "882513ce64736d64f6a186cf4f890e951e8659867e2eabdbb831383f0892a5d5",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_729",
+    "benchmark": "cfbench",
+    "source_id": 729,
+    "stratum": "hard",
+    "prompt_sha256": "1bd448806444bd480503c07255aeade778e2d76613e8fa125237e57447a32c8d",
+    "original_record_sha256": "990c80f1f57110062c455934a7f6de874ffc5d44c680018f257ae6d973bce194",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_748",
+    "benchmark": "cfbench",
+    "source_id": 748,
+    "stratum": "easy",
+    "prompt_sha256": "c3a9d30ec4e32c62026edb48f578e3d48e397ffc87692080c5360dfbb6f6ef69",
+    "original_record_sha256": "3805f64630050403ab927d235594d34d542508e2a55253cabb12098f790a6e2a",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_77",
+    "benchmark": "cfbench",
+    "source_id": 77,
+    "stratum": "easy",
+    "prompt_sha256": "87323612992d3f96aed3afa50233d95c3f613a48bbd0414af1ba107bafb00a67",
+    "original_record_sha256": "d79a6c0496d0b809f3941ddfddafc3a6cf4328d9ab4391f2b372603c5d3c311f",
+    "criteria_count": 4,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_792",
+    "benchmark": "cfbench",
+    "source_id": 792,
+    "stratum": "easy",
+    "prompt_sha256": "c80167297fc4a9634a60b368486d86b13912c4a7f3126657e4a5fb0b73800adb",
+    "original_record_sha256": "b3831fa40b41cb90470d2e9828114c0385d349bbb6b65144f98135690091c509",
+    "criteria_count": 3,
+    "priorities": [
+      "次需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_8",
+    "benchmark": "cfbench",
+    "source_id": 8,
+    "stratum": "hard",
+    "prompt_sha256": "8668799a42ee4fe44a1ebbb64257debbe2b8dc465c6d758dbd9a066278e7e08d",
+    "original_record_sha256": "ffa84f5151e60b6331bd97c36827425770635f06f4c48d2a73e1e6c38c5028d6",
+    "criteria_count": 5,
+    "priorities": [
+      "主需",
+      "主需",
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_80",
+    "benchmark": "cfbench",
+    "source_id": 80,
+    "stratum": "hard",
+    "prompt_sha256": "b0433b1365bea79bc8926d2ee31e14166eb0bcc185e7c53fe5ad8ea9f41ee2b0",
+    "original_record_sha256": "bec547b50f769c6bfe257feab37783cd14623a1324eb0f3efee747066d765482",
+    "criteria_count": 7,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需",
+      "次需",
+      "次需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_82",
+    "benchmark": "cfbench",
+    "source_id": 82,
+    "stratum": "easy",
+    "prompt_sha256": "de5c1de62d6ad059744f24a450e840e71e4462714c93781a8fd762669377cfc6",
+    "original_record_sha256": "5528ab72f35722f7d546c8b514d64e1a725bde79b03b118e8d43f38fbe5e4fb3",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_83",
+    "benchmark": "cfbench",
+    "source_id": 83,
+    "stratum": "hard",
+    "prompt_sha256": "83096146c85d4031671177170cf01aeca8e00bd3f4233c9adf1aa0b3eb8eca21",
+    "original_record_sha256": "6a438b7bb45971406deb3772cf5e8db0647167f0a8a323cd29c99c5a8c1c608d",
+    "criteria_count": 6,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需",
+      "次需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_846",
+    "benchmark": "cfbench",
+    "source_id": 846,
+    "stratum": "easy",
+    "prompt_sha256": "15e6b00786489413012c4d1f3446cb5f521f99523955816b5c8ee8fd88b004b3",
+    "original_record_sha256": "6168349b9e3699f2fc82b1a76de7a17b273835ab34376b6f16e909a2dc381f07",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_853",
+    "benchmark": "cfbench",
+    "source_id": 853,
+    "stratum": "hard",
+    "prompt_sha256": "aa40f14066c6ab61c773ad1d41f9d766808cf7015909dd2622fccd6294f95e84",
+    "original_record_sha256": "acc237d7cd8594133a2a6432d3867a272def6a8e7a6cec949594e5d045aa9754",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_941",
+    "benchmark": "cfbench",
+    "source_id": 941,
+    "stratum": "easy",
+    "prompt_sha256": "baaf4d36347435ba9c9b88de929e0c6dad10a0dca960b906e12ed874bd9651c7",
+    "original_record_sha256": "efbbda1d70650e9736ef5ef7d3e8bcfd90c059bb45e23dfb06b7db0b8cd9dd63",
+    "criteria_count": 3,
+    "priorities": [
+      "次需",
+      "主需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_965",
+    "benchmark": "cfbench",
+    "source_id": 965,
+    "stratum": "easy",
+    "prompt_sha256": "aab8a7783f590d3a6647537bed3527cba83ebee020cbaed1aa7def0f6f346450",
+    "original_record_sha256": "69feed4dc473bf3c50bef797d9ca7f0d4a58aed52997a3a5f5288da775785d6c",
+    "criteria_count": 3,
+    "priorities": [
+      "次需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "cf_998",
+    "benchmark": "cfbench",
+    "source_id": 998,
+    "stratum": "easy",
+    "prompt_sha256": "977f736e3ce05e1fd4642fbeb24a449ba99e90c85216002518ba76281833ef1e",
+    "original_record_sha256": "92e5a9b54e17d02fa9d573873a4a6f52c0ef4668612747dece975586d95faa13",
+    "criteria_count": 3,
+    "priorities": [
+      "主需",
+      "次需",
+      "次需"
+    ]
+  },
+  {
+    "id": "wb_1",
+    "benchmark": "writingbench_zh",
+    "source_id": 1,
+    "stratum": "Academic & Engineering",
+    "prompt_sha256": "34f19b403d717aa79129c1c2ce3a51c22f2af0eafb6d564fbf2f6d6622154119",
+    "original_record_sha256": "5aa7bab105ddf6f9ae02dbdfcee73144c7ec24593987526a77864a6dd6a76ab7",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_158",
+    "benchmark": "writingbench_zh",
+    "source_id": 158,
+    "stratum": "Politics & Law",
+    "prompt_sha256": "434fdabb19e91a519819de80fd254f63844657ac925e6a9fc7f291ddf431adb8",
+    "original_record_sha256": "0175919da50526aa95bf1b18f08d31c326264e760671b5317ae7559c2518d188",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_193",
+    "benchmark": "writingbench_zh",
+    "source_id": 193,
+    "stratum": "Literature & Arts",
+    "prompt_sha256": "8723ff5ca36b6fbd976d479403dac3b8942bbdf2d7a14e9cc34e060589e37118",
+    "original_record_sha256": "21183462b67574d14ba39a1981c66776757bab6968f41d57f74c739d33c91fff",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_207",
+    "benchmark": "writingbench_zh",
+    "source_id": 207,
+    "stratum": "Literature & Arts",
+    "prompt_sha256": "6f3aafffa9078b5c89a819dd228412dbe930476052db31924feefba07072b42e",
+    "original_record_sha256": "fe429ead1b5bb4842a137e3f5629b043128df703fe5842a6b2b78808057207ea",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_214",
+    "benchmark": "writingbench_zh",
+    "source_id": 214,
+    "stratum": "Education",
+    "prompt_sha256": "76a25296740f4333ad3edccc17bb38c9db680ed35231276cba32641fcede478c",
+    "original_record_sha256": "ca1376573b20917a7f561a65774fd70a8adf550535b103799b77c4c8e46911ad",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_215",
+    "benchmark": "writingbench_zh",
+    "source_id": 215,
+    "stratum": "Education",
+    "prompt_sha256": "935d07640021603b78883ac1961613897b21a062a68ff60e5c33b79ac32b0f64",
+    "original_record_sha256": "48acf071b5ab8285e46565df96fa6d727e1ef72bb475c3c4c9624766f93d3968",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_271",
+    "benchmark": "writingbench_zh",
+    "source_id": 271,
+    "stratum": "Academic & Engineering",
+    "prompt_sha256": "ee29e2ae67557d82868ad0dd38bd8057215b9c2f855d1ff90026a50e96f5cba0",
+    "original_record_sha256": "e2a32ef00ce8d3876c960819848eef4f15040a2669e46dcd51ff15c8759a6f60",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_345",
+    "benchmark": "writingbench_zh",
+    "source_id": 345,
+    "stratum": "Politics & Law",
+    "prompt_sha256": "fae9e3e05fcc5236d93935c18cef769093e3dd308ddd20057f75b42681026a8c",
+    "original_record_sha256": "a607211b7004148121f6b73bbb690fff38f3f169d949a4964122b63ec9403476",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_351",
+    "benchmark": "writingbench_zh",
+    "source_id": 351,
+    "stratum": "Politics & Law",
+    "prompt_sha256": "85b9797bad95d3c3fee462c2b1629cb460b7568c871e275192eaf62bcaace263",
+    "original_record_sha256": "d20eca2666221874afc653352058a340dae151ac6f8795f6a9dfd57198bb8522",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_364",
+    "benchmark": "writingbench_zh",
+    "source_id": 364,
+    "stratum": "Literature & Arts",
+    "prompt_sha256": "dbf1696b13d173b4689bf7f1c60f9372b221375214f3e18e2df6100234cb978f",
+    "original_record_sha256": "f26c684ae3ced8f4d344aa32a53cf22c22811cdc848f5bd8e4db21af706f670d",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_399",
+    "benchmark": "writingbench_zh",
+    "source_id": 399,
+    "stratum": "Education",
+    "prompt_sha256": "73d54e281c32a6e22c92c0900e1a2e9e750b02e381101d11ed783ec1e384a53c",
+    "original_record_sha256": "d2401b8c4ee191071997ef33d93683abb67429584530416a86c5540286f54b71",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_446",
+    "benchmark": "writingbench_zh",
+    "source_id": 446,
+    "stratum": "Advertising & Marketing",
+    "prompt_sha256": "eb209fd9816dce6eb1dfe3e5bdd0766b560ae3a3fdea0b90edf57aae80382bda",
+    "original_record_sha256": "0ee602121a2b46aead946c8ca16cccfa2f36d2d2a576a79f0ffc9fc132985320",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_456",
+    "benchmark": "writingbench_zh",
+    "source_id": 456,
+    "stratum": "Advertising & Marketing",
+    "prompt_sha256": "ac55d9d4db4113bbc2dd01ee7493f02e251319843bf9fcdc78274f9aa478e342",
+    "original_record_sha256": "274dbcef8c7af38ba05fc4402a89ab6c8ac555bc4a19248dee207896d909870e",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_457",
+    "benchmark": "writingbench_zh",
+    "source_id": 457,
+    "stratum": "Advertising & Marketing",
+    "prompt_sha256": "d48557af447e889067116c5bef0eac3ce8b10488ce3dec301e69ca21a83953c4",
+    "original_record_sha256": "8bb4d38df9688153d3188f4ba384013421ce46940697e5188a2ceb3e5a3b36a8",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_545",
+    "benchmark": "writingbench_zh",
+    "source_id": 545,
+    "stratum": "Education",
+    "prompt_sha256": "3599ee96662c643c47a801fe56a9a02c33ce743687e57390c61ee4d3c76f04ab",
+    "original_record_sha256": "0c8fb5d6f1da82572f771a1f9a29a896c0491e84beed989c1bee5f6042eb89cf",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_554",
+    "benchmark": "writingbench_zh",
+    "source_id": 554,
+    "stratum": "Academic & Engineering",
+    "prompt_sha256": "1408d6aeee47eeb72157581c86acdd9f8e2b4e865b693d2881bbfc9aaf496298",
+    "original_record_sha256": "bbc2661e8a8c73336e8fa9aa1c25da527989bed4914973b8939e7aa328a6197b",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_559",
+    "benchmark": "writingbench_zh",
+    "source_id": 559,
+    "stratum": "Academic & Engineering",
+    "prompt_sha256": "896a0cc563d79f3cf2baab1be2f15e0ad4a5ca77c3bffd254c4c2d2158a5a7d5",
+    "original_record_sha256": "967139e2ca4d478088ff6771a805551f965093f26d17c3c01869dd00344b0307",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_574",
+    "benchmark": "writingbench_zh",
+    "source_id": 574,
+    "stratum": "Finance & Business",
+    "prompt_sha256": "bffcb9c12c2819de280c1d1d252331cab31ccd2c6b3c694eee80632e1259ce31",
+    "original_record_sha256": "8416a947f382408f121719b086eb6d39ad4f0fe405a721c62df1c79796d46270",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_623",
+    "benchmark": "writingbench_zh",
+    "source_id": 623,
+    "stratum": "Finance & Business",
+    "prompt_sha256": "688d6bca12231c12e6b4d3a8b26f7cfb6ac605bfcce473b92df0a156eb9d179f",
+    "original_record_sha256": "73cfd63e3a765540a3ff640bb25b085b46c91fa5250200e511e5d01b3f995a13",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_639",
+    "benchmark": "writingbench_zh",
+    "source_id": 639,
+    "stratum": "Literature & Arts",
+    "prompt_sha256": "4454b2e091552486c4f7f24549e741ba1952d6632c235f2dd7d018636f132146",
+    "original_record_sha256": "10d24f9888052a3cc94a461c95d944a78abc15d56f2f3593276da23900c49c01",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_642",
+    "benchmark": "writingbench_zh",
+    "source_id": 642,
+    "stratum": "Education",
+    "prompt_sha256": "5b19e412f13c64bb08f5b18f92334a818ca06da286ec791ebd8087a399cb18d5",
+    "original_record_sha256": "b97d3e9ab2fef8062bf43a5461e398ab86189db3d128e8ab0c702d0c4c450bff",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_660",
+    "benchmark": "writingbench_zh",
+    "source_id": 660,
+    "stratum": "Finance & Business",
+    "prompt_sha256": "6ebb005f73e8390d210b11adbcf6953238d21ed65cb46009a85d53aff2eb55a4",
+    "original_record_sha256": "eee556acc6feea461f2b94a00e456a3910bf0d4e6e0ec6f1a157e97034932b6f",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_73",
+    "benchmark": "writingbench_zh",
+    "source_id": 73,
+    "stratum": "Finance & Business",
+    "prompt_sha256": "1c4ec411fec624b8d7cc79f0a59a3331045cf538237758b09b4a7375ef6f379e",
+    "original_record_sha256": "ae54eb31f5e6a45cebd2a668fa1bfabba635ae74188896703cc29de3652bd9eb",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_742",
+    "benchmark": "writingbench_zh",
+    "source_id": 742,
+    "stratum": "Literature & Arts",
+    "prompt_sha256": "f273eaba7da3ae0d0307ac7a1ddd12095edd0f42c03d1cf47f7f96c95cd31baa",
+    "original_record_sha256": "122e83f014ae9612b5a7f6506eb92b9f67531ddf6824f39e4b68ceedc3b446dc",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_760",
+    "benchmark": "writingbench_zh",
+    "source_id": 760,
+    "stratum": "Advertising & Marketing",
+    "prompt_sha256": "385dfbb60d7b552f01175d348b76c4d813cfeab84149df526fc629f2b2dfd580",
+    "original_record_sha256": "5fcab94dd4ab01f319f16938edfbb46fab59ba13fd9445e21359867b22598477",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_790",
+    "benchmark": "writingbench_zh",
+    "source_id": 790,
+    "stratum": "Politics & Law",
+    "prompt_sha256": "6410f785401f4f3346ea94d878275412182770cf644ca496a14ed78a92c4b010",
+    "original_record_sha256": "bd3577c326e835f5cfa40d68551c7a5086f104a718adbdda94df9a4d5199da37",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_815",
+    "benchmark": "writingbench_zh",
+    "source_id": 815,
+    "stratum": "Advertising & Marketing",
+    "prompt_sha256": "14d130e5a4cf6065c50715d7b66dce4b1366eda0489f769c4739bd442f56969b",
+    "original_record_sha256": "34b25ad5cd42ac4e8feefddbb3b4ac73a7e9659bad7098197322d0a1d87ea74a",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_836",
+    "benchmark": "writingbench_zh",
+    "source_id": 836,
+    "stratum": "Finance & Business",
+    "prompt_sha256": "e41f8976582933e7d18163c63f82a279dcda272f88ede1e5a4f75853f552577e",
+    "original_record_sha256": "e3cb00459870b76039be71ab4b244527eca59dd4bdf1c0395f1e71ddd617aa9c",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_895",
+    "benchmark": "writingbench_zh",
+    "source_id": 895,
+    "stratum": "Academic & Engineering",
+    "prompt_sha256": "58f9ad1aadf406866385cf1a4481d1f6c9127bafd847ab8f048e1d20b371d0ae",
+    "original_record_sha256": "3c6e5bb3521fcbc96d3dcdd0c6adc97f42fe9a1045f5d2d69d25a6552b3bc011",
+    "criteria_count": 5
+  },
+  {
+    "id": "wb_922",
+    "benchmark": "writingbench_zh",
+    "source_id": 922,
+    "stratum": "Politics & Law",
+    "prompt_sha256": "53f43645c936355d9a891ad2252cbcbb7f4eb51c2a5ceedc600a7421ddd31016",
+    "original_record_sha256": "bf75db07647936870e6d394d3d79c245da8ea7de62e0019f6d619291e0e7e745",
+    "criteria_count": 5
+  }
+]

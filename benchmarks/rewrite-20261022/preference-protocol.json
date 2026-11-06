@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-10-21T16:05:05.582061+00:00",
+  "max_model_calls": 8,
+  "automatic_retries": 0,
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "n_pairs": 40,
+  "reversed_positions": true,
+  "new_generations": 0,
+  "dimensions_source": "MCTS paper human evaluation: simplicity, fluency, adequacy. This uses a model judge, not the paper human raters or external blind evaluation.",
+  "predeclared_screen_gate": {
+    "stable_across_order_fraction": 0.85,
+    "minimum_net_preference_over_40": 0.2,
+    "paired_bootstrap_lower_above": 0.0
+  },
+  "interpretation": "Exploratory diagnostic on already scored outputs. A positive result would require a separately preregistered fresh validation; it does not override the failed SARI gate.",
+  "prompt_hashes": {
+    "batch_1_order_0": "a04b5e09d43a3ce7db72fb94ae47fea213c1ef3d0f058e74b005fe7e308abbca",
+    "batch_1_order_1": "28306826f99ce146e33384d26fd170d9ce61c50cf0d3c6992ac60ef111b2d479",
+    "batch_2_order_0": "42b9e48a68fb11797b4bebcd57d37c9797434e42bd77420aaa2878a7794b16ae",
+    "batch_2_order_1": "5b3a36a473b11510053b39fd6a7cc6a8115d66f55dbd9861ab95aeba2cb17dcc",
+    "batch_3_order_0": "6d96e4513c2f2906d0c5f9845ca990c72d00f589e38800fc92743c047d5593ec",
+    "batch_3_order_1": "8e2aed0a76d2fe55a6964c8b7d8ddcba36ee44ddabb1ea084b2519b2d63e550a",
+    "batch_4_order_0": "8771a20827655d7b04e8b7c0b05ca09790c7c47801f1613685e432a95d948dc7",
+    "batch_4_order_1": "e4ef21c0574d48f26921fc8c0714eb0e8ebda1307e5f75241b8cd3f05899070a"
+  }
+}

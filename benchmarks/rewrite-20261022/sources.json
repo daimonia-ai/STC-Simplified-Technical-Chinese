@@ -1,0 +1,161 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 9756,
+    "sha256": "c5c8188e09d064c395846288c74c0b3c853fdbf90052a6abd10d0a578a8fd0fb",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/README.md"
+  },
+  {
+    "path": "README-zh.md",
+    "bytes": 9124,
+    "sha256": "097bce8ece6f9527e1617c303d2ff98c91dd166dff113453699797112c84a414",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/README-zh.md"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 35823,
+    "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/LICENSE"
+  },
+  {
+    "path": "dataset/mcts.dev.orig",
+    "bytes": 59085,
+    "sha256": "c75d6b83a71d3a453a9559c22ed11a6f84b44dc0c1687c9f26ee8017a0b899c2",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.dev.orig"
+  },
+  {
+    "path": "dataset/mcts.dev.simp.0",
+    "bytes": 51437,
+    "sha256": "dfc599c5e8919b78d6093475bbb12a1b8f84475519e187edde0462fb520b769c",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.dev.simp.0"
+  },
+  {
+    "path": "dataset/mcts.dev.simp.1",
+    "bytes": 51581,
+    "sha256": "8f8d94a2a1355345212de45591b6bd99066fae3929ace705de96d4f2b056349d",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.dev.simp.1"
+  },
+  {
+    "path": "dataset/mcts.dev.simp.2",
+    "bytes": 53977,
+    "sha256": "658129393c4e6cd1f38235134f9ec9a9839bf2d0f8d776336439313cf802c9cf",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.dev.simp.2"
+  },
+  {
+    "path": "dataset/mcts.dev.simp.3",
+    "bytes": 58855,
+    "sha256": "0941dc309ca748462c0bb39e962b769d2cf6ded9c55834dca3b23dd027a8d9bc",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.dev.simp.3"
+  },
+  {
+    "path": "dataset/mcts.dev.simp.4",
+    "bytes": 57475,
+    "sha256": "2da37af71c83af0f6346680dd55070946a3094a10e9d900b8b78b6967c19781e",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.dev.simp.4"
+  },
+  {
+    "path": "dataset/mcts.test.orig",
+    "bytes": 59025,
+    "sha256": "aed2f2b3838d71bf1ef9a7e33d1b20f54874b30ae80e88fed14cd3b83357e271",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.test.orig"
+  },
+  {
+    "path": "dataset/mcts.test.simp.0",
+    "bytes": 49529,
+    "sha256": "8b1d5ed22c967d6177de9c6b85d2fbf42bfa5d549c1f1a410291bfebe101b618",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.test.simp.0"
+  },
+  {
+    "path": "dataset/mcts.test.simp.1",
+    "bytes": 50845,
+    "sha256": "659f537b4af2651455c6741a88658f3198ba8a9b0d5635f070439793c5d21b7f",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.test.simp.1"
+  },
+  {
+    "path": "dataset/mcts.test.simp.2",
+    "bytes": 52595,
+    "sha256": "051cd550ef71498269bc05fa00969c95233fc48ae6ab5d89e63d5ba9a8a9d54d",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.test.simp.2"
+  },
+  {
+    "path": "dataset/mcts.test.simp.3",
+    "bytes": 57704,
+    "sha256": "86a9ed109523b2768e2cf90fa72466cfe6ab4599a08de8f60fd10263bace5db9",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.test.simp.3"
+  },
+  {
+    "path": "dataset/mcts.test.simp.4",
+    "bytes": 57517,
+    "sha256": "5d3aa178ac7fd9c85ca3196b41f992904d35816d2fe5852d5c964e99d5abdcbf",
+    "source": "mcts",
+    "commit": "0cae0aa45381b738c00a18af68e2c36156382160",
+    "repository": "blcuicall/mcts",
+    "url": "https://raw.githubusercontent.com/blcuicall/mcts/0cae0aa45381b738c00a18af68e2c36156382160/dataset/mcts.test.simp.4"
+  },
+  {
+    "path": "easse/sari.py",
+    "url": "https://raw.githubusercontent.com/feralvam/easse/6a4352ec299ed03fda8ee45445ca43d9c7673e89/easse/sari.py",
+    "sha256": "e554cddeb9a3b75a2d7d69d64b5cb0ff4c11c968b5e94bb89c814a32a30b71ff",
+    "source": "easse",
+    "commit": "6a4352ec299ed03fda8ee45445ca43d9c7673e89",
+    "repository": "feralvam/easse"
+  },
+  {
+    "path": "LICENSE",
+    "url": "https://raw.githubusercontent.com/feralvam/easse/6a4352ec299ed03fda8ee45445ca43d9c7673e89/LICENSE",
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "source": "easse",
+    "commit": "6a4352ec299ed03fda8ee45445ca43d9c7673e89",
+    "repository": "feralvam/easse"
+  },
+  {
+    "path": "README.md",
+    "url": "https://raw.githubusercontent.com/feralvam/easse/6a4352ec299ed03fda8ee45445ca43d9c7673e89/README.md",
+    "sha256": "20a384e59b332e6fd2978b43a9da3075a5fa40a8cb254ad5a57447cf1b81a900",
+    "source": "easse",
+    "commit": "6a4352ec299ed03fda8ee45445ca43d9c7673e89",
+    "repository": "feralvam/easse"
+  }
+]

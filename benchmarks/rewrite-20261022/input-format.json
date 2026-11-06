@@ -1,0 +1,8 @@
+{
+  "prompt_template": "我想让你把我的复杂句子替换成简单的句子。你要保持句意不变，但使句子更简单。\\n复杂句：{source}\\n简单句：",
+  "literal_backslash_n": true,
+  "answer_normalization": "strip leading/trailing whitespace before SARI; preserve raw final answers in answers.jsonl",
+  "tokenization": "Lowercase each non-whitespace Unicode character; join with one ASCII space",
+  "sari_implementation_sha256": "e554cddeb9a3b75a2d7d69d64b5cb0ff4c11c968b5e94bb89c814a32a30b71ff",
+  "original_cases_sha256": "e08662f8351785347913a1cffe91562f8f4f7f01f481b5389b5920eb2daa8317"
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "source": "writingbench",
+    "path": "README.md",
+    "commit": "ae2d5176449b7b769815482641d35926f26793eb",
+    "bytes": 9323,
+    "sha256": "920b18c5505b1de19127890478a8c5bf7d76a6632e00a39013753e5630e66e01",
+    "repository": "X-PLUG/WritingBench",
+    "url": "https://raw.githubusercontent.com/X-PLUG/WritingBench/ae2d5176449b7b769815482641d35926f26793eb/README.md"
+  },
+  {
+    "source": "writingbench",
+    "path": "prompt.py",
+    "commit": "ae2d5176449b7b769815482641d35926f26793eb",
+    "bytes": 2673,
+    "sha256": "c5bf21f28d4b4e54b682236cbe815831f3e362ff9b4f3e8c7c10467c491ecad1",
+    "repository": "X-PLUG/WritingBench",
+    "url": "https://raw.githubusercontent.com/X-PLUG/WritingBench/ae2d5176449b7b769815482641d35926f26793eb/prompt.py"
+  },
+  {
+    "source": "writingbench",
+    "path": "evaluate_benchmark.py",
+    "commit": "ae2d5176449b7b769815482641d35926f26793eb",
+    "bytes": 5510,
+    "sha256": "64707256e39e0533a020fe8042152b63ec706b63cbaa18d251030c71b0095e34",
+    "repository": "X-PLUG/WritingBench",
+    "url": "https://raw.githubusercontent.com/X-PLUG/WritingBench/ae2d5176449b7b769815482641d35926f26793eb/evaluate_benchmark.py"
+  },
+  {
+    "source": "writingbench",
+    "path": "calculate_scores.py",
+    "commit": "ae2d5176449b7b769815482641d35926f26793eb",
+    "bytes": 8685,
+    "sha256": "d91fb7e99061a0681c1b68cbbc9fb1fb364ce1541307d32a6fa001024450381a",
+    "repository": "X-PLUG/WritingBench",
+    "url": "https://raw.githubusercontent.com/X-PLUG/WritingBench/ae2d5176449b7b769815482641d35926f26793eb/calculate_scores.py"
+  },
+  {
+    "source": "writingbench",
+    "path": "evaluator/llm.py",
+    "commit": "ae2d5176449b7b769815482641d35926f26793eb",
+    "bytes": 2727,
+    "sha256": "28a609a8ed070b2ab54fa8ff659b700175c20945c2b7cc670d106156aee2c0d5",
+    "repository": "X-PLUG/WritingBench",
+    "url": "https://raw.githubusercontent.com/X-PLUG/WritingBench/ae2d5176449b7b769815482641d35926f26793eb/evaluator/llm.py"
+  },
+  {
+    "source": "writingbench",
+    "path": "benchmark_query/benchmark_all.jsonl",
+    "commit": "ae2d5176449b7b769815482641d35926f26793eb",
+    "bytes": 14726077,
+    "sha256": "18fee37c645166eb2e206b36366b2e354265b1e4201db2c86e759e825eaddcbe",
+    "repository": "X-PLUG/WritingBench",
+    "url": "https://raw.githubusercontent.com/X-PLUG/WritingBench/ae2d5176449b7b769815482641d35926f26793eb/benchmark_query/benchmark_all.jsonl"
+  },
+  {
+    "source": "cfbench",
+    "path": "README.md",
+    "commit": "0bcbf9b0bcf21113a9813f86ed51a2135b328e41",
+    "bytes": 5546,
+    "sha256": "41f54a5c92b57b1ba18f2fb2c91088306e2908ca4fb813fd9ae119497659ce98",
+    "repository": "PKU-Baichuan-MLSystemLab/CFBench",
+    "url": "https://raw.githubusercontent.com/PKU-Baichuan-MLSystemLab/CFBench/0bcbf9b0bcf21113a9813f86ed51a2135b328e41/README.md"
+  },
+  {
+    "source": "cfbench",
+    "path": "code/evalaute.py",
+    "commit": "0bcbf9b0bcf21113a9813f86ed51a2135b328e41",
+    "bytes": 13556,
+    "sha256": "07d0c0f95bf8ebf232121a33f68f189b6a47a47cdff4f3f3e4fec63e4b0510c8",
+    "repository": "PKU-Baichuan-MLSystemLab/CFBench",
+    "url": "https://raw.githubusercontent.com/PKU-Baichuan-MLSystemLab/CFBench/0bcbf9b0bcf21113a9813f86ed51a2135b328e41/code/evalaute.py"
+  },
+  {
+    "source": "cfbench",
+    "path": "code/models/gpt4o.py",
+    "commit": "0bcbf9b0bcf21113a9813f86ed51a2135b328e41",
+    "bytes": 1556,
+    "sha256": "8f0a9314b514ee0c5906468cff33ec4e3ec469d7203a2076944283ad504fd63c",
+    "repository": "PKU-Baichuan-MLSystemLab/CFBench",
+    "url": "https://raw.githubusercontent.com/PKU-Baichuan-MLSystemLab/CFBench/0bcbf9b0bcf21113a9813f86ed51a2135b328e41/code/models/gpt4o.py"
+  },
+  {
+    "source": "cfbench",
+    "path": "data/cfbench_data.json",
+    "commit": "0bcbf9b0bcf21113a9813f86ed51a2135b328e41",
+    "bytes": 2510124,
+    "sha256": "f28bfe94420ff61063183712179988718c6caedcdd3d0635cc6d0383289796fc",
+    "repository": "PKU-Baichuan-MLSystemLab/CFBench",
+    "url": "https://raw.githubusercontent.com/PKU-Baichuan-MLSystemLab/CFBench/0bcbf9b0bcf21113a9813f86ed51a2135b328e41/data/cfbench_data.json"
+  }
+]

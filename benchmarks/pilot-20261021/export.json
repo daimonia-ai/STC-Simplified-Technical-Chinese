@@ -1,0 +1,44 @@
+{
+  "published_on": "2026-11-06",
+  "export_type": "allowlisted_projection",
+  "original_cases_sha256": "cf3aa59adc09a991f52ef8a53aad752081ec5816e10e1dc8f95bbddac27e98c3",
+  "answer_count": 180,
+  "grade_count": 540,
+  "included": [
+    "Frozen settings and sample IDs",
+    "Actual baseline, brief and STC instructions",
+    "All final generated answers with original hashes",
+    "WritingBench final judge JSON and CFBench numeric criterion scores",
+    "Per-case and aggregate scores"
+  ],
+  "not_included": [
+    "Upstream task, criterion and reference-answer text; obtain from pinned source URLs",
+    "Private command paths, account identifiers, credentials, event streams and internal reasoning",
+    "Internal product experiments"
+  ],
+  "audit": {
+    "source_hashes_match": true,
+    "runner_hashes_match": true,
+    "stages": {
+      "generation": {
+        "expected": 180,
+        "complete": 180,
+        "failed": 0
+      },
+      "judging": {
+        "expected": 540,
+        "complete": 540,
+        "failed": 0
+      }
+    },
+    "treatment_name_mentions": [],
+    "other_item_types": [],
+    "startup_warnings": {
+      "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.": 720,
+      "Exceeded skills context budget. All skill descriptions were removed and 160 additional skills were not included in the model-visible skills list.": 720
+    },
+    "successful_turns_expose_model_id": 0,
+    "prompts_matched": 720,
+    "complete": true
+  }
+}

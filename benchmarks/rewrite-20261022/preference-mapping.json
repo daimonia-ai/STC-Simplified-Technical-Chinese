@@ -1,0 +1,338 @@
+{
+  "batch_1_order_0": {
+    "mcts_test_167": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_144": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_169": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_61": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_106": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_18": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_282": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_268": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_123": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_114": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    }
+  },
+  "batch_1_order_1": {
+    "mcts_test_167": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_144": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_169": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_61": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_106": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_18": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_282": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_268": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_123": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_114": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    }
+  },
+  "batch_2_order_0": {
+    "mcts_test_199": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_17": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_293": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_52": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_24": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_275": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_51": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_33": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_99": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_122": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    }
+  },
+  "batch_2_order_1": {
+    "mcts_test_199": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_17": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_293": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_52": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_24": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_275": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_51": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_33": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_99": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_122": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    }
+  },
+  "batch_3_order_0": {
+    "mcts_test_324": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_260": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_309": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_12": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_295": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_204": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_332": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_8": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_160": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_78": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    }
+  },
+  "batch_3_order_1": {
+    "mcts_test_324": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_260": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_309": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_12": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_295": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_204": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_332": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_8": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_160": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_78": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    }
+  },
+  "batch_4_order_0": {
+    "mcts_test_29": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_89": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_271": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_158": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_129": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_262": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_237": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_30": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_356": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_157": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    }
+  },
+  "batch_4_order_1": {
+    "mcts_test_29": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_89": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_271": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_158": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    },
+    "mcts_test_129": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_262": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_237": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_30": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_356": {
+      "A": "brief",
+      "B": "rewrite_examples"
+    },
+    "mcts_test_157": {
+      "A": "rewrite_examples",
+      "B": "brief"
+    }
+  }
+}
