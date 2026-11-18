@@ -8,7 +8,7 @@ The initial pilot injected the full STC 0.2.3 rules at once and covered 60 writi
 
 On these tested configurations and samples, the full-rules revision scored lower in general writing. The later rewrite candidate did not meet its predefined acceptance conditions and did not establish a stable advantage over the brief instruction.
 
-The sections below provide methods, individual outputs, judgments, and limitations for inspection. These are project-run evaluations on subsets of public datasets. No complete benchmark dataset was evaluated, and v0.4.1 was not tested.
+The sections below provide methods, individual outputs, judgments, and limitations for inspection. These are project-run evaluations on subsets of public datasets. No complete benchmark dataset was evaluated, and v0.4.1 and later releases were not tested.
 
 ## Coverage
 
