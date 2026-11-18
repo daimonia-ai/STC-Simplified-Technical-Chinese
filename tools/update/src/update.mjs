@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { CMD, PACKAGE, VERSION } from '../../meta.mjs';
 import { skillFiles } from '../../skill-files.mjs';
 import { applyInit, describeFiles, planInit } from '../../init/src/init.mjs';
+import { compareVersions } from './version.mjs';
 
 const ROOT = resolve(fileURLToPath(new URL('../../../', import.meta.url)));
 export const GLOBAL_SKILL_DIRS = ['.agents/skills/stc', '.claude/skills/stc', '.codex/skills/stc', '.hermes/skills/stc'];
@@ -33,15 +34,7 @@ export const updateHelp = () => `用法：${CMD} update [选项]
 
 const toPosix = (p) => p.split(sep).join('/');
 
-export function compareVersions(a, b) {
-  const pa = String(a).split('-')[0].split('.').map(Number);
-  const pb = String(b).split('-')[0].split('.').map(Number);
-  for (let i = 0; i < 3; i += 1) {
-    const d = (pa[i] || 0) - (pb[i] || 0);
-    if (d) return Math.sign(d);
-  }
-  return 0;
-}
+export { compareVersions };
 
 // Returns the version of an installed STC skill, or null when the folder is not an STC skill.
 export function skillVersion(dir) {

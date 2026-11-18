@@ -28,7 +28,7 @@ test('standalone skill: full bundle, offline check, and default setup without a 
   mkdirSync(project);
   writeFileSync(join(project, 'AGENTS.md'), '# Project\n\nKeep the existing settings.\n');
   const cli = join(skill, 'tools/cli.mjs');
-  const env = { ...process.env, PATH: '' };
+  const env = { ...process.env, PATH: '', STC_UPDATE_CHECK: '0' };
   const version = run(process.execPath, [cli, '--version'], { env });
   assert.equal(version.stdout.trim(), VERSION);
   const setup = run(process.execPath, [cli, 'init', '--dir', skill, '--defaults'], { cwd: project, env });

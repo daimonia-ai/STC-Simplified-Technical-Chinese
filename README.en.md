@@ -222,6 +222,14 @@ To let the agent update STC, send:
 Run stc update to update STC, then verify the versions actually in use.
 ```
 
+### Update reminder
+
+When `stc check` finds a newer version, it shows the old and new version numbers, a link to the release notes, and the update command at the top of the report. You decide whether to update. The command never updates by itself. The agent tells you about the reminder and does not run the update command until you agree.
+
+The reminder comes from a cache. When the cache is older than 24 hours, the command asks npm in the background and does not wait, so a check is never slower. The first check shows nothing. A check after the background lookup finishes shows the reminder. Set the environment variable `STC_UPDATE_CHECK=0` to turn it off. See the [CLI documentation](tools/README.md#更新提醒).
+
+Versions released before this feature have no reminder. Update them once with the steps above.
+
 ### Standalone skill installation
 
 For a project skill installed by the skill manager, run this in the project root:

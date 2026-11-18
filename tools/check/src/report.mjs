@@ -26,6 +26,8 @@ export function formatReport(report, { format = 'text', showWarnings = true } = 
   out.push(`检查了 ${report.files.length} 个文件：${report.errors} 处需修改，${report.warnings} 处待确认。`);
   if (report.antiEcho) out.push(`Anti-Echo：${report.antiEcho.pending.length} 处待复核，${report.antiEcho.accepted.length} 处已记录保留理由。`);
   if (!showWarnings && report.warnings) out.push('本次只展示需修改项。');
+  // Near the top, so that a person or an agent who reads only the first lines still sees it.
+  if (report.update && !markdown) out.push('', report.update.message, '');
   const issues = report.files.flatMap((f) => f.issues);
   if (!issues.length) {
     out.push(report.errors + report.warnings === 0
