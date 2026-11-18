@@ -4,6 +4,7 @@ import { issueAdvice } from './advice.mjs';
 import { segmentsFromCode, segmentsFromJson, segmentsFromMarkdown, isCodeFile, isJsonFile } from './extract.mjs';
 import { antiEchoCandidates } from './anti-echo.mjs';
 import { uiPronounIssues } from './ui-pronouns.mjs';
+import { uiEchoIssues } from './ui-echo.mjs';
 
 export const PROFILES = ['for-chat', 'for-document', 'for-web-dev', 'for-instruction-writing'];
 
@@ -147,7 +148,8 @@ export function lintSegments(segments, profile, dictionary) {
     }
 
     for (const candidate of antiEchoCandidates(segment.text, profile)) {
-      add(segment, candidate.index, 'G20', 'warning', candidate.message, candidate.match);
+      add(segment, candidate.index, 'G20', 'warning', candidate.message, candidate.match,
+        candidate.suggestion && { use: candidate.suggestion });
     }
 
     scan(original, /[「」『』]/g, (m) =>
@@ -182,7 +184,7 @@ export function lintText(text, { path = 'stdin.md', profile, dictionary = loadDi
   const chosen = profile ?? detectProfile(path);
   const lines = text.split(/\r?\n/);
   const findings = lintSegments(segmentsFor(path, text), chosen, dictionary);
-  if (chosen === 'for-web-dev') findings.push(...uiPronounIssues(text, path));
+  if (chosen === 'for-web-dev') findings.push(...uiPronounIssues(text, path), ...uiEchoIssues(text, path));
   const issues = findings.sort((a, b) => a.line - b.line || a.col - b.col).map((issue) => ({
     ...issueAdvice(issue.rule, issue.message, undefined, issue.match), ...issue, context: lines[issue.line - 1] ?? '',
   }));

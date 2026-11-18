@@ -10,7 +10,8 @@ const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input'
 const mask = (value) => ' '.repeat(value.length);
 const unquoted = (value) => value.replace(/“[^”]*”|‘[^’]*’|"[^"\n]*"|(?<!\w)'[^'\n]*'(?!\w)/g, mask);
 
-function htmlUnits(text) {
+// ui-echo.mjs reuses htmlUnits and markdownUnits to find the text under a block title.
+export function htmlUnits(text) {
   const root = { tag: '', children: [] };
   const stack = [root];
   // Quoted attributes may contain >. Their values are never treated as visible text.
@@ -41,7 +42,7 @@ function htmlUnits(text) {
     if (node.text !== undefined) return [node];
     if (OMIT.has(node.tag)) return [];
     const contents = node.children.flatMap(collect);
-    const boundary = { text: '\n', offset: node.offset };
+    const boundary = { text: '\n', offset: node.offset, tag: node.tag };
     return BLOCK.has(node.tag) ? [boundary, ...contents, boundary] : contents;
   };
   const hasHeading = (node) => HEADING.test(node.tag) || node.children?.some(hasHeading);
@@ -79,7 +80,7 @@ function htmlUnits(text) {
   return { segments: collect(root), units };
 }
 
-function markdownUnits(segments) {
+export function markdownUnits(segments) {
   const units = [];
   let current;
   let headed = false;

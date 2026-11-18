@@ -17,7 +17,7 @@
 | 📚 **Terms** | Use one name for each object and action. Follow the project term list for product and feature names. |
 | 🎯 **References** | Name the subject, condition, and action so readers do not have to guess what a pronoun refers to. |
 | 🛡️ **Meaning** | Keep facts, numbers, negation, permissions, and real uncertainty. |
-| 🖥️ **Interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. Address the reader as “你” (you). |
+| 🖥️ **Interface copy** | Name the action on buttons. Explain what happened and what to do next in prompts and errors. Address the reader as “你” (you). Sort each explanatory sentence into one of three tiers: keep it on the screen, move it into a hint, or delete it. |
 | 📋 **Task receipts** | Separate results, user actions, and necessary information into “做完了 / 需要你 / 知会”. |
 
 ## Introduction videos
@@ -176,7 +176,7 @@ npx skills add \
 
 Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [installer options](https://github.com/vercel-labs/skills#available-options).
 
-To install manually, download `stc-skill-0.4.1.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
+To install manually, download `stc-skill-0.5.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
 
 ### Check a file
 
@@ -295,7 +295,7 @@ The rules are divided into four profiles by reader and purpose, plus a set of ge
 |---|---|---|
 | for chat | An agent replies to a person in a conversation | "I" and "you" are allowed. The first sentence answers the question |
 | for document | Text for people to read: reports, proposals, manuals, code comments, commit messages | Use names as subjects. For proposals addressed to customers, follow W2 for pronouns |
-| for web dev | Text that users see in a web page or an app | Address readers as “你” (you); “我 / 我们” (I / we) refer to the publisher (W2). Use one reader perspective within each UI unit (W10). Buttons start with a verb |
+| for web dev | Text that users see in a web page or an app | Address readers as “你” (you); “我 / 我们” (I / we) refer to the publisher (W2). Use one reader perspective within each UI unit (W10). Buttons start with a verb. Sort explanatory sentences into three tiers (W9) |
 | for instruction writing | Rules for agents: system prompts, AGENTS.md, skills | Strength words are limited to four fixed pairs (must/must not, should/should not, may/need not, can/cannot) |
 
 ## How the dictionary is ordered
