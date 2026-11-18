@@ -206,9 +206,87 @@ test('title echo reports the description and the title with source positions', (
   assert.deepEqual([fromMarkdown.line, fromMarkdown.col, fromMarkdown.related.line, fromMarkdown.related.col], [3, 1, 1, 4]);
 });
 
-test('title echo reads HTML and Markdown only', () => {
-  assertClear(['const view = <section><h2>团队成员</h2><p>查看和管理团队成员</p></section>;'], { path: 'View.tsx' });
+const tsx = (body) => `export const View = () => (\n  <section>\n${body}\n  </section>\n);`;
+
+test('JSX: a description under a title element or a title prop that repeats the title is a candidate', () => {
+  for (const body of [
+    '<h2>团队成员</h2>\n<p>查看和管理团队成员</p>',
+    "<h2>{t('团队成员', 'Team')}</h2><p>{t('查看和管理团队成员', 'View and manage')}</p>",
+    '<h2>团队成员</h2>{/* 说明 */}<p>查看和管理团队成员</p>',
+    '<CardHeader><CardTitle>团队成员</CardTitle><CardDescription>查看和管理团队成员</CardDescription></CardHeader>',
+    '<D><DialogPrimitive.Title>团队成员</DialogPrimitive.Title><DialogPrimitive.Description>查看和管理团队成员</DialogPrimitive.Description></D>',
+    '<PageHeader title="团队成员" description="查看和管理团队成员" />',
+    "<PageHeader title={t('团队成员', 'Team')} subtitle={t('查看和管理团队成员', 'View')} />",
+    '<ul>{rows.map((row) => <li key={row}><h3>团队成员</h3><p>查看和管理团队成员</p></li>)}</ul>',
+    '<div className="head"><h2 className="t"><Icon />团队成员</h2><div className="d">查看和管理团队成员</div></div>',
+  ]) {
+    assertCandidate(tsx(body), 'title', { path: 'View.tsx' });
+    assertCandidate(tsx(body), 'title', { path: 'View.jsx' });
+  }
+});
+
+test('JSX: variables, templates, conditions, other elements and keep-on-screen text are not repeats', () => {
+  assertClear([
+    '<h2>团队成员</h2><p>{summary}</p>',
+    // A sentence with a variable part is not fixed text, even when the rest repeats the title.
+    '<h2>团队成员</h2><p>查看和管理团队成员{suffix}</p>',
+    '<h2>团队成员</h2><p>查看和管理<b>{label}</b></p>',
+    '<h2>团队成员</h2><p>{`查看 ${count} 位团队成员`}</p>',
+    '<h2>团队成员</h2><p>{ok ? "查看团队成员" : "管理团队成员"}</p>',
+    '<h2>团队成员</h2>{hint && <p>查看和管理团队成员</p>}',
+    '<h2>团队成员</h2><MemberTable /><p>查看和管理团队成员</p>',
+    '<h2>团队成员</h2><span>查看和管理团队成员</span>',
+    '<h2>通知设置</h2><p>每周一 9 点发送汇总邮件。</p>',
+    '<DialogTitle>删除团队</DialogTitle><DialogDescription>删除团队后无法恢复。</DialogDescription>',
+    '<h2>团队成员</h2><p>谁在团队里：姓名、角色和邀请状态</p>',
+    // The hint prop of a panel is already the text inside the info icon.
+    '<PanelHead title="团队成员" hint="查看和管理团队成员" />',
+    '<PageHeader title="团队成员" description={summary} />',
+  ].map(tsx), { path: 'View.tsx' });
+});
+
+test('JSX: positions point at the description and the title in the source', () => {
+  const [element] = echoes(tsx('<h2>团队成员</h2>\n<p>查看和管理团队成员</p>'), { path: 'View.tsx' });
+  assert.deepEqual([element.line, element.col, element.related.line, element.related.col], [4, 4, 3, 5]);
+  assert.equal(element.context, '<p>查看和管理团队成员</p>');
+  const props = 'const a = <Page title="团队成员" description="查看和管理团队成员" />;';
+  const [prop] = echoes(props, { path: 'View.tsx' });
+  assert.deepEqual([prop.line, prop.col, prop.related.col], [1, props.indexOf('查看和管理团队成员') + 1, props.indexOf('团队成员') + 1]);
+  assert.equal(prop.match, '查看和管理团队成员');
+});
+
+test('JSX: generics, comparisons, regular expressions and markup inside strings do not hide or invent a pair', () => {
+  const code = [
+    "const [a, setA] = useState<string>('');",
+    'const pick = <T,>(items: T[]) => items[0];',
+    'if (a < b && c > d) { text = text.replace(/`/g, ""); }',
+    "const sample = '<h2>团队成员</h2><p>查看和管理团队成员</p>'; // <h2>团队成员</h2><p>查看和管理团队成员</p>",
+    'export const View = () => <Box><Select<string> value="a"><Opt>甲</Opt></Select><h2>团队成员</h2><p>查看和管理团队成员</p></Box>;',
+  ].join('\n');
+  const found = echoes(code, { path: 'View.tsx' });
+  assert.equal(found.length, 1);
+  assert.equal(found[0].line, 5);
+});
+
+test('JSX: unreadable markup is skipped without an error', () => {
+  assertClear(['export const View = () => <div><h2>团队成员</h2><p>查看和管理团队成员</div>;'], { path: 'View.tsx' });
+});
+
+test('JSX: a directive comment skips the description line', () => {
+  assertClear([tsx('<h2>团队成员</h2>\n{/* stc-disable-next-line */}\n<p>查看和管理团队成员</p>')], { path: 'View.tsx' });
+  assertClear([tsx('<h2>团队成员</h2>\n// stc-disable-next-line\n<p>查看和管理团队成员</p>')], { path: 'View.tsx' });
+});
+
+test('JSX: the other checks and the title check report a description once', () => {
+  assertCandidate(tsx('<h2>团队成员</h2><p>点击团队成员可以查看明细</p>'), 'operation', { path: 'View.tsx' });
+});
+
+test('title echo skips JSON, plain scripts and template languages', () => {
+  const markup = '<section><h2>团队成员</h2><p>查看和管理团队成员</p></section>';
   assertClear(['{"title": "团队成员", "hint": "查看和管理团队成员"}'], { path: 'zh-CN.json' });
+  for (const path of ['view.ts', 'view.mjs', 'View.vue', 'View.svelte', 'View.astro']) {
+    assertClear([`const view = ${JSON.stringify(markup)};`, markup], { path });
+  }
 });
 
 test('a description that another pattern already reports is listed once', () => {

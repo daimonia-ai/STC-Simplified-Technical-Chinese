@@ -1,12 +1,20 @@
 // Title echo: the first description under a block title that repeats the title (W9, G20).
-// HTML and Markdown keep titles apart from the text below them. Strings in code and JSON files
-// have no title level, so they are not read here.
+// HTML, Markdown and JSX (.tsx, .jsx) keep titles apart from the text below them. Strings in other
+// code files and in JSON have no title level, so they are not read here.
 import { isCodeFile, isJsonFile, segmentsFromMarkdown } from './extract.mjs';
 import { antiEchoCandidates, UI_ECHO_ADVICE } from './anti-echo.mjs';
+import { jsxRoots } from './jsx.mjs';
 import { htmlUnits, markdownUnits } from './ui-pronouns.mjs';
 
 const HAN = '\\u4e00-\\u9fff';
 const HEADING = /^h[1-6]$/;
+// JSX: a title is h1 to h6 or a component such as CardTitle or DialogPrimitive.Title. A description is
+// the next sibling when it is p, div or a component such as CardDescription.
+const JSX_TITLE = /^h[1-6]$|(?:Title|Heading)$/;
+const JSX_DESCRIPTION = /^(?:p|div)$|(?:Description|Subtitle|SubTitle)$/;
+// JSX: one component can carry both texts as props, as in <PageHeader title="..." description="..." />.
+const TITLE_PROPS = ['title', 'heading'];
+const DESCRIPTION_PROPS = ['description', 'subtitle', 'subTitle', 'desc'];
 // A description is a one-line explanation. A longer paragraph is body copy.
 const MAX_DESCRIPTION = 80;
 // W9 keeps these on the screen: readings, empty states, errors, risks, and limits such as price or permission.
@@ -106,9 +114,75 @@ function htmlPairs(text, locate) {
   return pairs;
 }
 
+// The text of a JSX string or container, when it is one fixed Chinese string such as {t('团队成员', 'Team')}.
+// A container with a variable, a template with ${}, or two Chinese strings is not fixed text.
+function fixedString({ strings }) {
+  const chinese = strings.filter((item) => new RegExp(`[${HAN}]`).test(item.value));
+  return chinese.length === 1 && !chinese[0].template ? chinese[0] : null;
+}
+
+// The text under JSX children and where it starts. `dynamic` is true when some of it is not fixed.
+function jsxText(children) {
+  const parts = [];
+  let dynamic = false;
+  const walk = (nodes) => {
+    for (const node of nodes) {
+      if (node.type === 'text') {
+        if (node.text.trim()) parts.push({ text: node.text, at: node.start + node.text.length - node.text.trimStart().length });
+      } else if (node.type === 'element') {
+        walk(node.children);
+      } else if (node.tokens > 0) {
+        const fixed = fixedString(node);
+        if (fixed) parts.push({ text: fixed.value, at: fixed.start });
+        else dynamic = true;
+      }
+    }
+  };
+  walk(children);
+  return { text: parts.map((part) => part.text).join('').replace(/\s+/g, ' ').trim(), at: parts[0]?.at ?? 0, dynamic };
+}
+
+function jsxProp(node, names) {
+  const prop = node.props.find((item) => names.includes(item.name) && item.value);
+  if (!prop) return null;
+  const { value } = prop;
+  if (value.kind === 'string') {
+    return { text: value.text.replace(/\s+/g, ' ').trim(), at: value.start + value.text.length - value.text.trimStart().length, dynamic: false };
+  }
+  const fixed = fixedString(value);
+  return fixed ? { text: fixed.value.trim(), at: fixed.start, dynamic: false } : { text: '', at: 0, dynamic: true };
+}
+
+function jsxPairs(text, locate) {
+  const pairs = [];
+  const add = (title, description) => {
+    if (!title || !description || title.dynamic || description.dynamic || !title.text || !description.text) return;
+    pairs.push({ title: title.text, titleAt: locate(title.at), description: description.text, at: locate(description.at) });
+  };
+  // Whitespace and { /* comment */ } between a title and its description do not count.
+  const blank = (node) => (node.type === 'text' && !node.text.trim()) || (node.type === 'expr' && node.tokens === 0);
+  const visit = (node) => {
+    node.nested.forEach(visit);
+    add(jsxProp(node, TITLE_PROPS), jsxProp(node, DESCRIPTION_PROPS));
+    node.children.forEach((child, k) => {
+      if (child.type === 'expr') child.nested.forEach(visit);
+      if (child.type !== 'element') return;
+      visit(child);
+      if (!JSX_TITLE.test(child.tag)) return;
+      let j = k + 1;
+      while (node.children[j] && blank(node.children[j])) j += 1;
+      const next = node.children[j];
+      if (next?.type === 'element' && JSX_DESCRIPTION.test(next.tag)) add(jsxText(child.children), jsxText(next.children));
+    });
+  };
+  jsxRoots(text).forEach(visit);
+  return pairs;
+}
+
 export function uiEchoIssues(text, path) {
   const markup = /\.html?$/i.test(path);
-  if (isJsonFile(path) || (isCodeFile(path) && !markup)) return [];
+  const jsx = /\.(?:tsx|jsx)$/i.test(path);
+  if (isJsonFile(path) || (isCodeFile(path) && !markup && !jsx)) return [];
   const lines = text.split('\n');
   const starts = [];
   const disabled = new Set();
@@ -123,7 +197,8 @@ export function uiEchoIssues(text, path) {
     return { line: row + 1, col: position - starts[row] + 1 };
   };
   const issues = [];
-  for (const { title, titleAt, description, at } of markup ? htmlPairs(text, locate) : markdownPairs(text, lines)) {
+  const found = markup ? htmlPairs(text, locate) : jsx ? jsxPairs(text, locate) : markdownPairs(text, lines);
+  for (const { title, titleAt, description, at } of found) {
     if (disabled.has(at.line) || disabled.has(titleAt.line)) continue;
     if (!new RegExp(`[${HAN}]`).test(description) || size(description) > MAX_DESCRIPTION || KEEP.test(description)) continue;
     const match = firstSentence(description);
