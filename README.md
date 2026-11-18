@@ -168,7 +168,7 @@ npx skills add \
 
 可用 `--agent codex`、`--agent claude-code` 或 `--agent hermes-agent` 指定 Agent，`--global` 安装到个人技能目录。其他选项见[安装器文档](https://github.com/vercel-labs/skills#available-options)。
 
-手动安装时，从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.5.0.zip`，将包里的 `stc/` 放到 Agent 的技能目录。默认规则的配置方法见 [Onboarding for Agents](ONBOARDING.md)。
+手动安装时，从 [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest) 下载 `stc-skill-0.6.0.zip`，将包里的 `stc/` 放到 Agent 的技能目录。默认规则的配置方法见 [Onboarding for Agents](ONBOARDING.md)。
 
 ### 检查文件
 
@@ -213,6 +213,14 @@ npx --yes @daimonia/stc@latest update
 ```text
 请运行 stc update 更新 STC，最后核对实际使用的版本。
 ```
+
+### 更新提醒
+
+`stc check` 发现有新版本时，会在报告开头提示新旧版本号、发布说明链接和更新命令。是否更新由你决定，命令不会自己更新。Agent 会把提示转告给你，你同意前不会运行更新命令。
+
+提示来自缓存。缓存超过 24 小时，命令在后台向 npm 查一次，不等结果，不拖慢检查。第一次检查没有提示，后台查完后的检查才有。设置环境变量 `STC_UPDATE_CHECK=0` 可以关闭。细节见[命令行文档](tools/README.md#更新提醒)。
+
+加入这个功能之前的版本没有提示，需要先按上面的方法更新一次。
 
 ### 单独 skill 安装
 

@@ -176,7 +176,7 @@ npx skills add \
 
 Use `--agent codex`, `--agent claude-code`, or `--agent hermes-agent` to select an agent. Add `--global` for your personal skill directory. See the [installer options](https://github.com/vercel-labs/skills#available-options).
 
-To install manually, download `stc-skill-0.5.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
+To install manually, download `stc-skill-0.6.0.zip` from [GitHub Releases](https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/latest). Put its `stc/` folder in your agent's skill directory. See [Onboarding for Agents](ONBOARDING.md) to configure default rules.
 
 ### Check a file
 
@@ -221,6 +221,14 @@ To let the agent update STC, send:
 ```text
 Run stc update to update STC, then verify the versions actually in use.
 ```
+
+### Update reminder
+
+When `stc check` finds a newer version, it shows the old and new version numbers, a link to the release notes, and the update command at the top of the report. You decide whether to update. The command never updates by itself. The agent tells you about the reminder and does not run the update command until you agree.
+
+The reminder comes from a cache. When the cache is older than 24 hours, the command asks npm in the background and does not wait, so a check is never slower. The first check shows nothing. A check after the background lookup finishes shows the reminder. Set the environment variable `STC_UPDATE_CHECK=0` to turn it off. See the [CLI documentation](tools/README.md#更新提醒).
+
+Versions released before this feature have no reminder. Update them once with the steps above.
 
 ### Standalone skill installation
 

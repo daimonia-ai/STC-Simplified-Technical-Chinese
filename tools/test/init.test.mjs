@@ -91,7 +91,9 @@ test('装进项目的命令行工具能独立运行检查，项目声明 CommonJ
   init(cwd);
   writeFileSync(join(cwd, 'doc.md'), '本周我们进行了大量优化。\n');
   const cli = join(cwd, '.claude/skills/stc/tools/cli.mjs');
-  const result = spawnSync(process.execPath, [cli, 'check', join(cwd, 'doc.md')], { encoding: 'utf8' });
+  const result = spawnSync(process.execPath, [cli, 'check', join(cwd, 'doc.md')], {
+    encoding: 'utf8', env: { ...process.env, STC_UPDATE_CHECK: '0' },
+  });
   assert.equal(result.status, 1);
   assert.match(result.stdout, /G4/);
 });

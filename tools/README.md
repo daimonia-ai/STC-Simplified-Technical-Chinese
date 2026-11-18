@@ -219,6 +219,38 @@ W2、W10 保留带引号的用户原话。HTML 的 `q`、`blockquote` 同样按�
 
 检查命令只查机器能判断的项。“一句只讲一件事”“先写结论”这类规则，仍要靠写的人或 agent 自己检查。
 
+### 更新提醒
+
+`stc check` 发现有新版本时，在报告开头提示新旧版本号、发布说明链接和更新命令。命令不会自己更新，是否更新由用户决定。
+
+```text
+STC 有新版本：0.6.0，当前是 0.5.0。
+发布说明：https://github.com/daimonia-ai/STC-Simplified-Technical-Chinese/releases/tag/v0.6.0
+是否更新由用户决定。更新命令：npx --yes @daimonia/stc@latest update
+更新会替换全局命令和个人目录里的 skill，旧目录备份在 ~/.stc-backups/。
+```
+
+提示的位置跟着报告格式走：
+
+| 报告格式 | 提示的位置 |
+|---|---|
+| 默认的文字报告 | 汇总行之后，在具体问题之前 |
+| `--json` | 第一个字段 `update`，含 `current`、`latest`、`notes`、`command`、`message` |
+| `--format markdown` | 终端的 stderr，保存下来的报告文件保持干净 |
+
+只有 `check` 显示提示。提示不改变检查结果和退出码。
+
+提示来自缓存文件 `~/.cache/stc/update-check.json`。设置了 `XDG_CACHE_HOME` 时，缓存文件在 `$XDG_CACHE_HOME/stc/` 下。这台机器上的所有 STC 副本共用一份缓存，各自和自己的版本比较。
+
+- 缓存超过 24 小时，或上次查询失败超过 1 小时，命令在后台运行 `npm view @daimonia/stc version`，不等结果。
+- 网络慢或不通时，检查不会变慢，也不会报错，只是没有提示。
+- 第一次检查没有提示，后台查完后的检查才有。
+- 命令只向 npm 注册表请求最新版本号，不上传文件内容。npm 的注册表和代理设置照常生效。
+
+关闭提示：设置环境变量 `STC_UPDATE_CHECK=0` 或 `NO_UPDATE_NOTIFIER=1`。源码检出目录（有 `.git`）默认关闭，设置 `STC_UPDATE_CHECK=1` 可以打开。
+
+Agent 看到提示后的处理写在 `SKILL.md`：转告用户，用户同意前不运行更新命令。没有运行 `check` 的用法（只读规则文本、网页链接）不会有提示。加入这个功能之前的版本也没有，需要先手动更新一次，见[更新版本](../README.md#更新版本)。
+
 ## 开发
 
 在仓库根目录运行：

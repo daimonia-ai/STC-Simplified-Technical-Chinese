@@ -6,6 +6,7 @@ import { lintText, loadDictionary, PROFILES } from './core.mjs';
 import { isCodeFile, isJsonFile } from './extract.mjs';
 import { formatReport } from './report.mjs';
 import { reviewAntiEcho } from './anti-echo.mjs';
+import { updateNotice } from '../../update/src/notice.mjs';
 
 // Directories skipped when walking a directory: dependencies, build output, and names that start with ".".
 const SKIP_DIRS = new Set(['node_modules', 'dist', 'build', 'out', 'coverage', 'vendor', 'target']);
@@ -27,6 +28,9 @@ export const checkHelp = (usage) => `用法：${usage} [选项] <文件或目录
   --anti-echo        有未复核的 G20 疑点时返回 1
   --review-decisions <文件>  读取 Anti-Echo 保留理由，与 --anti-echo 一起用
   --help             显示本说明
+
+环境变量：
+  STC_UPDATE_CHECK=0  关闭“有新版本”提示。默认每 24 小时在后台查一次 npm，不拖慢检查
 
 跳过检查：在要跳过的那一行上方写一行含 stc-disable-next-line 的注释。
 Markdown 里含“✗”的行（STC 文档里的反例）不检查。`;
@@ -76,7 +80,7 @@ function collectFiles(dir, out) {
 }
 
 // Returns 0 for a pass, 1 for blocking findings, or 2 for invalid arguments, paths or JSON syntax.
-export function runCheck(argv, { usage = 'stc check' } = {}) {
+export function runCheck(argv, { usage = 'stc check', notice = updateNotice } = {}) {
   const opts = parseArgs(argv);
   if (opts.help) {
     console.log(checkHelp(usage));
@@ -140,11 +144,17 @@ export function runCheck(argv, { usage = 'stc check' } = {}) {
   }
 
   const antiEcho = opts.antiEcho ? reviewAntiEcho(report, decisions) : undefined;
-  const result = { errors, warnings, files: report, ...(antiEcho ? { antiEcho } : {}) };
+  // The reminder is for the person who reads the output. It never changes the result or the exit code.
+  let update = null;
+  try { update = notice(); } catch { /* The reminder is optional. */ }
+  // In JSON the reminder comes first, so a truncated output still shows it.
+  const result = { ...(update ? { update } : {}), errors, warnings, files: report, ...(antiEcho ? { antiEcho } : {}) };
   if (opts.json) {
     console.log(JSON.stringify(result, null, 2));
   } else {
     console.log(formatReport(result, { format: opts.format, showWarnings: opts.warnings }));
+    // A Markdown report is often saved to a file, so its reminder goes to the terminal instead.
+    if (update && opts.format === 'markdown') console.error(`\n${update.message}`);
   }
   return errors > opts.maxErrors || antiEcho?.pending.length ? 1 : 0;
 }
